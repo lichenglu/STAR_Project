@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Configuration for firebase
 		FIRApp.configure()
 		
+		// Google Login
+		GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+		GIDSignIn.sharedInstance().delegate = self
+		
 		return true
 	}
 
@@ -44,7 +48,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
-
-
+	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+		let appKeyOption = UIApplicationOpenURLOptionsKey.sourceApplication
+		let annotationKeyOption = UIApplicationOpenURLOptionsKey.annotation
+		
+		return GIDSignIn.sharedInstance().handle(url as URL, sourceApplication: options[appKeyOption] as! String, annotation: options[annotationKeyOption] as! String)
+	}
+	
+	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+		return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication,  annotation: annotation)
+	}
 }
+
+extension AppDelegate: GIDSignInDelegate{
+	
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+		
+		if let error = error {
+			print(error.localizedDescription)
+			return
+		}
+	}
+	
+	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+		// Perform any operations when the user disconnects from app here.	
+	
+	}
+}
+
 

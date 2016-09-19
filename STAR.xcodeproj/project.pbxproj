@@ -14,6 +14,9 @@
 		575D51121D9047BB00788BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575D51101D9047BB00788BFA /* LaunchScreen.storyboard */; };
 		575D511A1D90488300788BFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 575D51191D90488300788BFA /* GoogleService-Info.plist */; };
 		575D511F1D904AD100788BFA /* STSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D511E1D904AD100788BFA /* STSignInController.swift */; };
+		575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51211D906CA600788BFA /* UIViewController+keyboard.swift */; };
+		575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51231D9076E300788BFA /* STRoundedButton.swift */; };
+		575D51261D90780000788BFA /* STDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51251D90780000788BFA /* STDefines.swift */; };
 		BBB6A58F9EAE755FDA773050 /* Pods_STAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074434962672E087ACBF7A16 /* Pods_STAR.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,10 @@
 		575D51131D9047BB00788BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		575D51191D90488300788BFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		575D511E1D904AD100788BFA /* STSignInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STSignInController.swift; sourceTree = "<group>"; };
+		575D51211D906CA600788BFA /* UIViewController+keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+keyboard.swift"; sourceTree = "<group>"; };
+		575D51231D9076E300788BFA /* STRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRoundedButton.swift; sourceTree = "<group>"; };
+		575D51251D90780000788BFA /* STDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STDefines.swift; sourceTree = "<group>"; };
+		575D51271D90816600788BFA /* STAR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STAR-Bridging-Header.h"; sourceTree = "<group>"; };
 		6663C129DC322885BB060DCE /* Pods-STAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.release.xcconfig"; sourceTree = "<group>"; };
 		8AE6202C83A79198AB9BA53A /* Pods-STAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,13 +84,14 @@
 				575D511C1D904A2C00788BFA /* Model */,
 				575D511B1D904A2300788BFA /* View */,
 				575D511D1D904A3500788BFA /* Controller */,
+				575D51201D906C6600788BFA /* Extensions */,
 				575D51071D9047BB00788BFA /* AppDelegate.swift */,
-				575D51091D9047BB00788BFA /* ViewController.swift */,
 				575D510E1D9047BB00788BFA /* Assets.xcassets */,
 				575D510B1D9047BB00788BFA /* Main.storyboard */,
 				575D51101D9047BB00788BFA /* LaunchScreen.storyboard */,
 				575D51131D9047BB00788BFA /* Info.plist */,
 				575D51191D90488300788BFA /* GoogleService-Info.plist */,
+				575D51271D90816600788BFA /* STAR-Bridging-Header.h */,
 			);
 			path = STAR;
 			sourceTree = "<group>";
@@ -91,6 +99,7 @@
 		575D511B1D904A2300788BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				575D51231D9076E300788BFA /* STRoundedButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -98,6 +107,7 @@
 		575D511C1D904A2C00788BFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				575D51251D90780000788BFA /* STDefines.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -106,8 +116,17 @@
 			isa = PBXGroup;
 			children = (
 				575D511E1D904AD100788BFA /* STSignInController.swift */,
+				575D51091D9047BB00788BFA /* ViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		575D51201D906C6600788BFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				575D51211D906CA600788BFA /* UIViewController+keyboard.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		F422922C6C562931C19F588D /* Frameworks */ = {
@@ -154,6 +173,7 @@
 					575D51031D9047BB00788BFA = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 6728FQG2GQ;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -243,9 +263,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */,
 				575D510A1D9047BB00788BFA /* ViewController.swift in Sources */,
 				575D511F1D904AD100788BFA /* STSignInController.swift in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
+				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
+				575D51261D90780000788BFA /* STDefines.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,12 +390,15 @@
 			baseConfigurationReference = 8AE6202C83A79198AB9BA53A /* Pods-STAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Chenglu.STAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STAR/STAR-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -382,12 +408,14 @@
 			baseConfigurationReference = 6663C129DC322885BB060DCE /* Pods-STAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Chenglu.STAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STAR/STAR-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -7,21 +7,69 @@
 //
 
 import UIKit
+import Firebase
 
-class STSignInController: UIViewController {
+class STSignInController: UIViewController, GIDSignInUIDelegate {
 
+	@IBOutlet weak var emailTextField: UITextField!
+	
+	@IBOutlet weak var pwTextField: UITextField!
+	
+	@IBOutlet weak var googleLoginView: UIView!
+	
+	@IBOutlet weak var signInBtn: UIButton!
+	
+	@IBOutlet weak var signInStackView: UIStackView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+		
+		// UI Setting
+		setUpUI()
+		
+		// HideKeyboardWhenTappedAround
+		hideKeyboardWhenTappedAround()
+		
+		// Animation
+		entryAnimation()
+		
+		GIDSignIn.sharedInstance().uiDelegate = self
+		
+	    // Uncomment to automatically sign in the user.
+	    //GIDSignIn.sharedInstance().signInSilently()
+			
+	    // TODO(developer) Configure the sign-in button look/feel
+	    // ...
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	
+	func setUpUI() {
+		
+		// Corner radius
+		googleLoginView.layer.cornerRadius = 5
+		googleLoginView.layer.masksToBounds = true
+	}
+	
+	func entryAnimation(){
+		let originalBounds = signInStackView.bounds
+		signInStackView.bounds = CGRect(x: originalBounds.origin.x, y: self.view.frame.height, width: originalBounds.width, height: -originalBounds.height)
+		UIView.animate(withDuration: 1) {
+			self.signInStackView.bounds = originalBounds
+		}
+	}
 
+	@IBAction func didTapLoginWithGoogle(_ sender: UIButton) {
+		
+	}
+	
+	@IBAction func didTapLoginWithEmail(_ sender: UIButton) {
+		
+	}
+	
     /*
     // MARK: - Navigation
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,11 +16,125 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="79U-7q-eco" userLabel="SignInStackView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our Project's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSP-vg-Hef">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="BBE-96-hCm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mwa-bn-MQY" userLabel="stackViewWithNoName">
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-nt-hAu" userLabel="googleStackView">
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tI-XI-fNO" userLabel="googleLoginView">
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_google" translatesAutoresizingMaskIntoConstraints="NO" id="iWi-i8-edt" userLabel="googleIcon">
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="5oo-k7-vcx"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="EZg-ZA-SPV"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvo-h4-rbm" userLabel="googleBtn">
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                                <state key="normal" title="Sign In with Google">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="didTapLoginWithGoogle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="82W-t0-UJz"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Dvo-h4-rbm" firstAttribute="top" secondItem="1tI-XI-fNO" secondAttribute="top" id="OQK-Oo-SOQ"/>
+                                                            <constraint firstItem="iWi-i8-edt" firstAttribute="top" secondItem="1tI-XI-fNO" secondAttribute="top" constant="5" id="R3B-OD-pVw"/>
+                                                            <constraint firstItem="Dvo-h4-rbm" firstAttribute="leading" secondItem="1tI-XI-fNO" secondAttribute="leading" id="akd-2a-foc"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Dvo-h4-rbm" secondAttribute="trailing" id="hOI-4A-sFu"/>
+                                                            <constraint firstAttribute="height" constant="50" id="ilg-pP-oIV"/>
+                                                            <constraint firstAttribute="bottom" secondItem="iWi-i8-edt" secondAttribute="bottom" constant="5" id="inA-07-NRr"/>
+                                                            <constraint firstItem="iWi-i8-edt" firstAttribute="leading" secondItem="1tI-XI-fNO" secondAttribute="leading" constant="15" id="oVq-6B-859"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Dvo-h4-rbm" secondAttribute="bottom" id="r7j-Vo-rDN"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fk-3Z-7gb" userLabel="orLabel">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="twy-kT-UFo"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <color key="textColor" red="0.95602838315815097" green="0.98445512820512815" blue="0.98445512820512815" alpha="0.90264008620689651" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ELS-bk-B7h" userLabel="emailSignInStackView">
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-XJ-2JH">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="wNS-jq-HOy"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5l-Pu-hGk">
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHW-Is-men" userLabel="SignInBtn" customClass="STRoundedButton" customModule="STAR" customModuleProvider="target">
+                                                        <color key="backgroundColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="2hH-67-UYg"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                        <state key="normal" title="Sign In">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="didTapLoginWithEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kBO-kB-KLa"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ELS-bk-B7h" firstAttribute="leading" secondItem="mwa-bn-MQY" secondAttribute="leading" id="9YD-L5-5lE"/>
+                                            <constraint firstAttribute="trailing" secondItem="ELS-bk-B7h" secondAttribute="trailing" id="P9M-nE-4yz"/>
+                                            <constraint firstItem="f8Q-nt-hAu" firstAttribute="leading" secondItem="mwa-bn-MQY" secondAttribute="leading" id="zHe-Xh-LMn"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="mwa-bn-MQY" firstAttribute="leading" secondItem="79U-7q-eco" secondAttribute="leading" constant="4" id="4Tw-xG-7IL"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0078431372549019607" green="0.46666666666666667" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="79U-7q-eco" secondAttribute="trailing" constant="20" id="Pbs-px-GVf"/>
+                            <constraint firstItem="79U-7q-eco" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="exI-VS-ghH"/>
+                            <constraint firstItem="79U-7q-eco" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="hZn-v3-fjP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="Q3L-XJ-2JH" id="aQK-xf-DYW"/>
+                        <outlet property="googleLoginView" destination="1tI-XI-fNO" id="Ddz-xn-a13"/>
+                        <outlet property="pwTextField" destination="f5l-Pu-hGk" id="ilp-5a-XhE"/>
+                        <outlet property="signInBtn" destination="sHW-Is-men" id="hzB-cV-eiP"/>
+                        <outlet property="signInStackView" destination="79U-7q-eco" id="mwS-tW-4yt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="42.728635682158924"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_google" width="24" height="24"/>
+    </resources>
 </document>
