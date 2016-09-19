@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaf-rG-bTe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -8,7 +8,7 @@
         <!--SignIn Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="SignIn Controller" customClass="STSignInController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInVC" id="BYZ-38-t0r" userLabel="SignIn Controller" customClass="STSignInController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,40 +29,12 @@
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mwa-bn-MQY" userLabel="stackViewWithNoName">
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-nt-hAu" userLabel="googleStackView">
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tI-XI-fNO" userLabel="googleLoginView">
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_google" translatesAutoresizingMaskIntoConstraints="NO" id="iWi-i8-edt" userLabel="googleIcon">
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="5oo-k7-vcx"/>
-                                                                    <constraint firstAttribute="width" constant="40" id="EZg-ZA-SPV"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dvo-h4-rbm" userLabel="googleBtn">
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                <state key="normal" title="Sign In with Google">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="didTapLoginWithGoogle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="82W-t0-UJz"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.14901960784313725" green="0.77647058823529413" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="Dvo-h4-rbm" firstAttribute="top" secondItem="1tI-XI-fNO" secondAttribute="top" id="OQK-Oo-SOQ"/>
-                                                            <constraint firstItem="iWi-i8-edt" firstAttribute="top" secondItem="1tI-XI-fNO" secondAttribute="top" constant="5" id="R3B-OD-pVw"/>
-                                                            <constraint firstItem="Dvo-h4-rbm" firstAttribute="leading" secondItem="1tI-XI-fNO" secondAttribute="leading" id="akd-2a-foc"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Dvo-h4-rbm" secondAttribute="trailing" id="hOI-4A-sFu"/>
-                                                            <constraint firstAttribute="height" constant="50" id="ilg-pP-oIV"/>
-                                                            <constraint firstAttribute="bottom" secondItem="iWi-i8-edt" secondAttribute="bottom" constant="5" id="inA-07-NRr"/>
-                                                            <constraint firstItem="iWi-i8-edt" firstAttribute="leading" secondItem="1tI-XI-fNO" secondAttribute="leading" constant="15" id="oVq-6B-859"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Dvo-h4-rbm" secondAttribute="bottom" id="r7j-Vo-rDN"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HA-ui-b9T" customClass="GIDSignInButton">
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="4hg-oJ-W2Q"/>
+                                                </constraints>
+                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fk-3Z-7gb" userLabel="orLabel">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="twy-kT-UFo"/>
@@ -73,16 +45,13 @@
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ELS-bk-B7h" userLabel="emailSignInStackView">
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-XJ-2JH">
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="wNS-jq-HOy"/>
-                                                        </constraints>
-                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3L-XJ-2JH">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5l-Pu-hGk">
-                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5l-Pu-hGk">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                     </textField>
@@ -103,9 +72,10 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="5HA-ui-b9T" firstAttribute="trailing" secondItem="ELS-bk-B7h" secondAttribute="trailing" id="8y7-qD-RUk"/>
                                             <constraint firstItem="ELS-bk-B7h" firstAttribute="leading" secondItem="mwa-bn-MQY" secondAttribute="leading" id="9YD-L5-5lE"/>
                                             <constraint firstAttribute="trailing" secondItem="ELS-bk-B7h" secondAttribute="trailing" id="P9M-nE-4yz"/>
-                                            <constraint firstItem="f8Q-nt-hAu" firstAttribute="leading" secondItem="mwa-bn-MQY" secondAttribute="leading" id="zHe-Xh-LMn"/>
+                                            <constraint firstItem="5HA-ui-b9T" firstAttribute="leading" secondItem="ELS-bk-B7h" secondAttribute="leading" id="tpN-a7-VsJ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -113,9 +83,30 @@
                                     <constraint firstItem="mwa-bn-MQY" firstAttribute="leading" secondItem="79U-7q-eco" secondAttribute="leading" constant="4" id="4Tw-xG-7IL"/>
                                 </constraints>
                             </stackView>
+                            <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cl0-2V-F6F" userLabel="infoView">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you haven't signed in before, an account will be created for you automatically after you sign in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJF-Ed-T4I">
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="kJF-Ed-T4I" firstAttribute="leading" secondItem="cl0-2V-F6F" secondAttribute="leading" constant="8" id="9Fg-j0-aJ6"/>
+                                    <constraint firstAttribute="trailing" secondItem="kJF-Ed-T4I" secondAttribute="trailing" constant="8" id="F4j-vg-ogp"/>
+                                    <constraint firstAttribute="height" constant="80" id="LHA-Db-Pzq"/>
+                                    <constraint firstItem="kJF-Ed-T4I" firstAttribute="top" secondItem="cl0-2V-F6F" secondAttribute="top" id="UbN-0n-olz"/>
+                                    <constraint firstAttribute="bottom" secondItem="kJF-Ed-T4I" secondAttribute="bottom" id="qpG-jt-SW0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0078431372549019607" green="0.46666666666666667" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="cl0-2V-F6F" firstAttribute="top" relation="greaterThanOrEqual" secondItem="79U-7q-eco" secondAttribute="bottom" constant="80" id="5KC-pD-rkG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cl0-2V-F6F" secondAttribute="bottom" id="7ga-yb-02v"/>
+                            <constraint firstItem="cl0-2V-F6F" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LGt-VQ-Q3W"/>
+                            <constraint firstAttribute="trailing" secondItem="cl0-2V-F6F" secondAttribute="trailing" id="MkR-kp-C8V"/>
                             <constraint firstAttribute="trailing" secondItem="79U-7q-eco" secondAttribute="trailing" constant="20" id="Pbs-px-GVf"/>
                             <constraint firstItem="79U-7q-eco" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="exI-VS-ghH"/>
                             <constraint firstItem="79U-7q-eco" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="hZn-v3-fjP"/>
@@ -123,7 +114,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Q3L-XJ-2JH" id="aQK-xf-DYW"/>
-                        <outlet property="googleLoginView" destination="1tI-XI-fNO" id="Ddz-xn-a13"/>
+                        <outlet property="googleSignInBtn" destination="5HA-ui-b9T" id="cdY-jm-t9b"/>
                         <outlet property="pwTextField" destination="f5l-Pu-hGk" id="ilp-5a-XhE"/>
                         <outlet property="signInBtn" destination="sHW-Is-men" id="hzB-cV-eiP"/>
                         <outlet property="signInStackView" destination="79U-7q-eco" id="mwS-tW-4yt"/>
@@ -131,10 +122,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.800000000000001" y="42.728635682158924"/>
+            <point key="canvasLocation" x="1525.5999999999999" y="-633.73313343328346"/>
+        </scene>
+        <!--Archive List-->
+        <scene sceneID="PBC-HP-t3j">
+            <objects>
+                <collectionViewController id="bwr-nX-9US" customClass="STArchiveListViewController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cEG-S1-Bne">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HTz-7c-n0p">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="archiveListCell" id="Ybb-Gk-7k0">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <color key="backgroundColor" red="0.41348765009999999" green="0.84427752280000001" blue="0.74177904920000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="bwr-nX-9US" id="3aQ-0v-jqw"/>
+                            <outlet property="delegate" destination="bwr-nX-9US" id="Ivl-IL-CTG"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Archive List" id="BqB-Yq-Yvo"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lDk-Li-kPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="43"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f2E-82-LgR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vaf-rG-bTe" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="72B-z7-jWd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bwr-nX-9US" kind="relationship" relationship="rootViewController" id="Y0v-iH-Paf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CWc-Ih-R7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800.79999999999995" y="42.728635682158924"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_google" width="24" height="24"/>
-    </resources>
 </document>

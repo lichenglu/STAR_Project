@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986DD1D909D3E00221D27 /* STArchiveListVC.swift */; };
+		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51071D9047BB00788BFA /* AppDelegate.swift */; };
-		575D510A1D9047BB00788BFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51091D9047BB00788BFA /* ViewController.swift */; };
 		575D510D1D9047BB00788BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575D510B1D9047BB00788BFA /* Main.storyboard */; };
 		575D510F1D9047BB00788BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575D510E1D9047BB00788BFA /* Assets.xcassets */; };
 		575D51121D9047BB00788BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575D51101D9047BB00788BFA /* LaunchScreen.storyboard */; };
@@ -22,9 +23,11 @@
 
 /* Begin PBXFileReference section */
 		074434962672E087ACBF7A16 /* Pods_STAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		571986DC1D9097A200221D27 /* STAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STAR.entitlements; sourceTree = "<group>"; };
+		571986DD1D909D3E00221D27 /* STArchiveListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveListVC.swift; sourceTree = "<group>"; };
+		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
 		575D51041D9047BB00788BFA /* STAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		575D51071D9047BB00788BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		575D51091D9047BB00788BFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		575D510C1D9047BB00788BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		575D510E1D9047BB00788BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		575D51111D9047BB00788BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		575D51061D9047BB00788BFA /* STAR */ = {
 			isa = PBXGroup;
 			children = (
+				571986DC1D9097A200221D27 /* STAR.entitlements */,
 				575D511C1D904A2C00788BFA /* Model */,
 				575D511B1D904A2300788BFA /* View */,
 				575D511D1D904A3500788BFA /* Controller */,
@@ -108,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				575D51251D90780000788BFA /* STDefines.swift */,
+				571986E01D90AB2D00221D27 /* STHelpers.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -116,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				575D511E1D904AD100788BFA /* STSignInController.swift */,
-				575D51091D9047BB00788BFA /* ViewController.swift */,
+				571986DD1D909D3E00221D27 /* STArchiveListVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -175,6 +180,11 @@
 						DevelopmentTeam = 6728FQG2GQ;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -264,9 +274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */,
-				575D510A1D9047BB00788BFA /* ViewController.swift in Sources */,
 				575D511F1D904AD100788BFA /* STSignInController.swift in Sources */,
+				571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
+				571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */,
 				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
 			);
@@ -391,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -409,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -8,6 +8,10 @@
 
 import Foundation
 
+// Notifications
+let kUserDidSuccessfullySignedIn = "userDidSuccessfullySignedIn"
+
+
 enum STColors{
 	case shadowGray
 }

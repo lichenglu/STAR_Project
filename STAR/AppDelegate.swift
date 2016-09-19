@@ -50,10 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+		
 		let appKeyOption = UIApplicationOpenURLOptionsKey.sourceApplication
 		let annotationKeyOption = UIApplicationOpenURLOptionsKey.annotation
 		
-		return GIDSignIn.sharedInstance().handle(url as URL, sourceApplication: options[appKeyOption] as! String, annotation: options[annotationKeyOption] as! String)
+		guard let sourceApplication = options[appKeyOption] as? String else {
+			return false
+		}
+		
+		return GIDSignIn.sharedInstance().handle(url as URL, sourceApplication: sourceApplication, annotation: nil)
 	}
 	
 	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -67,7 +72,19 @@ extension AppDelegate: GIDSignInDelegate{
 		
 		if let error = error {
 			print(error.localizedDescription)
+			print("Google Auth: failed 1")
 			return
+		}
+		
+		guard let authentication = user.authentication else { return }
+		let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+		
+		FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+			if error != nil {
+				print("Google Auth: failed 2")
+			}
+
+			STHelpers.postNotification(notificationName: kUserDidSuccessfullySignedIn)
 		}
 	}
 	
