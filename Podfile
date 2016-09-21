@@ -13,6 +13,7 @@ target 'STAR' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
+  pod 'MBProgressHUD', '~> 1.0.0'
 
   #Realm
 

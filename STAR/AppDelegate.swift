@@ -13,8 +13,31 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-
-
+	
+	lazy var archiveListVC: STArchiveListViewController? = {
+		
+		let appDelegate = UIApplication.shared.delegate
+		
+		if let tabBarVC = appDelegate?.window??.rootViewController as? UITabBarController,
+			let navs = tabBarVC.viewControllers,
+			let nav = navs[0] as? UINavigationController {
+			
+			let vcs = nav.viewControllers
+			
+			if let archiveListVC = vcs[0] as? STArchiveListViewController{
+				return archiveListVC
+			}
+		}
+		
+		return nil
+	}()
+	
+//	+ (SCSwiftNewDiscoverVC*)discoverViewController {
+//	AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//	UINavigationController *nav = [(UITabBarController *)appDelegate.window.rootViewController viewControllers][0];
+//	SCSwiftNewDiscoverVC *discoverVC = nav.viewControllers[0];
+//	return discoverVC;
+//	}
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
 		// Configuration for firebase
@@ -52,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 		
 		let appKeyOption = UIApplicationOpenURLOptionsKey.sourceApplication
-		let annotationKeyOption = UIApplicationOpenURLOptionsKey.annotation
 		
 		guard let sourceApplication = options[appKeyOption] as? String else {
 			return false
@@ -72,7 +94,7 @@ extension AppDelegate: GIDSignInDelegate{
 		
 		if let error = error {
 			print(error.localizedDescription)
-			print("Google Auth: failed 1")
+			didFailToSignIn(error: error)
 			return
 		}
 		
@@ -81,16 +103,22 @@ extension AppDelegate: GIDSignInDelegate{
 		
 		FIRAuth.auth()?.signIn(with: credential) { (user, error) in
 			if error != nil {
-				print("Google Auth: failed 2")
+				print(error?.localizedDescription)
+				self.didFailToSignIn(error: error!)
 			}
-
-			STHelpers.postNotification(notificationName: kUserDidSuccessfullySignedIn)
+			
+			STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
 		}
 	}
 	
 	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-		// Perform any operations when the user disconnects from app here.	
+		// Perform any operations when the user disconnects from app here.
+		STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedOff])
+	}
 	
+	// Helpers
+	func didFailToSignIn(error: Error) {
+		STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.failed(error: error)])
 	}
 }
 

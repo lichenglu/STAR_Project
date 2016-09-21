@@ -63,6 +63,26 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		571986E21D90E44800221D27 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				575D51131D9047BB00788BFA /* Info.plist */,
+				575D51071D9047BB00788BFA /* AppDelegate.swift */,
+				575D51271D90816600788BFA /* STAR-Bridging-Header.h */,
+				575D510E1D9047BB00788BFA /* Assets.xcassets */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		571986E31D90E46A00221D27 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				575D51101D9047BB00788BFA /* LaunchScreen.storyboard */,
+				575D510B1D9047BB00788BFA /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		575D50FB1D9047BB00788BFA = {
 			isa = PBXGroup;
 			children = (
@@ -89,13 +109,9 @@
 				575D511B1D904A2300788BFA /* View */,
 				575D511D1D904A3500788BFA /* Controller */,
 				575D51201D906C6600788BFA /* Extensions */,
-				575D51071D9047BB00788BFA /* AppDelegate.swift */,
-				575D510E1D9047BB00788BFA /* Assets.xcassets */,
-				575D510B1D9047BB00788BFA /* Main.storyboard */,
-				575D51101D9047BB00788BFA /* LaunchScreen.storyboard */,
-				575D51131D9047BB00788BFA /* Info.plist */,
+				571986E31D90E46A00221D27 /* Storyboards */,
+				571986E21D90E44800221D27 /* Supporting Files */,
 				575D51191D90488300788BFA /* GoogleService-Info.plist */,
-				575D51271D90816600788BFA /* STAR-Bridging-Header.h */,
 			);
 			path = STAR;
 			sourceTree = "<group>";

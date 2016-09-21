@@ -21,8 +21,23 @@ class STHelpers {
 		vc.present(alert, animated: true, completion: nil)
 	}
 	
-	class func postNotification(notificationName: String){
-		let notification = Notification(name: Notification.Name(rawValue: notificationName))
-		NotificationCenter.default.post(notification)
+	
+	// MARK: - Notifications
+	class func postNotification(withName name: String, object: Any?, userInfo: [AnyHashable : Any]? ) {
+		let notificationName = NSNotification.Name(name)
+		NotificationCenter.default.post(name: notificationName, object: object, userInfo: userInfo)
+	}
+	
+	class func postNotification(withName name: String, userInfo: [AnyHashable : Any]? ){
+		self.postNotification(withName: name, object: nil, userInfo: userInfo)
+	}
+	
+	class func postNotification(withName name: String){
+		self.postNotification(withName: name, object: nil, userInfo: nil)
+	}
+	
+	class func addNotifObserver(to observer: Any, selector: Selector, name:  String, object: Any?){
+		let notificationName = NSNotification.Name(name)
+		NotificationCenter.default.addObserver(observer, selector: selector, name: notificationName, object: object)
 	}
 }

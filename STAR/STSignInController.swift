@@ -34,12 +34,12 @@ class STSignInController: UIViewController {
 		GIDSignIn.sharedInstance().uiDelegate = self
 		let tap = UITapGestureRecognizer(target: self, action: #selector(STSignInController.didTapGoogleSignInBtn(_:)))
 		googleSignInBtn.addGestureRecognizer(tap)
+		googleSignInBtn.style = .wide
 	    // Uncomment to automatically sign in the user.
 		// GIDSignIn.sharedInstance().signInSilently()
 		
 		// Notification
-		let notificationName = NSNotification.Name(kUserDidSuccessfullySignedIn)
-		NotificationCenter.default.addObserver(self, selector:#selector(STSignInController.userDidLogin(notification:)), name: notificationName, object: nil)
+		STHelpers.addNotifObserver(to: self, selector: #selector(STSignInController.userLoginStatusDidChange(notification:)), name: kUserLoginStatusDidChange, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,8 +59,28 @@ class STSignInController: UIViewController {
 		}
 	}
 	
-	func userDidLogin(notification: Notification){
-		self.dismiss(animated: true, completion: nil)
+	func userLoginStatusDidChange(notification: Notification){
+		
+		guard let userInfo = notification.userInfo,
+			let loginStatus = userInfo["loginStatus"] as? STUserLoginStatus else {
+				return
+		}
+		
+		switch loginStatus {
+			
+		case .loggedIn:
+			
+			self.dismiss(animated: true, completion: nil)
+			
+		case .failed(let error):
+			
+			STHelpers.showAlterView(title: "Oops", message: error.localizedDescription, actionTitle: nil, vc: self)
+			
+		case .loggedOff:
+			
+			break
+			
+		}
 	}
 	
 	@IBAction func didTapLoginWithEmail(_ sender: UIButton) {
@@ -78,12 +98,12 @@ class STSignInController: UIViewController {
 						if let error = error {
 							STHelpers.showAlterView(title: "Oops", message: error.localizedDescription , actionTitle: "I see", vc: self)
 						}else{
-							STHelpers.postNotification(notificationName: kUserDidSuccessfullySignedIn)
+							STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
 						}
 					})
 					
 				}else{
-					STHelpers.postNotification(notificationName: kUserDidSuccessfullySignedIn)
+					STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
 				}
 			})
 			
@@ -108,9 +128,12 @@ class STSignInController: UIViewController {
 	func didTapGoogleSignInBtn(_ gesture: UITapGestureRecognizer) {
 		print("didTapGoogleSignInBtn")
 		GIDSignIn.sharedInstance().signIn()
+		
 	}
 }
 
 extension STSignInController: GIDSignInUIDelegate{
-
+	func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+		print("LALALALALA")
+	}
 }

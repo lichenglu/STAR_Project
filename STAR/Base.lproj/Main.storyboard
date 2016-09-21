@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaf-rG-bTe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Krf-Zx-W7E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -122,13 +122,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525.5999999999999" y="-633.73313343328346"/>
+            <point key="canvasLocation" x="1740" y="-715"/>
         </scene>
         <!--Archive List-->
         <scene sceneID="PBC-HP-t3j">
             <objects>
                 <collectionViewController id="bwr-nX-9US" customClass="STArchiveListViewController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cEG-S1-Bne">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cEG-S1-Bne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,12 +158,22 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDk-Li-kPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1527" y="43"/>
+            <point key="canvasLocation" x="2317" y="43"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Archives-->
         <scene sceneID="f2E-82-LgR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vaf-rG-bTe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Archives" image="document" selectedImage="document" id="Ar4-gu-VHT">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.25098039220000001" green="0.76862745099999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedImageTintColor">
+                                <color key="value" red="0.1764705882" green="0.59999999999999998" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="72B-z7-jWd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -176,7 +186,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWc-Ih-R7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800.79999999999995" y="42.728635682158924"/>
+            <point key="canvasLocation" x="1740" y="42.728635682158924"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="qax-1E-yXb">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Krf-Zx-W7E" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="UP7-0M-fi1">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="vaf-rG-bTe" kind="relationship" relationship="viewControllers" id="M7h-eG-9qj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o3H-sk-dk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1155" y="43"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="document" width="30" height="30"/>
+    </resources>
 </document>

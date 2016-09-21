@@ -10,8 +10,16 @@ import Foundation
 
 // Notifications
 let kUserDidSuccessfullySignedIn = "userDidSuccessfullySignedIn"
+let kUserDidFailToSignIn = "userDidFailToSignIn"
+let kUserLoginStatusDidChange = "userLoginStatusDidChange"
 
 
 enum STColors{
 	case shadowGray
+}
+
+enum STUserLoginStatus {
+	case loggedIn
+	case failed(error: Error)
+	case loggedOff
 }
