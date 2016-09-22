@@ -30,9 +30,6 @@ class STSignInController: UIViewController {
 		// HideKeyboardWhenTappedAround
 		hideKeyboardWhenTappedAround()
 		
-		// Animation
-		entryAnimation()
-		
 		// Google Login
 		GIDSignIn.sharedInstance().uiDelegate = self
 		let tap = UITapGestureRecognizer(target: self, action: #selector(STSignInController.didTapGoogleSignInBtn(_:)))
@@ -44,7 +41,12 @@ class STSignInController: UIViewController {
 		// Notification
 		STHelpers.addNotifObserver(to: self, selector: #selector(STSignInController.userLoginStatusDidChange(notification:)), name: kUserLoginStatusDidChange, object: nil)
     }
-
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// Animation
+		self.entryAnimation()
+	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,13 +58,10 @@ class STSignInController: UIViewController {
 	
 	// MARK: - helpers
 	private func entryAnimation(){
-		
-		STHelpers.delay(withSeconds: 0.5){
-			let originalBounds = self.signInStackView.bounds
-			self.signInStackView.bounds = CGRect(x: originalBounds.origin.x, y: self.view.frame.height, width: originalBounds.width, height: -originalBounds.height)
-			UIView.animate(withDuration: 1) {
-				self.signInStackView.bounds = originalBounds
-			}
+		let originalFrame = self.signInStackView.frame
+		self.signInStackView.frame = CGRect(x: originalFrame.origin.x, y: self.view.frame.height, width: originalFrame.width, height: originalFrame.height)
+		UIView.animate(withDuration: 1) {
+			self.signInStackView.frame = originalFrame
 		}
 	}
 	
