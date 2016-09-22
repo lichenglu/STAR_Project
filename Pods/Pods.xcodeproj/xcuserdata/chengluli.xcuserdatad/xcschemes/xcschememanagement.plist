@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-STAR.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0172FE07E8DA3703DE9262426F4DF345</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DBA6001481CEA0EBA031CC5C94508FAA</key>
+		<key>41AB87757ED010740E38BF82D273F78D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

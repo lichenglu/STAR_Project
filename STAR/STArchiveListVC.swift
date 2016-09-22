@@ -66,7 +66,7 @@ class STArchiveListViewController: UICollectionViewController {
 		guard let currentUser = FIRAuth.auth()?.currentUser else {
 			
 			if let signInVC = storyboard?.instantiateViewController(withIdentifier: "SignInVC"){
-				self.present(signInVC, animated: true, completion: nil)
+				self.present(signInVC, animated: false, completion: nil)
 			}
 			
 			return nil

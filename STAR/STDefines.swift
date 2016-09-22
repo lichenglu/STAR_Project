@@ -9,8 +9,6 @@
 import Foundation
 
 // Notifications
-let kUserDidSuccessfullySignedIn = "userDidSuccessfullySignedIn"
-let kUserDidFailToSignIn = "userDidFailToSignIn"
 let kUserLoginStatusDidChange = "userLoginStatusDidChange"
 
 

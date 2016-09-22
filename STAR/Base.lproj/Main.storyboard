@@ -122,13 +122,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="-715"/>
+            <point key="canvasLocation" x="1740" y="-627"/>
         </scene>
         <!--Archive List-->
         <scene sceneID="PBC-HP-t3j">
             <objects>
                 <collectionViewController id="bwr-nX-9US" customClass="STArchiveListViewController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cEG-S1-Bne">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cEG-S1-Bne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,7 +158,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDk-Li-kPd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2317" y="43"/>
+            <point key="canvasLocation" x="2423" y="43"/>
         </scene>
         <!--Archives-->
         <scene sceneID="f2E-82-LgR">
@@ -194,6 +194,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Krf-Zx-W7E" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="UP7-0M-fi1">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -203,7 +204,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3H-sk-dk8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1155" y="43"/>
+            <point key="canvasLocation" x="1033" y="43"/>
         </scene>
     </scenes>
     <resources>
