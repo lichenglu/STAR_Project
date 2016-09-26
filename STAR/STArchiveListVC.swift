@@ -19,11 +19,9 @@ class STArchiveListViewController: UICollectionViewController {
 	let minLineSpaceBetweenCells: CGFloat = 8
 	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)
 	
-	var currentUser:FIRUser? = nil
-	
     override func viewDidLoad() {
 		
-		self.currentUser = checkIfUserHasLoggedin()
+		checkIfUserHasLoggedin()
 		
 		super.viewDidLoad()
 		
@@ -61,18 +59,14 @@ class STArchiveListViewController: UICollectionViewController {
     }
 	
 	// MARK: Helpers
-	func checkIfUserHasLoggedin() -> FIRUser? {
+	func checkIfUserHasLoggedin(){
 		
-		guard let currentUser = FIRAuth.auth()?.currentUser else {
+		if !STUser.isLoggedIn() {
 			
 			if let signInVC = storyboard?.instantiateViewController(withIdentifier: "SignInVC"){
 				self.present(signInVC, animated: false, completion: nil)
 			}
-			
-			return nil
 		}
-		
-		return currentUser
 	}
 	
 	

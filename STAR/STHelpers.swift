@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct STHelpers {
 	
@@ -48,5 +49,19 @@ struct STHelpers {
 		DispatchQueue.main.asyncAfter(deadline: when){
 			completion?()
 		}
+	}
+	
+	
+	// MARK: - Realm
+	static func addObjectToRealm(object: Object) {
+		let realm = try! Realm()
+		try! realm.write {
+			realm.add(object)
+		}
+	}
+	
+	static func queryFromRealm<T: Object>(ofType type: T.Type, query: String) -> Results<T> {
+		let realm = try! Realm()
+		return realm.objects(T.self).filter(query)
 	}
 }

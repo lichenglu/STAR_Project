@@ -10,6 +10,7 @@
 		571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986DD1D909D3E00221D27 /* STArchiveListVC.swift */; };
 		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5745238C1D931FD7000A892A /* MBProgressHUD.m */; };
+		5746D1FE1D98B1970006F72D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5746D1FD1D98B1970006F72D /* STUser.swift */; };
 		575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51071D9047BB00788BFA /* AppDelegate.swift */; };
 		575D510D1D9047BB00788BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 575D510B1D9047BB00788BFA /* Main.storyboard */; };
 		575D510F1D9047BB00788BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 575D510E1D9047BB00788BFA /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
 		5745238B1D931FD7000A892A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		5745238C1D931FD7000A892A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		5746D1FD1D98B1970006F72D /* STUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUser.swift; sourceTree = "<group>"; };
 		575D51041D9047BB00788BFA /* STAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		575D51071D9047BB00788BFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		575D510C1D9047BB00788BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +106,15 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		5746D1FB1D98A4390006F72D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				575D51251D90780000788BFA /* STDefines.swift */,
+				571986E01D90AB2D00221D27 /* STHelpers.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		575D50FB1D9047BB00788BFA = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				571986DC1D9097A200221D27 /* STAR.entitlements */,
+				5746D1FB1D98A4390006F72D /* Utils */,
 				575D511C1D904A2C00788BFA /* Model */,
 				575D511B1D904A2300788BFA /* View */,
 				575D511D1D904A3500788BFA /* Controller */,
@@ -148,8 +160,7 @@
 		575D511C1D904A2C00788BFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				575D51251D90780000788BFA /* STDefines.swift */,
-				571986E01D90AB2D00221D27 /* STHelpers.swift */,
+				5746D1FD1D98B1970006F72D /* STUser.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -219,7 +230,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -314,6 +325,7 @@
 				575D511F1D904AD100788BFA /* STSignInController.swift in Sources */,
 				571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
+				5746D1FE1D98B1970006F72D /* STUser.swift in Sources */,
 				571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */,
 				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
@@ -440,6 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -458,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

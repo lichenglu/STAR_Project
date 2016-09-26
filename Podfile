@@ -7,13 +7,24 @@ target 'STAR' do
 
   # Pods for STAR
 
-  #Firebase
+  # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'GoogleSignIn'
 
-  #Realm
+  # Realm
+  pod 'RealmSwift'
+  
+  
+  # Required by Realm to accomadate xcode 8.0
+  post_install do |installer|
+	  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+		config.build_settings['SWIFT_VERSION'] = '3.0' # or '3.0'
+	end
+	  end
+  end
 
 end

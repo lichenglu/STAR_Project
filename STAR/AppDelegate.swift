@@ -107,7 +107,7 @@ extension AppDelegate: GIDSignInDelegate{
 				self.didFailToSignIn(error: error!)
 			}
 			
-			STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
+			STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn(user: user)])
 		}
 	}
 	

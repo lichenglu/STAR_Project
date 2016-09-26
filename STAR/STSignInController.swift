@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 class STSignInController: UIViewController {
 	
@@ -41,12 +42,17 @@ class STSignInController: UIViewController {
 		// Notification
 		STHelpers.addNotifObserver(to: self, selector: #selector(STSignInController.userLoginStatusDidChange(notification:)), name: kUserLoginStatusDidChange, object: nil)
     }
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+		
+		let currentUser = STUser.me()
+		print("realm testing ", currentUser?.uid)
 		
 		// Animation
 		self.entryAnimation()
 	}
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,7 +71,12 @@ class STSignInController: UIViewController {
 		}
 	}
 	
-	func signInIsValidated() -> (email: String?, pw: String?, success: Bool){
+	fileprivate func showSpinner() {
+		let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+		spinner.label.text = "Logging In..."
+	}
+	
+	private func signInIsValidated() -> (email: String?, pw: String?, success: Bool){
 		
 		if let email = emailTextField.text,
 			let pw = pwTextField.text,
@@ -79,7 +90,7 @@ class STSignInController: UIViewController {
 	}
 	
 	// MARK: - Notification
-	func userLoginStatusDidChange(notification: Notification){
+	@objc private func userLoginStatusDidChange(notification: Notification){
 		
 		guard let userInfo = notification.userInfo,
 			let loginStatus = userInfo["loginStatus"] as? STUserLoginStatus else {
@@ -88,7 +99,13 @@ class STSignInController: UIViewController {
 		
 		switch loginStatus {
 			
-		case .loggedIn:
+		case .loggedIn(let user):
+			
+			if let user = user {
+				UserDefaults.standard.setValue(user.uid, forKey: kCurrentUserUID)
+				let currentUser = STUser(value: ["uid": user.uid])
+				STHelpers.addObjectToRealm(object: currentUser)
+			}
 			
 			self.dismiss(animated: true, completion: nil)
 			
@@ -108,6 +125,8 @@ class STSignInController: UIViewController {
 	// MARK: - user actions
 	@IBAction func didTapLoginWithEmail(_ sender: UIButton) {
 		
+		self.showSpinner()
+		
 		let (email, pw, validated) = signInIsValidated()
 		
 		if(validated){
@@ -120,13 +139,14 @@ class STSignInController: UIViewController {
 						
 						if let error = error {
 							STHelpers.showAlterView(title: "Oops", message: error.localizedDescription , actionTitle: "I see", vc: self)
+							STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.failed(error: error)])
 						}else{
-							STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
+							STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn(user: user)])
 						}
 					})
 					
 				}else{
-					STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn])
+					STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedIn(user: user)])
 				}
 			})
 			
@@ -135,17 +155,14 @@ class STSignInController: UIViewController {
 		}
 	}
 	
-	func didTapGoogleSignInBtn(_ gesture: UITapGestureRecognizer) {
+	@objc private func didTapGoogleSignInBtn(_ gesture: UITapGestureRecognizer) {
 		print("didTapGoogleSignInBtn")
 		GIDSignIn.sharedInstance().signIn()
-		
+		self.showSpinner()
 	}
 }
 
 // MARK: - GIDSignInUIDelegate Google Auth
 extension STSignInController: GIDSignInUIDelegate{
-	func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
-		let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
-		spinner.label.text = "Logging In..."
-	}
+
 }

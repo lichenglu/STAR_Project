@@ -7,17 +7,23 @@
 //
 
 import Foundation
+import Firebase
 
-// Notifications
+// MARK: - Notifications
 let kUserLoginStatusDidChange = "userLoginStatusDidChange"
 
+// MARK: - Segue Identifiers
+
+// MARK: - UserDefaults Keys
+let kCurrentUserUID = "currentUserId"
+
+// MARK: - Enums
+enum STUserLoginStatus {
+	case loggedIn(user: FIRUser?)
+	case failed(error: Error)
+	case loggedOff
+}
 
 enum STColors{
 	case shadowGray
-}
-
-enum STUserLoginStatus {
-	case loggedIn
-	case failed(error: Error)
-	case loggedOff
 }
