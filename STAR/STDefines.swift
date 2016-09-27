@@ -24,6 +24,15 @@ enum STUserLoginStatus {
 	case loggedOff
 }
 
-enum STColors{
-	case shadowGray
+enum STColors: String{
+	case bgColor = "#eeeeee"
+	
+	func toUIColor() -> UIColor {
+		return UIColor(hexString: self.rawValue) ?? UIColor.blue
+	}
+}
+
+enum STStoryboardIds: String {
+	case archiveListVC
+	case toDoListVC
 }

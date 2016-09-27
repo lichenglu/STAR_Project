@@ -17,19 +17,12 @@ class STArchiveListViewController: UICollectionViewController {
 	let archiveCellHeight: CGFloat = 50
 	let minSpaceBetweenCells: CGFloat = 4
 	let minLineSpaceBetweenCells: CGFloat = 8
-	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)
+	let sectionInsets = UIEdgeInsetsMake(0, 8, 8, 8)
 	
     override func viewDidLoad() {
-		
-		checkIfUserHasLoggedin()
-		
 		super.viewDidLoad()
 		
-		do{
-			try FIRAuth.auth()?.signOut()
-		}catch{
-			print("Failed to log out \(error.localizedDescription))")
-		}
+		self.collectionView?.isScrollEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,15 +52,6 @@ class STArchiveListViewController: UICollectionViewController {
     }
 	
 	// MARK: Helpers
-	func checkIfUserHasLoggedin(){
-		
-		if !STUser.isLoggedIn() {
-			
-			if let signInVC = storyboard?.instantiateViewController(withIdentifier: "SignInVC"){
-				self.present(signInVC, animated: false, completion: nil)
-			}
-		}
-	}
 	
 	
     // MARK: UICollectionViewDelegate

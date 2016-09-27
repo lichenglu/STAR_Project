@@ -14,23 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	
-	lazy var archiveListVC: STArchiveListViewController? = {
-		
-		let appDelegate = UIApplication.shared.delegate
-		
-		if let tabBarVC = appDelegate?.window??.rootViewController as? UITabBarController,
-			let navs = tabBarVC.viewControllers,
-			let nav = navs[0] as? UINavigationController {
-			
-			let vcs = nav.viewControllers
-			
-			if let archiveListVC = vcs[0] as? STArchiveListViewController{
-				return archiveListVC
-			}
-		}
-		
-		return nil
-	}()
+//	lazy var archiveListVC: STArchiveListViewController? = {
+//		
+//		let appDelegate = UIApplication.shared.delegate
+//		
+//		if let tabBarVC = appDelegate?.window??.rootViewController as? UITabBarController,
+//			let navs = tabBarVC.viewControllers,
+//			let nav = navs[0] as? UINavigationController {
+//			
+//			let vcs = nav.viewControllers
+//			
+//			if let archiveListVC = vcs[0] as? STArchiveListViewController{
+//				return archiveListVC
+//			}
+//		}
+//		
+//		return nil
+//	}()
 	
 //	+ (SCSwiftNewDiscoverVC*)discoverViewController {
 //	AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

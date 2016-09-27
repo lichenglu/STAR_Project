@@ -20,6 +20,12 @@
 		575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51211D906CA600788BFA /* UIViewController+keyboard.swift */; };
 		575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51231D9076E300788BFA /* STRoundedButton.swift */; };
 		575D51261D90780000788BFA /* STDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51251D90780000788BFA /* STDefines.swift */; };
+		5782F16E1D99DB520004F4BF /* STRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F16D1D99DB520004F4BF /* STRootViewController.swift */; };
+		5782F1711D99DBF10004F4BF /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1701D99DBF10004F4BF /* UIView+Shadow.swift */; };
+		5782F1731D99DBFE0004F4BF /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */; };
+		5782F1751D99DC060004F4BF /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1741D99DC060004F4BF /* Palette.swift */; };
+		5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */; };
+		5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */; };
 		BBB6A58F9EAE755FDA773050 /* Pods_STAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074434962672E087ACBF7A16 /* Pods_STAR.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +49,12 @@
 		575D51231D9076E300788BFA /* STRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRoundedButton.swift; sourceTree = "<group>"; };
 		575D51251D90780000788BFA /* STDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STDefines.swift; sourceTree = "<group>"; };
 		575D51271D90816600788BFA /* STAR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STAR-Bridging-Header.h"; sourceTree = "<group>"; };
+		5782F16D1D99DB520004F4BF /* STRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRootViewController.swift; sourceTree = "<group>"; };
+		5782F1701D99DBF10004F4BF /* UIView+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
+		5782F1741D99DC060004F4BF /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STToDoListVC.swift; sourceTree = "<group>"; };
+		5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexValue.swift"; sourceTree = "<group>"; };
 		6663C129DC322885BB060DCE /* Pods-STAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.release.xcconfig"; sourceTree = "<group>"; };
 		8AE6202C83A79198AB9BA53A /* Pods-STAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +104,7 @@
 		574523891D931F7A000A892A /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				5782F16F1D99DB890004F4BF /* TwicketSegmentedControl */,
 				5745238A1D931FC7000A892A /* MBProgressHUD */,
 			);
 			name = Vendors;
@@ -169,7 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				575D511E1D904AD100788BFA /* STSignInController.swift */,
+				5782F16D1D99DB520004F4BF /* STRootViewController.swift */,
 				571986DD1D909D3E00221D27 /* STArchiveListVC.swift */,
+				5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -177,9 +192,20 @@
 		575D51201D906C6600788BFA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5782F1701D99DBF10004F4BF /* UIView+Shadow.swift */,
 				575D51211D906CA600788BFA /* UIViewController+keyboard.swift */,
+				5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		5782F16F1D99DB890004F4BF /* TwicketSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */,
+				5782F1741D99DC060004F4BF /* Palette.swift */,
+			);
+			name = TwicketSegmentedControl;
 			sourceTree = "<group>";
 		};
 		F422922C6C562931C19F588D /* Frameworks */ = {
@@ -322,11 +348,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */,
+				5782F16E1D99DB520004F4BF /* STRootViewController.swift in Sources */,
 				575D511F1D904AD100788BFA /* STSignInController.swift in Sources */,
+				5782F1711D99DBF10004F4BF /* UIView+Shadow.swift in Sources */,
 				571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
+				5782F1751D99DC060004F4BF /* Palette.swift in Sources */,
 				5746D1FE1D98B1970006F72D /* STUser.swift in Sources */,
 				571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */,
+				5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */,
+				5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */,
+				5782F1731D99DBFE0004F4BF /* TwicketSegmentedControl.swift in Sources */,
 				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
 				5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */,
