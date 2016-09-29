@@ -26,6 +26,8 @@
 		5782F1751D99DC060004F4BF /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1741D99DC060004F4BF /* Palette.swift */; };
 		5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */; };
 		5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */; };
+		57FEEF7C1D9B62C900BF32AB /* STReamlDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7B1D9B62C900BF32AB /* STReamlDB.swift */; };
+		57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */; };
 		BBB6A58F9EAE755FDA773050 /* Pods_STAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074434962672E087ACBF7A16 /* Pods_STAR.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		5782F1741D99DC060004F4BF /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STToDoListVC.swift; sourceTree = "<group>"; };
 		5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexValue.swift"; sourceTree = "<group>"; };
+		57FEEF7B1D9B62C900BF32AB /* STReamlDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STReamlDB.swift; sourceTree = "<group>"; };
+		57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFirebaseDB.swift; sourceTree = "<group>"; };
 		6663C129DC322885BB060DCE /* Pods-STAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.release.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.release.xcconfig"; sourceTree = "<group>"; };
 		8AE6202C83A79198AB9BA53A /* Pods-STAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STAR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-STAR/Pods-STAR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +128,8 @@
 			children = (
 				575D51251D90780000788BFA /* STDefines.swift */,
 				571986E01D90AB2D00221D27 /* STHelpers.swift */,
+				57FEEF7B1D9B62C900BF32AB /* STReamlDB.swift */,
+				57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -156,7 +162,6 @@
 				575D511D1D904A3500788BFA /* Controller */,
 				575D51201D906C6600788BFA /* Extensions */,
 				574523891D931F7A000A892A /* Vendors */,
-				571986E31D90E46A00221D27 /* Storyboards */,
 				571986E21D90E44800221D27 /* Supporting Files */,
 			);
 			path = STAR;
@@ -165,6 +170,7 @@
 		575D511B1D904A2300788BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				571986E31D90E46A00221D27 /* Storyboards */,
 				575D51231D9076E300788BFA /* STRoundedButton.swift */,
 			);
 			name = View;
@@ -355,6 +361,7 @@
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
 				5782F1751D99DC060004F4BF /* Palette.swift in Sources */,
 				5746D1FE1D98B1970006F72D /* STUser.swift in Sources */,
+				57FEEF7C1D9B62C900BF32AB /* STReamlDB.swift in Sources */,
 				571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */,
 				5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */,
 				5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */,
@@ -362,6 +369,7 @@
 				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
 				5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */,
+				57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

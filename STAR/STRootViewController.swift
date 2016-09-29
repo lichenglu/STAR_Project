@@ -41,10 +41,10 @@ class STRootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		checkIfUserHasLoggedin()
-		
 		setUpUI()
-        // Do any additional setup after loading the view.
+		
+		let currentUser = STUser.me()
+		print("realm testing ", currentUser?.description)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,16 +82,6 @@ class STRootViewController: UIViewController {
 		
 		// Notify Child View Controller
 		viewController.didMove(toParentViewController: self)
-	}
-	
-	private func checkIfUserHasLoggedin(){
-		
-		if !STUser.isLoggedIn() {
-			
-			if let signInVC = storyboard?.instantiateViewController(withIdentifier: "SignInVC"){
-				self.present(signInVC, animated: false, completion: nil)
-			}
-		}
 	}
 	
     /*

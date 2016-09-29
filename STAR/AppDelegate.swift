@@ -5,9 +5,9 @@
 //  Created by chenglu li on 19/9/2016.
 //  Copyright © 2016 Chenglu_Li. All rights reserved.
 //
-
 import UIKit
 import Firebase
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,12 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //		return nil
 //	}()
 	
-//	+ (SCSwiftNewDiscoverVC*)discoverViewController {
-//	AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//	UINavigationController *nav = [(UITabBarController *)appDelegate.window.rootViewController viewControllers][0];
-//	SCSwiftNewDiscoverVC *discoverVC = nav.viewControllers[0];
-//	return discoverVC;
-//	}
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
 		// Configuration for firebase
@@ -46,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Google Login
 		GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
+		
+		STRealmDB.migrateRealmModelV1()
 		
 		return true
 	}
@@ -86,11 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 		return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication,  annotation: annotation)
 	}
+	
 }
 
 extension AppDelegate: GIDSignInDelegate{
 	
-	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Swift.Error!) {
 		
 		if let error = error {
 			print(error.localizedDescription)
@@ -111,13 +108,13 @@ extension AppDelegate: GIDSignInDelegate{
 		}
 	}
 	
-	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Swift.Error!) {
 		// Perform any operations when the user disconnects from app here.
 		STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.loggedOff])
 	}
 	
 	// Helpers
-	func didFailToSignIn(error: Error) {
+	func didFailToSignIn(error: Swift.Error) {
 		STHelpers.postNotification(withName: kUserLoginStatusDidChange, userInfo: ["loginStatus": STUserLoginStatus.failed(error: error)])
 	}
 }

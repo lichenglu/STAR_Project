@@ -36,3 +36,7 @@ enum STStoryboardIds: String {
 	case archiveListVC
 	case toDoListVC
 }
+
+enum STSegueIds: String {
+	case authToRootView
+}

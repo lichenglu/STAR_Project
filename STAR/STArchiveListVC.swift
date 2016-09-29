@@ -22,7 +22,9 @@ class STArchiveListViewController: UICollectionViewController {
     override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.collectionView?.isScrollEnabled = true
+		self.collectionView?.alwaysBounceVertical = true
+		
+//		try! FIRAuth.auth()?.signOut()
     }
 
     override func didReceiveMemoryWarning() {
