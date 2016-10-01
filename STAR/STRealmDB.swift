@@ -26,18 +26,35 @@ class STRealmDB {
 		return realmRef.objects(T.self).filter(query)
 	}
 	
+	static func deleteRealm() {
+		let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+		let realmURLs = [
+			realmURL,
+			realmURL.appendingPathExtension("lock"),
+			realmURL.appendingPathExtension("log_a"),
+			realmURL.appendingPathExtension("log_b"),
+			realmURL.appendingPathExtension("note")
+		]
+		for URL in realmURLs {
+			do {
+				try FileManager.default.removeItem(at: URL)
+			} catch {
+			}
+		}
+	}
+	
 	static func migrateRealmModelV1() {
 		
 		let config = Realm.Configuration(
 			// Set the new schema version. This must be greater than the previously used
 			// version (if you've never set a schema version before, the version is 0).
-			schemaVersion: 1,
+			schemaVersion: 2,
 			
 			// Set the block which will be called automatically when opening a Realm with
 			// a schema version lower than the one set above
 			migrationBlock: { migration, oldSchemaVersion in
 				// We haven’t migrated anything yet, so oldSchemaVersion == 0
-				if (oldSchemaVersion < 1) {
+				if (oldSchemaVersion < 2) {
 					// Nothing to do!
 					// Realm will automatically detect new properties and removed properties
 					// And will update the schema on disk automatically
@@ -49,6 +66,6 @@ class STRealmDB {
 		
 		// Now that we've told Realm how to handle the schema change, opening the file
 		// will automatically perform the migration
-		let realm = try! Realm()
+		_ = try! Realm()
 	}
 }

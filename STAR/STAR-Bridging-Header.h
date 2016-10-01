@@ -4,3 +4,5 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <GoogleSignIn/GIDSignInButton.h>
 #import "MBProgressHUD.h"
+#import "TGCameraViewController.h"
+#import "TGCameraColor.h"

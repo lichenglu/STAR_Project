@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
 		
-		STRealmDB.migrateRealmModelV1()
+//		STRealmDB.deleteRealm()
+//		STRealmDB.migrateRealmModelV1()
 		
 		return true
 	}

@@ -26,14 +26,17 @@ enum STUserLoginStatus {
 
 enum STColors: String{
 	case bgColor = "#eeeeee"
+	case themeBlue = "#0277bd"
+	case shadowColor = "#000000"
 	
 	func toUIColor() -> UIColor {
-		return UIColor(hexString: self.rawValue) ?? UIColor.blue
+		return UIColor(hexString: self.rawValue) ?? UIColor.red
 	}
 }
 
 enum STStoryboardIds: String {
 	case archiveListVC
+	case archiveDetailVC
 	case toDoListVC
 }
 

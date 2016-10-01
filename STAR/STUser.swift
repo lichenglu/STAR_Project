@@ -9,11 +9,6 @@ import Foundation
 import RealmSwift
 import Firebase
 
-protocol STRealmModel {
-	static var properties: [String] { get }
-	func toDictionary() -> [String: Any]
-}
-
 class STUser: Object{
 	
 	dynamic var uid: String!
@@ -44,6 +39,11 @@ class STUser: Object{
 	
 	static func isLoggedIn() -> Bool {
 		return FIRAuth.auth()?.currentUser != nil
+	}
+	
+	static var currentUserId: String {
+		guard let uid = STUser.me()?.uid else { return "" }
+		return uid
 	}
 	
 	static func me() -> STUser? {

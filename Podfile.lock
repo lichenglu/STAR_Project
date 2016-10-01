@@ -49,6 +49,7 @@ PODS:
   - Realm/Headers (2.0.0)
   - RealmSwift (2.0.0):
     - Realm (= 2.0.0)
+  - SnapKit (3.0.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - RealmSwift
+  - SnapKit (~> 3.0)
 
 SPEC CHECKSUMS:
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
@@ -74,7 +76,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Realm: 6dda421ae4b3e9a09742fc2cf4b876d459cbedcd
   RealmSwift: 7d015f34a2781a50889be9b5a15c36c08597ea0e
+  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
 
-PODFILE CHECKSUM: 074d6cc6dfe4250ecfb5ab0914551c9b9782e694
+PODFILE CHECKSUM: 5cc3270b68fd6b2e49cf74f504c33d63a4f1435f
 
 COCOAPODS: 1.0.1

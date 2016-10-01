@@ -23,6 +23,8 @@ class STSignInController: UIViewController {
 	
 	@IBOutlet weak var signInStackView: UIStackView!
 	
+	var hasSeenAnimation = false
+	
 	var realmRef: Realm!
 	
 	// MARK: - lifecycle
@@ -54,7 +56,10 @@ class STSignInController: UIViewController {
 		checkIfUserHasLoggedin()
 		
 		// Animation
-		self.entryAnimation()
+		if !hasSeenAnimation{
+			self.entryAnimation()
+			hasSeenAnimation = true
+		}
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -95,7 +100,7 @@ class STSignInController: UIViewController {
 	
 	private func checkIfUserHasLoggedin(){
 		
-		if STUser.isLoggedIn() {
+		if STUser.me() != nil {
 			self.performSegue(withIdentifier: STSegueIds.authToRootView.rawValue, sender: nil)
 		}
 	}

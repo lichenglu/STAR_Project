@@ -31,4 +31,8 @@ class STFirebaseDB {
 		let userData = user.toDictionary()
 		refBUser.child(uid).updateChildValues(userData)
 	}
+	
+	func updateUserOnFirebase(withUID uid: String, data: [String: Any]) {
+		refBUser.child(uid).updateChildValues(data)
+	}
 }

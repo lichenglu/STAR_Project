@@ -17,6 +17,9 @@ target 'STAR' do
   # Realm
   pod 'RealmSwift'
   
+  # UI Constraints
+  pod 'SnapKit', '~> 3.0'
+  
   
   # Required by Realm to accomadate xcode 8.0
   post_install do |installer|
