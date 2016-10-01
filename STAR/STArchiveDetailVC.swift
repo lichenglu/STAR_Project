@@ -32,7 +32,7 @@ class STArchiveDetailVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		self.collectionView?.alwaysBounceVertical = true
+//		self.collectionView?.alwaysBounceVertical = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,11 +84,6 @@ class STArchiveDetailVC: UICollectionViewController {
 				return cell
 		}
 		
-		let item = dataSource[indexPath.section][indexPath.row]
-		
-		DispatchQueue.main.async {
-			cell.configureUI(withHierarchy: item as! STHierarchy)
-		}
 //		if let item = dataSource[indexPath.section][indexPath.row] as? STBox
 //		{
 //			cell.configureUI(withHierarchy: item)
@@ -118,6 +113,27 @@ class STArchiveDetailVC: UICollectionViewController {
 			return headerView
 		default:
 			assert(false, "Unexpected element kind")
+		}
+	}
+	
+	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		
+		print("Will display cell \(indexPath.row)")
+		
+		guard let dataSource = dataSource,
+			  dataSource.count > indexPath.section,
+			  dataSource[indexPath.section].count > indexPath.row,
+		      let cell = cell as? STArchiveCollectionViewCell
+		
+		else
+		{
+			return
+		}
+		
+		let item = dataSource[indexPath.section][indexPath.row]
+		
+		DispatchQueue.main.async {
+			cell.configureUI(withHierarchy: item as! STHierarchy)
 		}
 	}
 

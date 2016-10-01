@@ -31,7 +31,7 @@ class STArchiveListViewController: UICollectionViewController {
     override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.collectionView?.alwaysBounceVertical = true
+//		self.collectionView?.alwaysBounceVertical = true
 		
 		dataSource = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "ownerId = '\(STUser.currentUserId)'")
 //
@@ -65,14 +65,25 @@ class STArchiveListViewController: UICollectionViewController {
 			dataSource.count > indexPath.row else {
 				return cell
 		}
+    
+        return cell
+    }
+	
+	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		
+		print("Will display cell \(indexPath.row)")
+		
+		guard let dataSource = dataSource,
+			  dataSource.count > indexPath.row,
+			  let cell = cell as? STArchiveCollectionViewCell else {
+				return
+		}
 		
 		let item = dataSource[indexPath.row]
 		DispatchQueue.main.async {
 			cell.configureUI(withHierarchy: item)
 		}
-    
-        return cell
-    }
+	}
 	
 	// MARK: Helpers
 	func pushToDetailView(dataSource: [[AnyObject]], titles: [String]) {
