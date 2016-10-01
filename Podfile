@@ -20,6 +20,10 @@ target 'STAR' do
   # UI Constraints
   pod 'SnapKit', '~> 3.0'
   
+  # Image Caching
+  pod 'SDWebImage', '~>3.8'
+  pod 'Haneke', '~> 1.0'
+  
   
   # Required by Realm to accomadate xcode 8.0
   post_install do |installer|

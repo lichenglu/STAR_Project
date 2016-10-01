@@ -24,7 +24,10 @@ enum STHierarchyType: Int {
 	
 	func toUIImage() -> UIImage {
 		
+		print("toUIImage")
+		
 		let defaultImage = UIImage(named: "institution")
+
 		switch self {
 		case .institution:
 			return UIImage(named: "institution") ?? defaultImage!

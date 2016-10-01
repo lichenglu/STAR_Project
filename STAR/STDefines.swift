@@ -17,6 +17,9 @@ let kUserLoginStatusDidChange = "userLoginStatusDidChange"
 // MARK: - UserDefaults Keys
 let kCurrentUserUID = "currentUserId"
 
+// MARK: - Constant Keys
+let kHierarchyCoverImage = "hierarchyCoverImage"
+
 // MARK: - Enums
 enum STUserLoginStatus {
 	case loggedIn(user: FIRUser?)

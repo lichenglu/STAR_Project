@@ -14,7 +14,7 @@ private let headerIdentifier = "archiveHeader"
 class STArchiveDetailVC: UICollectionViewController {
 	
 	let numberOfItemsPerRow: CGFloat = 2
-	let archiveCellHeight: CGFloat = 80
+	let archiveCellHeight: CGFloat = 200
 	let minSpaceBetweenCells: CGFloat = 4
 	let minLineSpaceBetweenCells: CGFloat = 8
 	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)

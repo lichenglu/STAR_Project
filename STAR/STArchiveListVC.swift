@@ -16,7 +16,7 @@ private let reuseIdentifier = "archiveListCell"
 class STArchiveListViewController: UICollectionViewController {
 	
 	let numberOfItemsPerRow: CGFloat = 2
-	let archiveCellHeight: CGFloat = 80
+	let archiveCellHeight: CGFloat = 200
 	let minSpaceBetweenCells: CGFloat = 4
 	let minLineSpaceBetweenCells: CGFloat = 8
 	let sectionInsets = UIEdgeInsetsMake(0, 8, 8, 8)
@@ -142,7 +142,7 @@ extension STArchiveListViewController: UICollectionViewDelegateFlowLayout{
 	// Make each cell equal width, the amount of three equals window width
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
-		return CGSize(width: (collectionView.bounds.size.width - minSpaceBetweenCells * 4 - self.sectionInsets.left - self.sectionInsets.right)/numberOfItemsPerRow, height: self.archiveCellHeight)
+		return CGSize(width: (collectionView.bounds.size.width - minSpaceBetweenCells * (2 * (numberOfItemsPerRow - 1)) - self.sectionInsets.left - self.sectionInsets.right)/numberOfItemsPerRow, height: self.archiveCellHeight)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
