@@ -159,7 +159,13 @@
                             <constraint firstItem="McJ-OH-cHR" firstAttribute="top" secondItem="5O4-UU-aRI" secondAttribute="bottom" id="irb-c7-vTg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8vz-ud-0Kb"/>
+                    <navigationItem key="navigationItem" id="8vz-ud-0Kb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0hs-k9-uoN">
+                            <connections>
+                                <action selector="didTapAddButton:" destination="4Dn-B9-bWz" id="L5g-GA-MjJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="presentedView" destination="5O4-UU-aRI" id="g6q-Eb-3xf"/>
                         <outlet property="segmentedControl" destination="lB0-8p-Bae" id="ZGq-tQ-s5t"/>
@@ -182,7 +188,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rNM-Rm-LeD" id="MGL-pW-UYb">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -213,7 +219,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="archiveListCell" id="Ybb-Gk-7k0" customClass="STArchiveCollectionViewCell" customModule="STAR" customModuleProvider="target">
-                                <rect key="frame" x="12.5" y="0.0" width="350" height="200"/>
+                                <rect key="frame" x="13" y="0.0" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>

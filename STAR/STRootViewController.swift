@@ -159,9 +159,22 @@ class STRootViewController: UIViewController {
 		viewController.didMove(toParentViewController: self)
 	}
 	
+	// MARK: - User actions
+	
 	func didTapCameraButton(sender: STCameraButton){
 		let navigationController = TGCameraNavigationController.new(with: self)
 		present(navigationController!, animated: true, completion: nil)
+	}
+	
+	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
+		let me = STUser.me()
+		guard let ownerId = me?.uid else { assert(false, "No user logged in") }
+		let realm = try! Realm()
+		let newInstitution = STInstitution()
+		newInstitution.ownerId = ownerId
+		newInstitution.title = "New Institution"
+		
+		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
 	}
 	
     /*

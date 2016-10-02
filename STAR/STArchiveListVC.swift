@@ -27,6 +27,7 @@ class STArchiveListViewController: UICollectionViewController {
 			self.collectionView?.reloadData()
 		}
 	}
+	 var notificationToken: NotificationToken?
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +35,7 @@ class STArchiveListViewController: UICollectionViewController {
 //		self.collectionView?.alwaysBounceVertical = true
 		
 		dataSource = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "ownerId = '\(STUser.currentUserId)'")
+		observeRealmChange(dataSource: dataSource)
 //
 //		print("results ", results.description)
 //		try! FIRAuth.auth()?.signOut()
@@ -43,6 +45,10 @@ class STArchiveListViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	deinit {
+		notificationToken?.stop()
+	}
 
     // MARK: UICollectionViewDataSource
 
@@ -92,6 +98,36 @@ class STArchiveListViewController: UICollectionViewController {
 		vc.dataSource = dataSource
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func observeRealmChange(dataSource: Results<STInstitution>?) {
+		// Set results notification block
+		self.notificationToken = dataSource?.addNotificationBlock { (changes: RealmCollectionChange) in
+			
+			guard let collectionView = self.collectionView else { return }
+			switch changes {
+			case .initial:
+				// Results are now populated and can be accessed without blocking the UI
+				collectionView.reloadData()
+				break
+			case .update(_, let deletions, let insertions, let modifications):
+				// Query results have changed, so apply them to the collectionView
+
+				collectionView.performBatchUpdates({
+					collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
+					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
+					collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
+					}, completion: { (finished) in
+						
+				})
+				
+				break
+			case .error(let err):
+				// An error occurred while opening the Realm file on the background worker thread
+				fatalError("\(err)")
+				break
+			}
+		}
 	}
 	
     // MARK: UICollectionViewDelegate

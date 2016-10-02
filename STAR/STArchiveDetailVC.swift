@@ -31,7 +31,6 @@ class STArchiveDetailVC: UICollectionViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
 //		self.collectionView?.alwaysBounceVertical = true
     }
 
