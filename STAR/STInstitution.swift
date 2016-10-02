@@ -20,23 +20,9 @@ class STInstitution: STHierarchy, STContainer {
 		return ReamlEnum(value: ["rawValue": STHierarchyType.institution.rawValue])
 	}
 	
-	var children: [[AnyObject]] {
+	var children: [AnyObject] {
 		
-		var result = [[AnyObject]]()
-		var tempArr = [AnyObject]()
-		
-		boxes.forEach{ tempArr.append($0) }
-		result.append(tempArr)
-		tempArr.removeAll()
-		
-		collections.forEach{ tempArr.append($0) }
-		result.append(tempArr)
-		tempArr.removeAll()
-		
-		volumes.forEach{ tempArr.append($0) }
-		result.append(tempArr)
-		
-		return result
+		return [boxes, collections, volumes]
 	}
 	
 	var hierarchyProperties: [String] {

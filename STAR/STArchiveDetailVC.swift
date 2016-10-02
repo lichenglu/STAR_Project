@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let cellIdentifier = "archiveListCell"
 private let headerIdentifier = "archiveHeader"
@@ -20,7 +21,8 @@ class STArchiveDetailVC: UICollectionViewController {
 	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)
 	let headerViewHeight: CGFloat = 26
 	
-	var dataSource:[[AnyObject]]? {
+	var owner: STContainer?
+	var dataSource:[AnyObject]? {
 		didSet {
 			self.collectionView?.reloadData()
 			print("dataSource", dataSource?.count)
@@ -31,6 +33,9 @@ class STArchiveDetailVC: UICollectionViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		setUpUI()
+		guard let owner = self.owner else { return }
+		dataSource = owner.children
 //		self.collectionView?.alwaysBounceVertical = true
     }
 
@@ -40,12 +45,111 @@ class STArchiveDetailVC: UICollectionViewController {
     }
 	
 	// MARK: - Helpers
-	func openItem(dataSource: [[AnyObject]], titles: [String]){
+	func setUpUI() {
+		// Nav title
+		if let owner = self.owner as? STHierarchy {
+			self.title = owner.title
+		}
+		
+		// Add button
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STArchiveDetailVC.didTapAddButton(sender:)))
+		self.navigationItem.rightBarButtonItem = addButton
+	}
+	
+	func openItem(owner: STContainer, titles: [String]){
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 			else { return }
-		vc.dataSource = dataSource
+		vc.owner = owner
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func getItem(fromIndexPath indexPath: IndexPath) -> STHierarchy? {
+		
+		guard let dataSource = dataSource,
+			dataSource.count > indexPath.section,
+			dataSource[indexPath.section].count > indexPath.row
+		else
+		{
+			return nil
+		}
+		
+		var item: STHierarchy?
+		
+		if let items = dataSource[indexPath.section] as? List<STBox>
+		{
+			item = items[indexPath.row]
+		}
+		else if let items = dataSource[indexPath.section] as? List<STCollection>
+		{
+			item = items[indexPath.row]
+		}
+		else if let items = dataSource[indexPath.section]as? List<STVolume>
+		{
+			item = items[indexPath.row]
+		}
+		else if let items = dataSource[indexPath.section]as? List<STFolder>
+		{
+			item = items[indexPath.row]
+		}
+		else if let items = dataSource[indexPath.section]as? List<STItem>
+		{
+			item = items[indexPath.row]
+		}
+		
+		return item
+	}
+	
+	func showAddOptions() {
+		let actionSheet = UIAlertController(title: "Add Something", message: "What hierarchy do you wanna add to?", preferredStyle: .actionSheet)
+		self.sectionTitles?.forEach({ (title) in
+			let action = UIAlertAction(title: title.capitalized, style: .default, handler: { (action) in
+				
+				guard let title = action.title?.lowercased(),
+					 let owner = self.owner as? STHierarchy else { return }
+				
+				switch title.lowercased() {
+				case "\(STHierarchyType.box)es":
+					print("new box added")
+					let box = STBox()
+					box.ownerId = owner.id
+					box.title = "New Box"
+				case "\(STHierarchyType.collection)s":
+					print("new collection added")
+					let collection = STCollection()
+					collection.ownerId = owner.id
+					collection.title = "New Collection"
+				case "\(STHierarchyType.folder)s":
+					print("new folder added")
+					let folder = STFolder()
+					folder.ownerId = owner.id
+				case "\(STHierarchyType.volume)s":
+					print("new volume added")
+					let volume = STVolume()
+					volume.ownerId = owner.id
+				default:
+					print("unknown type")
+				}
+			})
+			
+			actionSheet.addAction(action)
+		})
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		actionSheet.addAction(cancelAction)
+		self.present(actionSheet, animated: true, completion: nil)
+	}
+	
+	// MARK: - User Actions
+	func didTapAddButton(sender: UIBarButtonItem) {
+		
+		guard let numberOfSections = self.collectionView?.numberOfSections
+		else
+		{
+			return
+		}
+		
+		showAddOptions()
 	}
 	
 	
@@ -77,25 +181,6 @@ class STArchiveDetailVC: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! STArchiveCollectionViewCell
 		
-		guard let dataSource = dataSource,
-			dataSource.count > indexPath.section,
-			dataSource[indexPath.section].count > indexPath.row else {
-				return cell
-		}
-		
-//		if let item = dataSource[indexPath.section][indexPath.row] as? STBox
-//		{
-//			cell.configureUI(withHierarchy: item)
-//		}
-//		else if let item = dataSource[indexPath.section][indexPath.row] as? STCollection
-//		{
-//			cell.configureUI(withHierarchy: item)
-//		}
-//		else if let item = dataSource[indexPath.section][indexPath.row] as? STVolume
-//		{
-//			cell.configureUI(withHierarchy: item)
-//		}
-		
 		return cell
 	}
 	
@@ -119,38 +204,24 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		print("Will display cell \(indexPath.row)")
 		
-		guard let dataSource = dataSource,
-			  dataSource.count > indexPath.section,
-			  dataSource[indexPath.section].count > indexPath.row,
-		      let cell = cell as? STArchiveCollectionViewCell
+		guard let cell = cell as? STArchiveCollectionViewCell else { return }
 		
-		else
-		{
-			return
-		}
-		
-		let item = dataSource[indexPath.section][indexPath.row]
+		guard let item = getItem(fromIndexPath: indexPath) else { return }
 		
 		DispatchQueue.main.async {
-			cell.configureUI(withHierarchy: item as! STHierarchy)
+			cell.configureUI(withHierarchy: item)
 		}
 	}
 
     // MARK: UICollectionViewDelegate
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		
-		guard let dataSource = dataSource,
-				  dataSource.count > indexPath.section,
-				  dataSource[indexPath.section].count > indexPath.row else {
-			return
-		}
+		guard let item = getItem(fromIndexPath: indexPath) else { return }
 		
-		let item = dataSource[indexPath.section][indexPath.row]
-		
-		if let item = item as? STItem {
+		if item is STItem {
 			
-		}else if let item = item as? STContainer{
-			self.openItem(dataSource: item.children, titles: item.hierarchyProperties)
+		}else if let itemData = item as? STContainer{
+			self.openItem(owner: itemData, titles: itemData.hierarchyProperties)
 		}
 
 	}
@@ -161,27 +232,20 @@ class STArchiveDetailVC: UICollectionViewController {
     }
     */
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
-    /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+//    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+//        return false
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+//    
+//    }
 
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
 

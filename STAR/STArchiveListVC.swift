@@ -92,10 +92,10 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	
 	// MARK: Helpers
-	func pushToDetailView(dataSource: [[AnyObject]], titles: [String]) {
+	func pushToDetailView(owner: STInstitution, titles: [String]) {
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 		else { return }
-		vc.dataSource = dataSource
+		vc.owner = owner
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
@@ -139,7 +139,7 @@ class STArchiveListViewController: UICollectionViewController {
 				return
 		}
 		let item = dataSource[indexPath.row]
-		self.pushToDetailView(dataSource: item.children, titles: item.hierarchyProperties)
+		self.pushToDetailView(owner: item, titles: item.hierarchyProperties)
 	}
 	
     /*

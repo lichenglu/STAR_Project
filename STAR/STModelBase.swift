@@ -16,7 +16,7 @@ protocol STRealmModel {
 }
 
 protocol STContainer {
-	var children: [[AnyObject]] { get }
+	var children: [AnyObject] { get }
 	var hierarchyProperties: [String] { get }
 }
 
@@ -47,7 +47,7 @@ enum STHierarchyType: Int {
 class STHierarchy: Object {
 	
 	dynamic var id: String = NSUUID().uuidString
-	dynamic var ownerId: String!
+	dynamic var owner: Object!
 	dynamic var title: String!
 	
 	var type: STHierarchyType {

@@ -17,15 +17,9 @@ class STVolume: STHierarchy, STContainer {
 		return ReamlEnum(value: ["rawValue": STHierarchyType.volume.rawValue])
 	}
 	
-	var children: [[AnyObject]] {
+	var children: [AnyObject]  {
 		
-		var result = [[AnyObject]]()
-		var tempArr = [AnyObject]()
-		
-		items.forEach{ tempArr.append($0) }
-		result.append(tempArr)
-		
-		return result
+		return [items]
 	}
 	
 	var hierarchyProperties: [String] {
