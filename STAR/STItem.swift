@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Firebase
 
 class STItem: STHierarchy {
 	
@@ -26,6 +27,18 @@ class STItem: STHierarchy {
 	
 	override static func ignoredProperties() -> [String] {
 		return ["tags"]
+	}
+	
+	var firebaseRef: FIRDatabaseReference? {
+		let realm = try! Realm()
+		if let owner = STRealmDB.query(fromRealm: realm, ofType: STFolder.self, query: "id = '\(ownerId!)'").first {
+			return owner.firebaseRef?.child("items").child(id)
+		}else if let owner = STRealmDB.query(fromRealm: realm, ofType: STCollection.self, query: "id = '\(ownerId!)'").first {
+			return owner.firebaseRef?.child("items").child(id)
+		}else if let owner = STRealmDB.query(fromRealm: realm, ofType: STVolume.self, query: "id = '\(ownerId!)'").first {
+			return owner.firebaseRef?.child("items").child(id)
+		}
+		return nil
 	}
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 import RealmSwift
-
+import Firebase
 
 class STFolder: STHierarchy, STContainer {
 	let items = List<STItem>()
@@ -30,5 +30,11 @@ class STFolder: STHierarchy, STContainer {
 	
 	var hierarchyProperties: [String] {
 		return ["items"]
+	}
+	
+	var firebaseRef: FIRDatabaseReference? {
+		let realm = try! Realm()
+		let owner = STRealmDB.query(fromRealm: realm, ofType: STBox.self, query: "id = '\(ownerId!)'").first
+		return owner?.firebaseRef?.child("folders").child(id)
 	}
 }

@@ -15,7 +15,7 @@ private let reuseIdentifier = "archiveListCell"
 
 class STArchiveListViewController: UICollectionViewController {
 	
-	let numberOfItemsPerRow: CGFloat = 2
+	let numberOfItemsPerRow: CGFloat = 1
 	let archiveCellHeight: CGFloat = 200
 	let minSpaceBetweenCells: CGFloat = 4
 	let minLineSpaceBetweenCells: CGFloat = 8

@@ -12,7 +12,6 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var imageView: UIImageView!
-	var firstTimeRendered = true
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -28,10 +27,7 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
 		print("data", kHierarchyCoverImage + "\(data.type)")
 		titleLabel.text = data.title
-//		if firstTimeRendered {
-//			let image = data.type.toUIImage()
-//			imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
-//			firstTimeRendered = false
-//		}
+		let image = data.type.toUIImage()
+		imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
 	}
 }
