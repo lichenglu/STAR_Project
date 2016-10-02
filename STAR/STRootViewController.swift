@@ -63,19 +63,23 @@ class STRootViewController: UIViewController {
 //		generateSeedData()
 		
 //		let realm = try! Realm()
-//		guard let institution = realm.objects(STInstitution.self).first else { return }
+//		guard let institution = realm.objects(STInstitution.self).first
+//		else
+//		{
+//			return
+//		}
+//		
 //		print("institution")
-//		print(institution.children)
-//		print(institution.type)
-//		print(institution.hierarchyProperties)
-//		print(institution.boxes.description)
-//		print(institution.id)
-//		print(institution.ownerId)
+//		print(institution.firebaseRef)
+//		print(institution.boxes.first?.firebaseRef)
+//		print(institution.collections.first?.firebaseRef)
+//		print(institution.volumes.first?.firebaseRef)
 	}
 	
 	private func setUpSegmentControl() {
 		let titles = ["Archives", "To-dos", "Profile"]
 		segmentedControl.setSegmentItems(titles)
+		segmentedControl.sliderBackgroundColor = STColors.themeBlue.toUIColor()
 		segmentedControl.delegate = self
 		
 		archiveListVC.view.isHidden = false

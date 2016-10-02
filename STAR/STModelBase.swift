@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Firebase
 
 protocol STRealmModel {
 	static var properties: [String] { get }

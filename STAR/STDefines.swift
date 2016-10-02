@@ -29,7 +29,7 @@ enum STUserLoginStatus {
 
 enum STColors: String{
 	case bgColor = "#eeeeee"
-	case themeBlue = "#0277bd"
+	case themeBlue = "#1388CB"
 	case shadowColor = "#000000"
 	
 	func toUIColor() -> UIColor {

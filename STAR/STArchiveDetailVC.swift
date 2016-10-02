@@ -18,7 +18,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	let minSpaceBetweenCells: CGFloat = 4
 	let minLineSpaceBetweenCells: CGFloat = 8
 	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)
-	let headerViewHeight: CGFloat = 30
+	let headerViewHeight: CGFloat = 26
 	
 	var dataSource:[[AnyObject]]? {
 		didSet {

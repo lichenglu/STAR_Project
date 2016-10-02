@@ -206,23 +206,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HTz-7c-n0p">
-                            <size key="itemSize" width="135" height="80"/>
+                            <size key="itemSize" width="350" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="archiveListCell" id="Ybb-Gk-7k0" customClass="STArchiveCollectionViewCell" customModule="STAR" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="135" height="80"/>
+                                <rect key="frame" x="12.5" y="0.0" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="135" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7b-Dd-a7E">
+                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LU-G6-fPD">
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lv3-w3-oqe"/>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geg-QN-weN">
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0078431372550000003" green="0.46666666670000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Lv3-w3-oqe" secondAttribute="trailing" id="C4U-ky-jne"/>
+                                                <constraint firstItem="Lv3-w3-oqe" firstAttribute="leading" secondItem="5LU-G6-fPD" secondAttribute="leading" id="X91-9Z-JWJ"/>
+                                                <constraint firstItem="Lv3-w3-oqe" firstAttribute="top" secondItem="5LU-G6-fPD" secondAttribute="top" id="iGQ-7e-Bsv"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lv3-w3-oqe" secondAttribute="bottom" id="xlX-k8-J6V"/>
+                                            </constraints>
+                                        </view>
+                                        <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7b-Dd-a7E">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please type the institution name here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geg-QN-weN">
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -230,13 +241,11 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="Lv3-w3-oqe" firstAttribute="leading" secondItem="P7b-Dd-a7E" secondAttribute="leading" id="Vt7-Fb-fFv"/>
-                                                <constraint firstAttribute="trailing" secondItem="Lv3-w3-oqe" secondAttribute="trailing" id="Wbo-FE-oZO"/>
+                                                <constraint firstItem="geg-QN-weN" firstAttribute="top" secondItem="P7b-Dd-a7E" secondAttribute="top" constant="8" id="FOz-oI-gIZ"/>
+                                                <constraint firstAttribute="height" constant="50" id="fgn-HQ-EuG"/>
                                                 <constraint firstAttribute="bottom" secondItem="geg-QN-weN" secondAttribute="bottom" constant="8" id="nl7-dN-1Ov"/>
                                                 <constraint firstItem="geg-QN-weN" firstAttribute="leading" secondItem="P7b-Dd-a7E" secondAttribute="leading" constant="8" id="p0l-16-b5b"/>
                                                 <constraint firstAttribute="trailing" secondItem="geg-QN-weN" secondAttribute="trailing" constant="8" id="qJK-i2-3on"/>
-                                                <constraint firstAttribute="bottom" secondItem="Lv3-w3-oqe" secondAttribute="bottom" id="rfV-Fg-lE6"/>
-                                                <constraint firstItem="Lv3-w3-oqe" firstAttribute="top" secondItem="P7b-Dd-a7E" secondAttribute="top" id="zuE-CO-jSD"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -244,8 +253,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="P7b-Dd-a7E" secondAttribute="trailing" id="0xC-xk-RLe"/>
-                                    <constraint firstItem="P7b-Dd-a7E" firstAttribute="top" secondItem="Ybb-Gk-7k0" secondAttribute="top" id="MdE-hl-fiD"/>
+                                    <constraint firstItem="5LU-G6-fPD" firstAttribute="top" secondItem="Ybb-Gk-7k0" secondAttribute="top" id="1XM-Sr-ZAu"/>
+                                    <constraint firstItem="5LU-G6-fPD" firstAttribute="leading" secondItem="Ybb-Gk-7k0" secondAttribute="leading" id="EGu-tZ-l0O"/>
+                                    <constraint firstAttribute="trailing" secondItem="5LU-G6-fPD" secondAttribute="trailing" id="MKa-wE-GzF"/>
                                     <constraint firstItem="P7b-Dd-a7E" firstAttribute="leading" secondItem="Ybb-Gk-7k0" secondAttribute="leading" id="OcU-Ic-Lnv"/>
+                                    <constraint firstItem="P7b-Dd-a7E" firstAttribute="top" secondItem="5LU-G6-fPD" secondAttribute="bottom" id="Yb2-jv-H7Q"/>
                                     <constraint firstAttribute="bottom" secondItem="P7b-Dd-a7E" secondAttribute="bottom" id="q3R-Br-VE4"/>
                                 </constraints>
                                 <connections>
@@ -406,7 +418,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aweawe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SV3-UG-Dy5" userLabel="headerTitle">
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -418,7 +430,7 @@
                             <constraints>
                                 <constraint firstItem="MOu-PY-1N7" firstAttribute="leading" secondItem="0m5-G6-L2b" secondAttribute="leading" id="0cG-3q-jtZ"/>
                                 <constraint firstAttribute="trailing" secondItem="MOu-PY-1N7" secondAttribute="trailing" id="7uq-a0-FjS"/>
-                                <constraint firstItem="SV3-UG-Dy5" firstAttribute="centerX" secondItem="0m5-G6-L2b" secondAttribute="centerX" id="YOW-25-mQ3"/>
+                                <constraint firstItem="SV3-UG-Dy5" firstAttribute="leading" secondItem="0m5-G6-L2b" secondAttribute="leading" constant="12" id="Eh1-ko-xqd"/>
                                 <constraint firstAttribute="bottom" secondItem="MOu-PY-1N7" secondAttribute="bottom" id="fM8-8W-Wig"/>
                                 <constraint firstItem="MOu-PY-1N7" firstAttribute="top" secondItem="0m5-G6-L2b" secondAttribute="top" id="fSw-Py-Pt0"/>
                                 <constraint firstItem="SV3-UG-Dy5" firstAttribute="centerY" secondItem="0m5-G6-L2b" secondAttribute="centerY" id="lxl-LF-wGc"/>
