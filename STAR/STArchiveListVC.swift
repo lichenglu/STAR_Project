@@ -92,7 +92,7 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	
 	// MARK: Helpers
-	func pushToDetailView(owner: STInstitution, titles: [String]) {
+	func pushToDetailView(owner: STContainer, titles: [String]) {
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 		else { return }
 		vc.owner = owner

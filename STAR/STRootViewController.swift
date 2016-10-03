@@ -110,13 +110,14 @@ class STRootViewController: UIViewController {
 	}
 	
 	func generateSeedData(){
-		let me = STUser.me()
-		guard let ownerId = me?.uid else { assert(false, "No user logged in") }
+
+		guard let me = STUser.me() else { assert(false, "No user logged in") }
 		
 		let realm = try! Realm()
 		(0...15).forEach { (idx) in
 			let institution = STInstitution()
-			institution.ownerId = ownerId
+			institution.owner = me
+			institution.ownerId = me.uid
 			institution.title = "Test Institution\(idx)"
 			STRealmDB.updateObject(inRealm: realm, object: institution)
 		}
@@ -167,11 +168,11 @@ class STRootViewController: UIViewController {
 	}
 	
 	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
-		let me = STUser.me()
-		guard let ownerId = me?.uid else { assert(false, "No user logged in") }
+		guard let me = STUser.me()else { assert(false, "No user logged in") }
 		let realm = try! Realm()
 		let newInstitution = STInstitution()
-		newInstitution.ownerId = ownerId
+		newInstitution.owner = me
+		newInstitution.ownerId = me.uid
 		newInstitution.title = "New Institution"
 		
 		STRealmDB.updateObject(inRealm: realm, object: newInstitution)

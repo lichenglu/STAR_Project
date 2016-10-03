@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import Firebase
 
-class STUser: Object{
+class STUser: STBaseModel{
 	
 	dynamic var uid: String!
 	dynamic var displayName: String? = nil

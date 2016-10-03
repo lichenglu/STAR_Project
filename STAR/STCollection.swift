@@ -11,10 +11,30 @@ import RealmSwift
 import Firebase
 
 class STCollection: STHierarchy, STContainer {
+
+	var items: Results<STItem> {
+		if let realm = self.realm {
+			return realm.objects(STItem.self).filter("ownerId = '\(id)'")
+		} else {
+			return RealmSwift.List<STItem>().filter("1 != 1")
+		}
+	}
 	
-	let boxes = List<STBox>()
-	let volumes = List<STVolume>()
-	let items = List<STItem>()
+	var boxes: Results<STBox> {
+		if let realm = self.realm {
+			return realm.objects(STBox.self).filter("ownerId = '\(id)'")
+		} else {
+			return RealmSwift.List<STBox>().filter("1 != 1")
+		}
+	}
+	
+	var volumes: Results<STVolume> {
+		if let realm = self.realm {
+			return realm.objects(STVolume.self).filter("ownerId = '\(id)'")
+		} else {
+			return RealmSwift.List<STVolume>().filter("1 != 1")
+		}
+	}
 	
 	override dynamic var _type: ReamlEnum {
 		return ReamlEnum(value: ["rawValue": STHierarchyType.collection.rawValue])
@@ -32,6 +52,6 @@ class STCollection: STHierarchy, STContainer {
 	var firebaseRef: FIRDatabaseReference? {
 		let realm = try! Realm()
 		let owner = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "id = '\(ownerId!)'").first
-		return owner?.firebaseRef.child("collections").child(id)
+		return owner?.firebaseRef?.child("collections").child(id)
 	}
 }

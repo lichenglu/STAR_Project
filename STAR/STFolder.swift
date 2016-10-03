@@ -11,7 +11,14 @@ import RealmSwift
 import Firebase
 
 class STFolder: STHierarchy, STContainer {
-	let items = List<STItem>()
+	
+	var items: Results<STItem> {
+		if let realm = self.realm {
+			return realm.objects(STItem.self).filter("ownerId = '\(id)'")
+		} else {
+			return RealmSwift.List<STItem>().filter("1 != 1")
+		}
+	}
 	
 	override dynamic var _type: ReamlEnum {
 		return ReamlEnum(value: ["rawValue": STHierarchyType.folder.rawValue])

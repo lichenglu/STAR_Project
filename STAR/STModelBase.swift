@@ -15,7 +15,7 @@ protocol STRealmModel {
 	func toDictionary() -> [String: Any]
 }
 
-protocol STContainer {
+protocol STContainer: class {
 	var children: [AnyObject] { get }
 	var hierarchyProperties: [String] { get }
 }
@@ -44,11 +44,26 @@ enum STHierarchyType: Int {
 	}
 }
 
-class STHierarchy: Object {
+class STBaseModel: Object {
+	
+}
+
+class STHierarchy: STBaseModel {
 	
 	dynamic var id: String = NSUUID().uuidString
-	dynamic var owner: Object!
 	dynamic var title: String!
+	dynamic var owner: STBaseModel? {
+		willSet{
+			guard let owner = owner else { return }
+			if let ownerData = owner as? STUser {
+				ownerId = ownerData.uid
+			}else if let ownerData = owner as? STHierarchy {
+				ownerId = ownerData.id
+			}
+		}
+	}
+	
+	dynamic var ownerId: String!
 	
 	var type: STHierarchyType {
 		guard let type = STHierarchyType(rawValue: _type.rawValue) else {

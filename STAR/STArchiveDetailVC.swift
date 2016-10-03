@@ -24,19 +24,20 @@ class STArchiveDetailVC: UICollectionViewController {
 	var owner: STContainer?
 	var dataSource:[AnyObject]? {
 		didSet {
-			self.collectionView?.reloadData()
 			print("dataSource", dataSource?.count)
 		}
 	}
+	var notifTokens = [NotificationToken]()
 	
 	var sectionTitles: [String]?
 	
+	// MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
 		setUpUI()
 		guard let owner = self.owner else { return }
 		dataSource = owner.children
-//		self.collectionView?.alwaysBounceVertical = true
+		mapRealmNotifToDataSource()
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,8 +45,20 @@ class STArchiveDetailVC: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		notifTokens.forEach { (token) in
+			token.stop()
+		}
+	}
+	
+	deinit {
+		print("STArchiveDetailVC is gone")
+	}
+	
 	// MARK: - Helpers
 	func setUpUI() {
+		
 		// Nav title
 		if let owner = self.owner as? STHierarchy {
 			self.title = owner.title
@@ -54,6 +67,9 @@ class STArchiveDetailVC: UICollectionViewController {
 		// Add button
 		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STArchiveDetailVC.didTapAddButton(sender:)))
 		self.navigationItem.rightBarButtonItem = addButton
+		
+		// Allow bouncing
+		self.collectionView?.alwaysBounceVertical = true
 	}
 	
 	func openItem(owner: STContainer, titles: [String]){
@@ -76,23 +92,23 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		var item: STHierarchy?
 		
-		if let items = dataSource[indexPath.section] as? List<STBox>
+		if let items = dataSource[indexPath.section] as? Results<STBox>
 		{
 			item = items[indexPath.row]
 		}
-		else if let items = dataSource[indexPath.section] as? List<STCollection>
+		else if let items = dataSource[indexPath.section] as? Results<STCollection>
 		{
 			item = items[indexPath.row]
 		}
-		else if let items = dataSource[indexPath.section]as? List<STVolume>
+		else if let items = dataSource[indexPath.section] as? Results<STVolume>
 		{
 			item = items[indexPath.row]
 		}
-		else if let items = dataSource[indexPath.section]as? List<STFolder>
+		else if let items = dataSource[indexPath.section] as? Results<STFolder>
 		{
 			item = items[indexPath.row]
 		}
-		else if let items = dataSource[indexPath.section]as? List<STItem>
+		else if let items = dataSource[indexPath.section] as? Results<STItem>
 		{
 			item = items[indexPath.row]
 		}
@@ -100,36 +116,109 @@ class STArchiveDetailVC: UICollectionViewController {
 		return item
 	}
 	
+	// MARK: - Pragma
+	func mapRealmNotifToDataSource() {
+		guard let dataSource = dataSource,
+			  dataSource.count > 0
+		else
+		{
+			return
+		}
+		
+		for (section, results) in dataSource.enumerated() {
+			
+			if let results = results as? Results<STBox>
+			{
+				addRealmNotif(results: results, section: section)
+			}
+			else if let results = results as? Results<STCollection>
+			{
+				addRealmNotif(results: results, section: section)
+			}
+			else if let results = results as? Results<STVolume>
+			{
+				addRealmNotif(results: results, section: section)
+			}
+			else if let results = results as? Results<STFolder>
+			{
+				addRealmNotif(results: results, section: section)
+			}
+			else if let results = results as? Results<STItem>
+			{
+				addRealmNotif(results: results, section: section)
+			}
+		}
+	}
+	
+	func addRealmNotif<T: STHierarchy>(results: Results<T>, section: Int) {
+		let token = results.addNotificationBlock { (changes: RealmCollectionChange) in
+			guard let collectionView = self.collectionView else { return }
+			switch changes {
+			case .initial:
+				// Results are now populated and can be accessed without blocking the UI
+				collectionView.reloadData()
+				break
+			case .update(_, let deletions, let insertions, let modifications):
+				// Query results have changed, so apply them to the collectionView
+				
+				collectionView.performBatchUpdates({
+					collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: section) })
+					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: section) })
+					collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: section) })
+					}, completion: { (finished) in
+						
+				})
+				
+				break
+			case .error(let err):
+				// An error occurred while opening the Realm file on the background worker thread
+				fatalError("\(err)")
+				break
+			}
+		}
+		self.notifTokens.append(token)
+	}
+	
 	func showAddOptions() {
 		let actionSheet = UIAlertController(title: "Add Something", message: "What hierarchy do you wanna add to?", preferredStyle: .actionSheet)
 		self.sectionTitles?.forEach({ (title) in
-			let action = UIAlertAction(title: title.capitalized, style: .default, handler: { (action) in
+			let action = UIAlertAction(title: title.capitalized, style: .default, handler: { [unowned self] (action) in
 				
 				guard let title = action.title?.lowercased(),
 					 let owner = self.owner as? STHierarchy else { return }
 				
+				let realm = try! Realm()
+				var newItem: STHierarchy!
+				
 				switch title.lowercased() {
 				case "\(STHierarchyType.box)es":
 					print("new box added")
-					let box = STBox()
-					box.ownerId = owner.id
-					box.title = "New Box"
+					newItem = STBox()
+					newItem.owner = owner
+					newItem.title = "New Box"
+					STRealmDB.addObject(toRealm: realm, object: newItem)
 				case "\(STHierarchyType.collection)s":
 					print("new collection added")
-					let collection = STCollection()
-					collection.ownerId = owner.id
-					collection.title = "New Collection"
+					newItem = STCollection()
+					newItem.owner = owner
+					newItem.title = "New Collection"
 				case "\(STHierarchyType.folder)s":
 					print("new folder added")
-					let folder = STFolder()
-					folder.ownerId = owner.id
+					newItem = STFolder()
+					newItem.owner = owner
+					newItem.title = "New Folder"
 				case "\(STHierarchyType.volume)s":
 					print("new volume added")
-					let volume = STVolume()
-					volume.ownerId = owner.id
+					newItem = STVolume()
+					newItem.owner = owner
+					newItem.title = "New Volume"
+					
 				default:
 					print("unknown type")
 				}
+				
+				STRealmDB.addObject(toRealm: realm, object: newItem)
+				self.dataSource = self.owner?.children
 			})
 			
 			actionSheet.addAction(action)
