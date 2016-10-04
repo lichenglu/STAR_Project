@@ -33,7 +33,7 @@ class STVolume: STHierarchy, STContainer {
 		return ["items"]
 	}
 	
-	var firebaseRef: FIRDatabaseReference? {
+	override var firebaseRef: FIRDatabaseReference? {
 		let realm = try! Realm()
 		if let owner = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "id = '\(ownerId!)'").first {
 			return owner.firebaseRef?.child("volumes").child(id)
@@ -41,6 +41,26 @@ class STVolume: STHierarchy, STContainer {
 			return owner.firebaseRef?.child("volumes").child(id)
 		}
 		return nil
+	}
+}
+
+extension STVolume {
+	
+	override var properties: [String] {
+		return ["id", "title", "ownerId"]
+	}
+	
+	override func toDictionary() -> [String : Any] {
+		var userData = [String: Any]()
+		self.properties.forEach { (property) in
+			userData[property] = self.value(forKey: property)
+		}
+		
+		userData["items"] = Array(self.items.map({ (item) -> [String : Any] in
+			return item.toDictionary()
+		}))
+		
+		return userData
 	}
 }
 

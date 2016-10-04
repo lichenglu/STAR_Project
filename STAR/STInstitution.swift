@@ -49,8 +49,51 @@ class STInstitution: STHierarchy, STContainer {
 		return ["boxes", "collections", "volumes"]
 	}
 	
-	var firebaseRef: FIRDatabaseReference? {
+	override var firebaseRef: FIRDatabaseReference? {
 		guard let ownerId = self.ownerId else { return nil }
 		return STFirebaseDB.db.refUser.child(ownerId).child("institutions").child(id)
 	}
 }
+
+extension STInstitution {
+	
+	override var properties: [String] {
+		return ["id", "title", "ownerId"]
+	}
+	
+	override func toDictionary() -> [String : Any] {
+		var userData = [String: Any]()
+		self.properties.forEach { (property) in
+			userData[property] = self.value(forKey: property)
+		}
+		userData["boxes"] = Array(self.boxes.map({ (box) -> [String : Any] in
+			return box.toDictionary()
+		}))
+		
+		userData["collections"] = Array(self.collections.map({ (collection) -> [String : Any] in
+			return collection.toDictionary()
+		}))
+		
+		userData["volumes"] = Array(self.volumes.map({ (volume) -> [String : Any] in
+			return volume.toDictionary()
+		}))
+		
+		return userData
+	}
+}
+//extension STInstitution: STRealmModel {
+//	
+//	static var properties: [String] {
+//		return ["boxes", "collections",
+//		        "volumes", "id", "title", "ownerId", "owner"]
+//	}
+//	
+//	func toDictionary() -> [String : Any] {
+//		var userData = [String: Any]()
+//		STItem.properties.forEach { (property) in
+//			userData[property] = self.value(forKey: property)
+//		}
+//		
+//		return userData
+//	}
+//}

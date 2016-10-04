@@ -29,7 +29,7 @@ class STItem: STHierarchy {
 		return ["tags"]
 	}
 	
-	var firebaseRef: FIRDatabaseReference? {
+	override var firebaseRef: FIRDatabaseReference? {
 		let realm = try! Realm()
 		if let owner = STRealmDB.query(fromRealm: realm, ofType: STFolder.self, query: "id = '\(ownerId!)'").first {
 			return owner.firebaseRef?.child("items").child(id)
@@ -42,16 +42,16 @@ class STItem: STHierarchy {
 	}
 }
 
-extension STItem: STRealmModel {
+extension STItem {
 	
-	static var properties: [String] {
+	override var properties: [String] {
 		return ["ownerId", "id",
 		        "title", "tags"]
 	}
 	
-	func toDictionary() -> [String : Any] {
+	override func toDictionary() -> [String : Any] {
 		var userData = [String: Any]()
-		STItem.properties.forEach { (property) in
+		self.properties.forEach { (property) in
 			userData[property] = self.value(forKey: property)
 		}
 		

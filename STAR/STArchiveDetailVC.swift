@@ -70,6 +70,10 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		// Allow bouncing
 		self.collectionView?.alwaysBounceVertical = true
+		
+		// EmptyDataSet delegates
+		self.collectionView?.emptyDataSetSource = self
+		self.collectionView?.emptyDataSetDelegate = self
 	}
 	
 	func openItem(owner: STContainer, titles: [String]){
@@ -160,7 +164,7 @@ class STArchiveDetailVC: UICollectionViewController {
 				break
 			case .update(_, let deletions, let insertions, let modifications):
 				// Query results have changed, so apply them to the collectionView
-				
+				collectionView.reloadEmptyDataSet()
 				collectionView.performBatchUpdates({
 					collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: section) })
 					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: section) })
@@ -217,7 +221,7 @@ class STArchiveDetailVC: UICollectionViewController {
 					print("unknown type")
 				}
 				
-				STRealmDB.addObject(toRealm: realm, object: newItem)
+				STRealmDB.updateObject(inRealm: realm, object: newItem)
 				self.dataSource = self.owner?.children
 			})
 			
@@ -270,6 +274,10 @@ class STArchiveDetailVC: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! STArchiveCollectionViewCell
 		
+		guard let item = getItem(fromIndexPath: indexPath) else { return cell }
+		
+		cell.configureUI(withHierarchy: item)
+		
 		return cell
 	}
 	
@@ -291,15 +299,6 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		
-		print("Will display cell \(indexPath.row)")
-		
-		guard let cell = cell as? STArchiveCollectionViewCell else { return }
-		
-		guard let item = getItem(fromIndexPath: indexPath) else { return }
-		
-		DispatchQueue.main.async {
-			cell.configureUI(withHierarchy: item)
-		}
 	}
 
     // MARK: UICollectionViewDelegate
@@ -343,7 +342,7 @@ extension STArchiveDetailVC: UICollectionViewDelegateFlowLayout{
 	// Make each cell equal width, the amount of three equals window width
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
-		return CGSize(width: (collectionView.bounds.size.width - minSpaceBetweenCells * 4 - self.sectionInsets.left - self.sectionInsets.right)/numberOfItemsPerRow, height: self.archiveCellHeight)
+		return CGSize(width: (collectionView.bounds.size.width - minSpaceBetweenCells * (2 * (numberOfItemsPerRow - 1)) - self.sectionInsets.left - self.sectionInsets.right)/numberOfItemsPerRow, height: self.archiveCellHeight)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -358,4 +357,51 @@ extension STArchiveDetailVC: UICollectionViewDelegateFlowLayout{
 		return self.sectionInsets
 	}
 	
+}
+
+
+// MARK: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
+extension STArchiveDetailVC: DZNEmptyDataSetSource {
+	
+	func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+		return STImageNames.emptyData.toUIImage()
+	}
+	
+	func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+		let text = "Start Archiving Your Favorite Files Now"
+		let font = UIFont.boldSystemFont(ofSize: 17)
+		let textColor = UIColor.black
+		let attributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: textColor] as [String : Any]
+		
+		return NSAttributedString(string: text, attributes: attributes)
+	}
+	
+	func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+		let text = "Favorites are saved for offline access."
+		let font = UIFont.systemFont(ofSize: 14.5)
+		let textColor = UIColor.darkGray
+		let paragraph = NSMutableParagraphStyle()
+		paragraph.lineBreakMode = .byWordWrapping
+		paragraph.alignment = .center
+		
+		let attributes = [NSFontAttributeName: font,
+		                  NSForegroundColorAttributeName: textColor,
+		                  NSParagraphStyleAttributeName: paragraph] as [String : Any]
+		
+		return NSAttributedString(string: text, attributes: attributes)
+	}
+	
+	func backgroundColor(forEmptyDataSet scrollView: UIScrollView) -> UIColor? {
+		return UIColor(hexString: "f0f3f5")
+	}
+}
+
+extension STArchiveDetailVC: DZNEmptyDataSetDelegate {
+	func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
+		return true
+	}
+	
+	func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
+		return true
+	}
 }

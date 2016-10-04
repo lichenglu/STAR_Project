@@ -50,9 +50,6 @@ PODS:
   - Realm/Headers (2.0.0)
   - RealmSwift (2.0.0):
     - Realm (= 2.0.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
   - SnapKit (3.0.1)
 
 DEPENDENCIES:
@@ -63,7 +60,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - Haneke (~> 1.0)
   - RealmSwift
-  - SDWebImage (~> 3.8)
   - SnapKit (~> 3.0)
 
 SPEC CHECKSUMS:
@@ -83,9 +79,8 @@ SPEC CHECKSUMS:
   Haneke: 01454a67322faa0dd9d81fc0f447885044e71521
   Realm: 6dda421ae4b3e9a09742fc2cf4b876d459cbedcd
   RealmSwift: 7d015f34a2781a50889be9b5a15c36c08597ea0e
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
 
-PODFILE CHECKSUM: 528e50dba0278e4b3279311aeae1ed032fa0d5ec
+PODFILE CHECKSUM: 02d397d3944530f8d96a9807f512b31eac3145df
 
 COCOAPODS: 1.0.1

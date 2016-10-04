@@ -34,6 +34,8 @@
 		5782F1751D99DC060004F4BF /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1741D99DC060004F4BF /* Palette.swift */; };
 		5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */; };
 		5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */; };
+		578B84501DA1F9EF0057D658 /* UIScrollView+EmptyDataSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */; };
+		578B84521DA1FA240057D658 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */; };
 		57FEEF7C1D9B62C900BF32AB /* STRealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7B1D9B62C900BF32AB /* STRealmDB.swift */; };
 		57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */; };
 		57FEEF801D9DC99C00BF32AB /* STItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7F1D9DC99C00BF32AB /* STItem.swift */; };
@@ -105,6 +107,8 @@
 		5782F1741D99DC060004F4BF /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STToDoListVC.swift; sourceTree = "<group>"; };
 		5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexValue.swift"; sourceTree = "<group>"; };
+		578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "STAR/UIScrollView+EmptyDataSet.h"; sourceTree = SOURCE_ROOT; };
+		578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "STAR/UIScrollView+EmptyDataSet.m"; sourceTree = SOURCE_ROOT; };
 		57FEEF7B1D9B62C900BF32AB /* STRealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRealmDB.swift; sourceTree = "<group>"; };
 		57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFirebaseDB.swift; sourceTree = "<group>"; };
 		57FEEF7F1D9DC99C00BF32AB /* STItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STItem.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 		574523891D931F7A000A892A /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				578B844A1DA1F84A0057D658 /* DZNEmptyDataSet */,
 				57FEEF871D9E099F00BF32AB /* TGCameraViewController */,
 				5782F16F1D99DB890004F4BF /* TwicketSegmentedControl */,
 				5745238A1D931FC7000A892A /* MBProgressHUD */,
@@ -328,6 +333,16 @@
 				5782F1741D99DC060004F4BF /* Palette.swift */,
 			);
 			name = TwicketSegmentedControl;
+			sourceTree = "<group>";
+		};
+		578B844A1DA1F84A0057D658 /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */,
+				578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */,
+			);
+			name = DZNEmptyDataSet;
+			path = ../Pods/DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		57FEEF871D9E099F00BF32AB /* TGCameraViewController */ = {
@@ -642,6 +657,7 @@
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
 				5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */,
 				57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */,
+				578B84501DA1F9EF0057D658 /* UIScrollView+EmptyDataSet.h in Sources */,
 				57FEEFD21D9E099F00BF32AB /* TGCameraFocus.m in Sources */,
 				57558E0A1D9F6A66002AA922 /* STVolume.swift in Sources */,
 				57FEEFC81D9E099F00BF32AB /* UIImage+CameraFilters.m in Sources */,
@@ -649,6 +665,7 @@
 				57558E001D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift in Sources */,
 				57FEEFD01D9E099F00BF32AB /* TGCameraColor.m in Sources */,
 				57FEEFCA1D9E099F00BF32AB /* TGCameraNavigationController.m in Sources */,
+				578B84521DA1FA240057D658 /* UIScrollView+EmptyDataSet.m in Sources */,
 				57FEEFCE1D9E099F00BF32AB /* TGAssetsLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

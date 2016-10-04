@@ -160,6 +160,16 @@ class STRootViewController: UIViewController {
 		viewController.didMove(toParentViewController: self)
 	}
 	
+	func addANewInstitution() {
+		guard let me = STUser.me()else { assert(false, "No user logged in") }
+		let realm = try! Realm()
+		let newInstitution = STInstitution()
+		newInstitution.owner = me
+		newInstitution.ownerId = me.uid
+		newInstitution.title = "New Institution"
+		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
+	}
+	
 	// MARK: - User actions
 	
 	func didTapCameraButton(sender: STCameraButton){
@@ -168,14 +178,9 @@ class STRootViewController: UIViewController {
 	}
 	
 	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
-		guard let me = STUser.me()else { assert(false, "No user logged in") }
-		let realm = try! Realm()
-		let newInstitution = STInstitution()
-		newInstitution.owner = me
-		newInstitution.ownerId = me.uid
-		newInstitution.title = "New Institution"
-		
-		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
+		if segmentedControl.selectedSegmentIndex == 0 {
+			addANewInstitution()
+		}
 	}
 	
     /*

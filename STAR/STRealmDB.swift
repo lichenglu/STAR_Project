@@ -13,12 +13,20 @@ class STRealmDB {
 	static func addObject(toRealm realmRef: Realm, object: Object) {
 		try! realmRef.write {
 			realmRef.add(object)
+			if let object = object as? STHierarchy,
+				let ref = object.firebaseRef{
+				STFirebaseDB.db.updateHierarchyOnFirebase(withRef: ref, data: object.toDictionary())
+			}
 		}
 	}
 	
 	static func updateObject(inRealm realmRef: Realm, object: Object) {
 		try! realmRef.write {
 			realmRef.add(object, update: true)
+			if let object = object as? STHierarchy,
+			   let ref = object.firebaseRef{
+				STFirebaseDB.db.updateHierarchyOnFirebase(withRef: ref, data: object.toDictionary())
+			}
 		}
 	}
 	

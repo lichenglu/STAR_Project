@@ -16,21 +16,29 @@ class STUser: STBaseModel{
 	dynamic var email: String? = nil
 	dynamic var photoURL: String? = nil
 	
+	var institutions: Results<STInstitution> {
+		if let realm = self.realm {
+			return realm.objects(STInstitution.self).filter("ownerId = '\(uid)'")
+		} else {
+			return RealmSwift.List<STInstitution>().filter("1 != 1")
+		}
+	}
+	
 	convenience init(withFIRUser user: FIRUser) {
-		var userData = [String: Any]()
-		STUser.properties.forEach { (property) in
+		
+		self.init()
+		
+		self.properties.forEach { (property) in
 			
 			if(property == "photoURL") {
 				if let photoURL = user.value(forKey: property) as? URL{
 					print("photoURL.absoluteURL \(photoURL.absoluteString)")
-					userData[property] = photoURL.absoluteString
+					self.setValue(photoURL.absoluteString, forKey: property)
 				}
 			}else {
-				userData[property] = user.value(forKey: property)
+				self.setValue(user.value(forKey: property), forKey: property)
 			}
 		}
-		
-		self.init(value: userData)
 	}
 	
 	override static func primaryKey() -> String? {
@@ -63,16 +71,19 @@ class STUser: STBaseModel{
 
 extension STUser: STRealmModel {
 	
-	static var properties: [String] {
+	var properties: [String] {
 		return ["uid", "displayName",
 		        "email", "photoURL"]
 	}
 
 	func toDictionary() -> [String : Any] {
 		var userData = [String: Any]()
-		STUser.properties.forEach { (property) in
+		self.properties.forEach { (property) in
 			userData[property] = self.value(forKey: property)
 		}
+		userData["institutions"] = Array(institutions.map({ (institution) -> [String : Any] in
+			return institution.toDictionary()
+		}))
 		
 		return userData
 	}

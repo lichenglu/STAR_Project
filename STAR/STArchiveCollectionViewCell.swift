@@ -27,7 +27,12 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
 		print("data", kHierarchyCoverImage + "\(data.type)")
 		titleLabel.text = data.title
-		let image = data.type.toUIImage()
-		imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
+		
+		DispatchQueue.global(qos: .default).async {
+			let image = data.type.toUIImage()
+			DispatchQueue.main.async {
+				self.imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
+			}
+		}
 	}
 }

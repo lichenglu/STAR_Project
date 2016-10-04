@@ -43,6 +43,14 @@ enum STStoryboardIds: String {
 	case toDoListVC
 }
 
+enum STImageNames: String {
+	case emptyData = "placeholder_emptyData"
+	
+	func toUIImage() -> UIImage? {
+		return UIImage(named: self.rawValue)
+	}
+}
+
 enum STSegueIds: String {
 	case authToRootView
 }

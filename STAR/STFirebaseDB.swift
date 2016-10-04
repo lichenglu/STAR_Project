@@ -46,6 +46,10 @@ class STFirebaseDB {
 		refUser.child(uid).updateChildValues(data)
 	}
 	
+	func updateHierarchyOnFirebase(withRef ref: FIRDatabaseReference, data: [String: Any]) {
+		ref.updateChildValues(data)
+	}
+	
 	func uploadImageToFirebase(withUID uid: String, imageId: String, image: UIImage, metaData: STItem?, completion: ((FIRStorageMetadata?, Error?) -> Void)?) {
 		
 		// Img to data

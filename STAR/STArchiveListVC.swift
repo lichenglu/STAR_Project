@@ -27,7 +27,7 @@ class STArchiveListViewController: UICollectionViewController {
 			self.collectionView?.reloadData()
 		}
 	}
-	 var notificationToken: NotificationToken?
+	var notificationToken: NotificationToken?
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,6 +36,8 @@ class STArchiveListViewController: UICollectionViewController {
 		
 		dataSource = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "ownerId = '\(STUser.currentUserId)'")
 		observeRealmChange(dataSource: dataSource)
+		self.collectionView?.emptyDataSetSource = self;
+		self.collectionView?.emptyDataSetDelegate = self;
 //
 //		print("results ", results.description)
 //		try! FIRAuth.auth()?.signOut()
@@ -71,24 +73,16 @@ class STArchiveListViewController: UICollectionViewController {
 			dataSource.count > indexPath.row else {
 				return cell
 		}
-    
+		
+		let item = dataSource[indexPath.row]
+		cell.configureUI(withHierarchy: item)
+		
         return cell
     }
 	
 	override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		
 		print("Will display cell \(indexPath.row)")
-		
-		guard let dataSource = dataSource,
-			  dataSource.count > indexPath.row,
-			  let cell = cell as? STArchiveCollectionViewCell else {
-				return
-		}
-		
-		let item = dataSource[indexPath.row]
-		DispatchQueue.main.async {
-			cell.configureUI(withHierarchy: item)
-		}
 	}
 	
 	// MARK: Helpers
@@ -112,7 +106,7 @@ class STArchiveListViewController: UICollectionViewController {
 				break
 			case .update(_, let deletions, let insertions, let modifications):
 				// Query results have changed, so apply them to the collectionView
-
+				collectionView.reloadEmptyDataSet()
 				collectionView.performBatchUpdates({
 					collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
 					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
@@ -141,20 +135,6 @@ class STArchiveListViewController: UICollectionViewController {
 		let item = dataSource[indexPath.row]
 		self.pushToDetailView(owner: item, titles: item.hierarchyProperties)
 	}
-	
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -193,4 +173,50 @@ extension STArchiveListViewController: UICollectionViewDelegateFlowLayout{
 		return self.sectionInsets
 	}
 	
+}
+
+ // MARK: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
+extension STArchiveListViewController: DZNEmptyDataSetSource {
+	
+	func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+		return STImageNames.emptyData.toUIImage()
+	}
+	
+	func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+		let text = "Start Archiving Your Favorite Files Now"
+		let font = UIFont.boldSystemFont(ofSize: 17)
+		let textColor = UIColor.black
+		let attributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: textColor] as [String : Any]
+		
+		return NSAttributedString(string: text, attributes: attributes)
+	}
+	
+	func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+		let text = "Favorites are saved for offline access."
+		let font = UIFont.systemFont(ofSize: 14.5)
+		let textColor = UIColor.darkGray
+		let paragraph = NSMutableParagraphStyle()
+		paragraph.lineBreakMode = .byWordWrapping
+		paragraph.alignment = .center
+		
+		let attributes = [NSFontAttributeName: font,
+		                  NSForegroundColorAttributeName: textColor,
+		                  NSParagraphStyleAttributeName: paragraph] as [String : Any]
+		
+		return NSAttributedString(string: text, attributes: attributes)
+	}
+	
+	func backgroundColor(forEmptyDataSet scrollView: UIScrollView) -> UIColor? {
+		return UIColor(hexString: "f0f3f5")
+	}
+}
+
+extension STArchiveListViewController: DZNEmptyDataSetDelegate {
+	func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
+		return true
+	}
+	
+	func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
+		return true
+	}
 }

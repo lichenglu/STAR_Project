@@ -10,8 +10,8 @@ import Foundation
 import RealmSwift
 import Firebase
 
-protocol STRealmModel {
-	static var properties: [String] { get }
+protocol STRealmModel: class {
+	var properties: [String] { get }
 	func toDictionary() -> [String: Any]
 }
 
@@ -80,6 +80,11 @@ class STHierarchy: STBaseModel {
 		return type.toUIImage()
 	}
 	
+	var firebaseRef: FIRDatabaseReference? {
+		guard (self.ownerId) != nil else { return nil }
+		return STFirebaseDB.db.refUser
+	}
+	
 	override static func primaryKey() -> String? {
 		return "id"
 	}
@@ -89,6 +94,21 @@ class STHierarchy: STBaseModel {
 	}
 }
 
+extension STHierarchy: STRealmModel {
+	
+	var properties: [String] {
+		return [""]
+	}
+	
+	func toDictionary() -> [String : Any] {
+		var userData = [String: Any]()
+		self.properties.forEach { (property) in
+			userData[property] = self.value(forKey: property)
+		}
+		
+		return userData
+	}
+}
 
 class RealmString: Object {
 	dynamic var stringValue = ""
