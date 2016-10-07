@@ -27,12 +27,23 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
 		print("data", kHierarchyCoverImage + "\(data.type)")
 		titleLabel.text = data.title
+	
+//		let key = kHierarchyCoverImage + "\(data.type)" as NSString
+		let image = data.type.toUIImage()
+		self.imageView.image = image
 		
-		DispatchQueue.global(qos: .default).async {
-			let image = data.type.toUIImage()
-			DispatchQueue.main.async {
-				self.imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
-			}
-		}
+//		if let image = STCache.imageCache.object(forKey: key) {
+//			self.imageView.image = image
+//		}else {
+//			let image = data.type.toUIImage()
+//			STCache.imageCache.setObject(image, forKey: key)
+//		}
+		
+//		DispatchQueue.global(qos: .default).async {
+//			let image = data.type.toUIImage()
+//			DispatchQueue.main.async {
+//				self.imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
+//			}
+//		}
 	}
 }

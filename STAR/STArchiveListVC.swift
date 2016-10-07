@@ -38,7 +38,10 @@ class STArchiveListViewController: UICollectionViewController {
 		observeRealmChange(dataSource: dataSource)
 		self.collectionView?.emptyDataSetSource = self;
 		self.collectionView?.emptyDataSetDelegate = self;
-//
+		
+		// Allow bouncing
+		self.collectionView?.alwaysBounceVertical = true
+		
 //		print("results ", results.description)
 //		try! FIRAuth.auth()?.signOut()
     }
@@ -112,7 +115,10 @@ class STArchiveListViewController: UICollectionViewController {
 					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
 					collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
 					}, completion: { (finished) in
-						
+						if insertions.count > 0 {
+							let indexPath = IndexPath(row: insertions.first!, section: 0)
+							collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.bottom, animated: true)
+						}
 				})
 				
 				break

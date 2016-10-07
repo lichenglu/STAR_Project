@@ -54,3 +54,7 @@ enum STImageNames: String {
 enum STSegueIds: String {
 	case authToRootView
 }
+
+struct STCache {
+	static var imageCache = NSCache<NSString, UIImage>()
+}

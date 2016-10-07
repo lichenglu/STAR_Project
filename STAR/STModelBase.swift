@@ -25,21 +25,16 @@ enum STHierarchyType: Int {
 	
 	func toUIImage() -> UIImage {
 		
-		print("toUIImage")
+		let key = kHierarchyCoverImage + "\(self.rawValue)" as NSString
 		
-		let defaultImage = UIImage(named: "institution")
-
-		switch self {
-		case .institution:
-			return UIImage(named: "institution") ?? defaultImage!
-		case .box:
-			return UIImage(named: "box") ?? defaultImage!
-		case .collection:
-			return UIImage(named: "collection") ?? defaultImage!
-		case .volume:
-			return UIImage(named: "volume") ?? defaultImage!
-		default:
-			return defaultImage!
+		if let image = STCache.imageCache.object(forKey: key) {
+			return image
+		}else{
+			print("toUIImage")
+			let defaultImage = UIImage(named: "institution")
+			let image = UIImage(named: "\(self)") ?? defaultImage!
+			STCache.imageCache.setObject(image, forKey: key)
+			return image
 		}
 	}
 }

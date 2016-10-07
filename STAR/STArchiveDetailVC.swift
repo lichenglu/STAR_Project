@@ -170,7 +170,10 @@ class STArchiveDetailVC: UICollectionViewController {
 					collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: section) })
 					collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: section) })
 					}, completion: { (finished) in
-						
+						if insertions.count > 0 {
+							let indexPath = IndexPath(row: insertions.first!, section: section)
+							collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.bottom, animated: true)
+						}
 				})
 				
 				break
