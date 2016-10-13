@@ -37,6 +37,14 @@ enum STHierarchyType: Int {
 			return image
 		}
 	}
+	
+	func plural() -> String{
+		if self == .box {
+			return "boxes"
+		}
+		
+		return "\(self)s"
+	}
 }
 
 class STBaseModel: Object {
