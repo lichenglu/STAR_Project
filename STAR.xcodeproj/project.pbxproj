@@ -10,8 +10,12 @@
 		571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986DD1D909D3E00221D27 /* STArchiveListVC.swift */; };
 		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C82DD1D9ED03E00CFC070 /* STInstitution.swift */; };
-		5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5745238C1D931FD7000A892A /* MBProgressHUD.m */; };
 		5746D1FE1D98B1970006F72D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5746D1FD1D98B1970006F72D /* STUser.swift */; };
+		5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */; };
+		5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */; };
+		5754F90C1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */; };
+		5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */; };
+		5754F9121DB5E3CB00C3B3A1 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F9111DB5E3CB00C3B3A1 /* Palette.swift */; };
 		57558E001D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558DFF1D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift */; };
 		57558E021D9F47E9002AA922 /* STArchiveDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558E011D9F47E9002AA922 /* STArchiveDetailVC.swift */; };
 		57558E041D9F500C002AA922 /* STArchiveHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558E031D9F500C002AA922 /* STArchiveHeaderView.swift */; };
@@ -30,12 +34,8 @@
 		575D51261D90780000788BFA /* STDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575D51251D90780000788BFA /* STDefines.swift */; };
 		5782F16E1D99DB520004F4BF /* STRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F16D1D99DB520004F4BF /* STRootViewController.swift */; };
 		5782F1711D99DBF10004F4BF /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1701D99DBF10004F4BF /* UIView+Shadow.swift */; };
-		5782F1731D99DBFE0004F4BF /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */; };
-		5782F1751D99DC060004F4BF /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1741D99DC060004F4BF /* Palette.swift */; };
 		5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */; };
 		5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */; };
-		578B84501DA1F9EF0057D658 /* UIScrollView+EmptyDataSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */; };
-		578B84521DA1FA240057D658 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */; };
 		57FEEF7C1D9B62C900BF32AB /* STRealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7B1D9B62C900BF32AB /* STRealmDB.swift */; };
 		57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */; };
 		57FEEF801D9DC99C00BF32AB /* STItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FEEF7F1D9DC99C00BF32AB /* STItem.swift */; };
@@ -79,9 +79,12 @@
 		571986DD1D909D3E00221D27 /* STArchiveListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveListVC.swift; sourceTree = "<group>"; };
 		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
 		571C82DD1D9ED03E00CFC070 /* STInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STInstitution.swift; sourceTree = "<group>"; };
-		5745238B1D931FD7000A892A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		5745238C1D931FD7000A892A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		5746D1FD1D98B1970006F72D /* STUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUser.swift; sourceTree = "<group>"; };
+		5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
+		5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
+		5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwicketSegmentedControl.framework; path = Carthage/Build/iOS/TwicketSegmentedControl.framework; sourceTree = "<group>"; };
+		5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
+		5754F9111DB5E3CB00C3B3A1 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		57558DFF1D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		57558E011D9F47E9002AA922 /* STArchiveDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveDetailVC.swift; sourceTree = "<group>"; };
 		57558E031D9F500C002AA922 /* STArchiveHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveHeaderView.swift; sourceTree = "<group>"; };
@@ -103,12 +106,8 @@
 		575D51271D90816600788BFA /* STAR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STAR-Bridging-Header.h"; sourceTree = "<group>"; };
 		5782F16D1D99DB520004F4BF /* STRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRootViewController.swift; sourceTree = "<group>"; };
 		5782F1701D99DBF10004F4BF /* UIView+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
-		5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
-		5782F1741D99DC060004F4BF /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STToDoListVC.swift; sourceTree = "<group>"; };
 		5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexValue.swift"; sourceTree = "<group>"; };
-		578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "STAR/UIScrollView+EmptyDataSet.h"; sourceTree = SOURCE_ROOT; };
-		578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "STAR/UIScrollView+EmptyDataSet.m"; sourceTree = SOURCE_ROOT; };
 		57FEEF7B1D9B62C900BF32AB /* STRealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRealmDB.swift; sourceTree = "<group>"; };
 		57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFirebaseDB.swift; sourceTree = "<group>"; };
 		57FEEF7F1D9DC99C00BF32AB /* STItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STItem.swift; sourceTree = "<group>"; };
@@ -177,6 +176,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBB6A58F9EAE755FDA773050 /* Pods_STAR.framework in Frameworks */,
+				5754F90C1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework in Frameworks */,
+				5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */,
+				5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,21 +218,10 @@
 		574523891D931F7A000A892A /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				578B844A1DA1F84A0057D658 /* DZNEmptyDataSet */,
+				5754F9131DB5E3CF00C3B3A1 /* TwicketSegmentedControl */,
 				57FEEF871D9E099F00BF32AB /* TGCameraViewController */,
-				5782F16F1D99DB890004F4BF /* TwicketSegmentedControl */,
-				5745238A1D931FC7000A892A /* MBProgressHUD */,
 			);
 			name = Vendors;
-			sourceTree = "<group>";
-		};
-		5745238A1D931FC7000A892A /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				5745238B1D931FD7000A892A /* MBProgressHUD.h */,
-				5745238C1D931FD7000A892A /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		5746D1FB1D98A4390006F72D /* Utils */ = {
@@ -242,6 +233,15 @@
 				57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		5754F9131DB5E3CF00C3B3A1 /* TwicketSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */,
+				5754F9111DB5E3CB00C3B3A1 /* Palette.swift */,
+			);
+			name = TwicketSegmentedControl;
 			sourceTree = "<group>";
 		};
 		575D50FB1D9047BB00788BFA = {
@@ -324,25 +324,6 @@
 				5782F1791D99F0220004F4BF /* UIColor+HexValue.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		5782F16F1D99DB890004F4BF /* TwicketSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				5782F1721D99DBFE0004F4BF /* TwicketSegmentedControl.swift */,
-				5782F1741D99DC060004F4BF /* Palette.swift */,
-			);
-			name = TwicketSegmentedControl;
-			sourceTree = "<group>";
-		};
-		578B844A1DA1F84A0057D658 /* DZNEmptyDataSet */ = {
-			isa = PBXGroup;
-			children = (
-				578B844F1DA1F9EE0057D658 /* UIScrollView+EmptyDataSet.h */,
-				578B84511DA1FA240057D658 /* UIScrollView+EmptyDataSet.m */,
-			);
-			name = DZNEmptyDataSet;
-			path = ../Pods/DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		57FEEF871D9E099F00BF32AB /* TGCameraViewController */ = {
@@ -472,6 +453,9 @@
 		F422922C6C562931C19F588D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */,
+				5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */,
+				5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */,
 				074434962672E087ACBF7A16 /* Pods_STAR.framework */,
 			);
 			name = Frameworks;
@@ -490,6 +474,7 @@
 				575D51021D9047BB00788BFA /* Resources */,
 				5CDC4CB2BF7BF933ECB86557 /* [CP] Embed Pods Frameworks */,
 				3DF69795392BD9B53CCDEEBC /* [CP] Copy Pods Resources */,
+				5754F90E1DB5E14600C3B3A1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -576,6 +561,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-STAR/Pods-STAR-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5754F90E1DB5E14600C3B3A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/TwicketSegmentedControl.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/DZNEmptyDataSet.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		5CDC4CB2BF7BF933ECB86557 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -613,6 +614,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5754F9121DB5E3CB00C3B3A1 /* Palette.swift in Sources */,
 				57558E021D9F47E9002AA922 /* STArchiveDetailVC.swift in Sources */,
 				57558E041D9F500C002AA922 /* STArchiveHeaderView.swift in Sources */,
 				575D51241D9076E300788BFA /* STRoundedButton.swift in Sources */,
@@ -635,9 +637,9 @@
 				57FEEFD31D9E099F00BF32AB /* TGCameraFunctions.m in Sources */,
 				57FEEFDF1D9E099F00BF32AB /* TGTintedLabel.m in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
-				5782F1751D99DC060004F4BF /* Palette.swift in Sources */,
 				57FEEFDB1D9E099F00BF32AB /* TGCameraSlideDownView.m in Sources */,
 				5746D1FE1D98B1970006F72D /* STUser.swift in Sources */,
+				5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */,
 				57FEEFD41D9E099F00BF32AB /* TGCameraGrid.m in Sources */,
 				57FEEF821D9DD2AF00BF32AB /* STModelBase.swift in Sources */,
 				57FEEF7C1D9B62C900BF32AB /* STRealmDB.swift in Sources */,
@@ -648,16 +650,13 @@
 				5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */,
 				57FEEFD61D9E099F00BF32AB /* TGCameraToggle.m in Sources */,
 				5782F17A1D99F0220004F4BF /* UIColor+HexValue.swift in Sources */,
-				5782F1731D99DBFE0004F4BF /* TwicketSegmentedControl.swift in Sources */,
 				57558E0C1D9F6AAC002AA922 /* STFolder.swift in Sources */,
 				57FEEFDA1D9E099F00BF32AB /* TGCameraGridView.m in Sources */,
 				57558E061D9F69A7002AA922 /* STBox.swift in Sources */,
 				57FEEFDC1D9E099F00BF32AB /* TGCameraSlideUpView.m in Sources */,
 				575D51221D906CA600788BFA /* UIViewController+keyboard.swift in Sources */,
 				575D51261D90780000788BFA /* STDefines.swift in Sources */,
-				5745238D1D931FD7000A892A /* MBProgressHUD.m in Sources */,
 				57FEEF7E1D9C5A5100BF32AB /* STFirebaseDB.swift in Sources */,
-				578B84501DA1F9EF0057D658 /* UIScrollView+EmptyDataSet.h in Sources */,
 				57FEEFD21D9E099F00BF32AB /* TGCameraFocus.m in Sources */,
 				57558E0A1D9F6A66002AA922 /* STVolume.swift in Sources */,
 				57FEEFC81D9E099F00BF32AB /* UIImage+CameraFilters.m in Sources */,
@@ -665,7 +664,6 @@
 				57558E001D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift in Sources */,
 				57FEEFD01D9E099F00BF32AB /* TGCameraColor.m in Sources */,
 				57FEEFCA1D9E099F00BF32AB /* TGCameraNavigationController.m in Sources */,
-				578B84521DA1FA240057D658 /* UIScrollView+EmptyDataSet.m in Sources */,
 				57FEEFCE1D9E099F00BF32AB /* TGAssetsLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -819,6 +817,10 @@
 				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -839,6 +841,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = STAR/STAR.entitlements;
 				DEVELOPMENT_TEAM = 6728FQG2GQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = STAR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

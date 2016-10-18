@@ -1,0 +1,10 @@
+framework module TwicketSegmentedControl {
+  umbrella header "TwicketSegmentedControl.h"
+
+  export *
+  module * { export * }
+}
+
+module TwicketSegmentedControl.Swift {
+    header "TwicketSegmentedControl-Swift.h"
+}

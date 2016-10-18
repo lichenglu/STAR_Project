@@ -1,0 +1,5 @@
+# MBProgress Hud Spinner
+github "jdg/MBProgressHUD" ~> 1.0.0
+
+# Empty dataset placeholder
+github "dzenbot/DZNEmptyDataSet"

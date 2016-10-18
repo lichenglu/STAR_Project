@@ -10,6 +10,7 @@
 import UIKit
 import Firebase
 import RealmSwift
+import DZNEmptyDataSet
 
 private let reuseIdentifier = "archiveListCell"
 

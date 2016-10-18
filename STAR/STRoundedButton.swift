@@ -18,18 +18,28 @@ class STRoundedButton: UIButton {
 	@IBInspectable var shadowColor = UIColor(red: 120/255.0, green: 20/255.0, blue: 20/255.0, alpha: 0.8)
 	@IBInspectable var shadowOpacity: Float = 0.8
 	@IBInspectable var shadowOffset: CGSize = CGSize(width: 1.0, height: 1.0)
+	var isFirstTimeRendered = true
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
 		
-		// Add shadow to the button
-		layer.shadowRadius = shadowRadius
-		layer.shadowOpacity = shadowOpacity
-		layer.shadowColor = shadowColor.cgColor
-		layer.shadowOffset = shadowOffset
-		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-		
-		// CornerRadius
-		layer.cornerRadius = cornerRadius
+		if isFirstTimeRendered {
+			isFirstTimeRendered = false
+			
+			// Add shadow to the button
+			layer.shadowRadius = shadowRadius
+			layer.shadowOpacity = shadowOpacity
+			layer.shadowColor = shadowColor.cgColor
+			layer.shadowOffset = shadowOffset
+			layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+			
+			// CornerRadius
+			layer.cornerRadius = cornerRadius
+		}
 	}
 }
