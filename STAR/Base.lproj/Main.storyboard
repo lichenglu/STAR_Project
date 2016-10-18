@@ -188,7 +188,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rNM-Rm-LeD" id="MGL-pW-UYb">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -207,7 +207,7 @@
         <scene sceneID="PBC-HP-t3j">
             <objects>
                 <collectionViewController storyboardIdentifier="archiveListVC" id="bwr-nX-9US" customClass="STArchiveListViewController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cEG-S1-Bne">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cEG-S1-Bne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -331,7 +331,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Asd-nH-525" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UJg-4S-txc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UJg-4S-txc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -349,7 +349,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="adU-kZ-gDS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nsy-p0-X1O">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Nsy-p0-X1O">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -366,7 +366,7 @@
         <scene sceneID="e2p-PB-4bR">
             <objects>
                 <collectionViewController storyboardIdentifier="archiveDetailVC" id="nNi-qp-byw" userLabel="Archive Detail VC" customClass="STArchiveDetailVC" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GNY-85-c3N">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="GNY-85-c3N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

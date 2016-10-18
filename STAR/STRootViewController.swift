@@ -160,15 +160,48 @@ class STRootViewController: UIViewController {
 		viewController.didMove(toParentViewController: self)
 	}
 	
-	func addANewInstitution() {
+	func addANewInstitution(title: String) {
 		guard let me = STUser.me()else { assert(false, "No user logged in"); return }
 		let realm = try! Realm()
 		let newInstitution = STInstitution()
 		newInstitution.owner = me
 		newInstitution.ownerId = me.uid
-		newInstitution.title = "New Institution"
+		newInstitution.title = title
 		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
 	}
+	
+	func showTitleInputView() {
+		
+		let alertController = UIAlertController(title: "File Name",
+		                                        message: "Enter file name below",
+		                                        preferredStyle: .alert)
+		
+		alertController.addTextField { (textField) in
+			textField.placeholder = "What is the file name?"
+		}
+		
+		let submitAction = UIAlertAction(title: "Create", style: .default) { [weak self](paramAction) in
+			
+			guard let textFields = alertController.textFields,
+				let titleText = textFields.first?.text
+				else
+			{
+				return
+			}
+			
+			let title = (titleText.replacingOccurrences(of: " ", with: "") == "") ? "New" : titleText
+			
+			self?.addANewInstitution(title: title)
+		}
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		
+		alertController.addAction(submitAction)
+		alertController.addAction(cancelAction)
+		
+		self.present(alertController, animated: true, completion: nil)
+	}
+	
 	
 	// MARK: - User actions
 	
@@ -179,7 +212,7 @@ class STRootViewController: UIViewController {
 	
 	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
 		if segmentedControl.selectedSegmentIndex == 0 {
-			addANewInstitution()
+			showTitleInputView()
 		}
 	}
 	

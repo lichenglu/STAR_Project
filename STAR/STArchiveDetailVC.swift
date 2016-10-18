@@ -194,38 +194,7 @@ class STArchiveDetailVC: UICollectionViewController {
 				guard let title = action.title?.lowercased(),
 					 let owner = self.owner as? STHierarchy else { return }
 				
-				let realm = try! Realm()
-				var newItem: STHierarchy!
-				
-				switch title.lowercased() {
-				case "\(STHierarchyType.box)es":
-					print("new box added")
-					newItem = STBox()
-					newItem.owner = owner
-					newItem.title = "New Box"
-					STRealmDB.addObject(toRealm: realm, object: newItem)
-				case "\(STHierarchyType.collection)s":
-					print("new collection added")
-					newItem = STCollection()
-					newItem.owner = owner
-					newItem.title = "New Collection"
-				case "\(STHierarchyType.folder)s":
-					print("new folder added")
-					newItem = STFolder()
-					newItem.owner = owner
-					newItem.title = "New Folder"
-				case "\(STHierarchyType.volume)s":
-					print("new volume added")
-					newItem = STVolume()
-					newItem.owner = owner
-					newItem.title = "New Volume"
-					
-				default:
-					print("unknown type")
-				}
-				
-				STRealmDB.updateObject(inRealm: realm, object: newItem)
-				self.dataSource = self.owner?.children
+				self.showTitleInputView(fileType: title, owner: owner)
 			})
 			
 			actionSheet.addAction(action)
@@ -236,10 +205,71 @@ class STArchiveDetailVC: UICollectionViewController {
 		self.present(actionSheet, animated: true, completion: nil)
 	}
 	
+	func showTitleInputView(fileType: String, owner: STHierarchy) {
+		
+		let alertController = UIAlertController(title: "File Name",
+		                                    message: "Enter file name below",
+		                                    preferredStyle: .alert)
+		
+		alertController.addTextField { (textField) in
+			textField.placeholder = "What is the file name?"
+		}
+		
+		let submitAction = UIAlertAction(title: "Create", style: .default) { [weak self](paramAction) in
+			
+				guard let textFields = alertController.textFields,
+					let titleText = textFields.first?.text
+				else
+				{
+					return
+				}
+			
+				let realm = try! Realm()
+				var newItem: STHierarchy!
+			
+				let title = (titleText.replacingOccurrences(of: " ", with: "") == "") ? "New" : titleText
+			
+				switch fileType.lowercased() {
+				case STHierarchyType.box.plural():
+					print("new box added")
+					newItem = STBox()
+					newItem.owner = owner
+					newItem.title = title
+				case STHierarchyType.collection.plural():
+					print("new collection added")
+					newItem = STCollection()
+					newItem.owner = owner
+					newItem.title = title
+				case STHierarchyType.folder.plural():
+					print("new folder added")
+					newItem = STFolder()
+					newItem.owner = owner
+					newItem.title = title
+				case STHierarchyType.volume.plural():
+					print("new volume added")
+					newItem = STVolume()
+					newItem.owner = owner
+					newItem.title = title
+				default:
+					print("unknown type")
+				}
+				
+				STRealmDB.updateObject(inRealm: realm, object: newItem)
+				self?.dataSource = self?.owner?.children
+		}
+		
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		
+		alertController.addAction(submitAction)
+		alertController.addAction(cancelAction)
+		
+		self.present(alertController, animated: true, completion: nil)
+	}
+	
 	// MARK: - User Actions
 	func didTapAddButton(sender: UIBarButtonItem) {
 		
-		guard let numberOfSections = self.collectionView?.numberOfSections
+		guard (self.collectionView?.numberOfSections) != nil
 		else
 		{
 			return
@@ -297,6 +327,7 @@ class STArchiveDetailVC: UICollectionViewController {
 			return headerView
 		default:
 			assert(false, "Unexpected element kind")
+			return UICollectionReusableView()
 		}
 	}
 	
