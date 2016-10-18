@@ -81,19 +81,3 @@ extension STInstitution {
 		return userData
 	}
 }
-//extension STInstitution: STRealmModel {
-//	
-//	static var properties: [String] {
-//		return ["boxes", "collections",
-//		        "volumes", "id", "title", "ownerId", "owner"]
-//	}
-//	
-//	func toDictionary() -> [String : Any] {
-//		var userData = [String: Any]()
-//		STItem.properties.forEach { (property) in
-//			userData[property] = self.value(forKey: property)
-//		}
-//		
-//		return userData
-//	}
-//}

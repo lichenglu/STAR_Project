@@ -27,7 +27,8 @@ class STRoundedButton: UIButton {
 		layer.shadowOpacity = shadowOpacity
 		layer.shadowColor = shadowColor.cgColor
 		layer.shadowOffset = shadowOffset
-		 
+		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+		
 		// CornerRadius
 		layer.cornerRadius = cornerRadius
 	}

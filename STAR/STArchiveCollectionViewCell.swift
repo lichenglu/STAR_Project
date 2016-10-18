@@ -16,12 +16,15 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		self.layer.cornerRadius = 5
-		
-		layer.shadowRadius = 2
-		layer.shadowOpacity = 0.8
+		self.clipsToBounds = false
+		layer.masksToBounds = false
+		layer.cornerRadius = 5
 		layer.shadowColor = STColors.shadowColor.toUIColor().cgColor
-		layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+		layer.shadowOpacity = 0.7
+		layer.shadowOffset = CGSize.zero
+		layer.shadowRadius = 1.5
+		layer.shouldRasterize = true
+//		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
 	}
 	
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
@@ -29,8 +32,12 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 		titleLabel.text = data.title
 	
 //		let key = kHierarchyCoverImage + "\(data.type)" as NSString
-		let image = data.type.toUIImage()
-		self.imageView.image = image
+		DispatchQueue.global().async {
+			let image = data.type.toUIImage()
+			DispatchQueue.main.async {
+				self.imageView.image = image
+			}
+		}
 		
 //		if let image = STCache.imageCache.object(forKey: key) {
 //			self.imageView.image = image

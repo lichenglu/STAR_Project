@@ -111,7 +111,7 @@ class STRootViewController: UIViewController {
 	
 	func generateSeedData(){
 
-		guard let me = STUser.me() else { assert(false, "No user logged in") }
+		guard let me = STUser.me() else { assert(false, "No user logged in");  return }
 		
 		let realm = try! Realm()
 		(0...15).forEach { (idx) in
@@ -161,7 +161,7 @@ class STRootViewController: UIViewController {
 	}
 	
 	func addANewInstitution() {
-		guard let me = STUser.me()else { assert(false, "No user logged in") }
+		guard let me = STUser.me()else { assert(false, "No user logged in"); return }
 		let realm = try! Realm()
 		let newInstitution = STInstitution()
 		newInstitution.owner = me
