@@ -16,6 +16,7 @@
 		5754F90C1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */; };
 		5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */; };
 		5754F9121DB5E3CB00C3B3A1 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F9111DB5E3CB00C3B3A1 /* Palette.swift */; };
+		5754F9151DB6B84400C3B3A1 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F9141DB6B84400C3B3A1 /* ItemDetailViewController.swift */; };
 		57558E001D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558DFF1D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift */; };
 		57558E021D9F47E9002AA922 /* STArchiveDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558E011D9F47E9002AA922 /* STArchiveDetailVC.swift */; };
 		57558E041D9F500C002AA922 /* STArchiveHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57558E031D9F500C002AA922 /* STArchiveHeaderView.swift */; };
@@ -85,6 +86,7 @@
 		5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwicketSegmentedControl.framework; path = Carthage/Build/iOS/TwicketSegmentedControl.framework; sourceTree = "<group>"; };
 		5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
 		5754F9111DB5E3CB00C3B3A1 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		5754F9141DB6B84400C3B3A1 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		57558DFF1D9F2ED6002AA922 /* STArchiveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		57558E011D9F47E9002AA922 /* STArchiveDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveDetailVC.swift; sourceTree = "<group>"; };
 		57558E031D9F500C002AA922 /* STArchiveHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveHeaderView.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				571986DD1D909D3E00221D27 /* STArchiveListVC.swift */,
 				57558E011D9F47E9002AA922 /* STArchiveDetailVC.swift */,
 				5782F1761D99DCEC0004F4BF /* STToDoListVC.swift */,
+				5754F9141DB6B84400C3B3A1 /* ItemDetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				57FEEF861D9DDD4C00BF32AB /* STCameraButton.swift in Sources */,
 				57FEEFC91D9E099F00BF32AB /* TGCameraAuthorizationViewController.m in Sources */,
 				57FEEFD11D9E099F00BF32AB /* TGCameraFlash.m in Sources */,
+				5754F9151DB6B84400C3B3A1 /* ItemDetailViewController.swift in Sources */,
 				57FEEFD81D9E099F00BF32AB /* TGCameraFilterView.m in Sources */,
 				57558E081D9F69C1002AA922 /* STCollection.swift in Sources */,
 				57FEEFD71D9E099F00BF32AB /* TGAssetImageFile.m in Sources */,

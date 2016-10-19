@@ -23,6 +23,9 @@ target 'STAR' do
   # Image Caching
   pod 'Haneke', '~> 1.0'
   
+  # Taglist View
+  pod 'PARTagPicker'
+  
   
   # Required by Realm to accomadate xcode 8.0
   post_install do |installer|
