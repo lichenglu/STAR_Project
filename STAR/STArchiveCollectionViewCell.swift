@@ -13,44 +13,47 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var imageView: UIImageView!
 	
+	var cornerRadius: CGFloat = 5
+	var shadowOpacity: Float = 0.8
+	var shadowOffset: CGSize = CGSize.zero
+	var shadowRadius: CGFloat = 1.5
+	
+	
+	var isFirstTimeRendered = true
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+	}
+	
+	override func layoutSubviews() {
 		
-		self.clipsToBounds = false
-		layer.masksToBounds = false
-		layer.cornerRadius = 5
-		layer.shadowColor = STColors.shadowColor.toUIColor().cgColor
-		layer.shadowOpacity = 0.7
-		layer.shadowOffset = CGSize.zero
-		layer.shadowRadius = 1.5
-		layer.shouldRasterize = true
-//		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+		super.layoutSubviews()
+		
+		if isFirstTimeRendered {
+			
+			isFirstTimeRendered = false
+			
+			self.contentView.layer.cornerRadius = cornerRadius;
+			self.contentView.layer.masksToBounds = true;
+			
+			layer.masksToBounds = false
+			layer.shadowColor = STColors.shadowColor.toUIColor().cgColor
+			layer.shadowOpacity = shadowOpacity
+			layer.shadowOffset = shadowOffset
+			layer.shadowRadius = shadowRadius
+			layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).cgPath
+		}
 	}
 	
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
-		print("data", kHierarchyCoverImage + "\(data.type)")
+	
 		titleLabel.text = data.title
 	
-//		let key = kHierarchyCoverImage + "\(data.type)" as NSString
 		DispatchQueue.global().async {
-			let image = data.type.toUIImage()
+			let image = data.imageForHierarchy()
 			DispatchQueue.main.async {
 				self.imageView.image = image
 			}
 		}
-		
-//		if let image = STCache.imageCache.object(forKey: key) {
-//			self.imageView.image = image
-//		}else {
-//			let image = data.type.toUIImage()
-//			STCache.imageCache.setObject(image, forKey: key)
-//		}
-		
-//		DispatchQueue.global(qos: .default).async {
-//			let image = data.type.toUIImage()
-//			DispatchQueue.main.async {
-//				self.imageView.hnk_setImage(image, withKey: kHierarchyCoverImage + "\(data.type)")
-//			}
-//		}
 	}
 }
