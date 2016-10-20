@@ -47,13 +47,13 @@ PODS:
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
   - Haneke (1.0.2)
-  - PARTagPicker (1.2.2)
   - Realm (2.0.2):
     - Realm/Headers (= 2.0.2)
   - Realm/Headers (2.0.2)
   - RealmSwift (2.0.2):
     - Realm (= 2.0.2)
   - SnapKit (3.0.2)
+  - WSTagsField (2.0.0)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -62,9 +62,9 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - Haneke (~> 1.0)
-  - PARTagPicker
   - RealmSwift
   - SnapKit (~> 3.0)
+  - WSTagsField
 
 SPEC CHECKSUMS:
   Firebase: be473484f0d515e72ffd04acf22f981773c23e58
@@ -82,11 +82,11 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
   Haneke: 01454a67322faa0dd9d81fc0f447885044e71521
-  PARTagPicker: 852ecc80cea0d5bf6575a94ca3f534d033c02078
   Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
   RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  WSTagsField: df3f020590e1c0f26d85293e4ce24c5d4fcc3c80
 
-PODFILE CHECKSUM: 54c3209b8dc0ee453e995f40fdcc89006c26dd69
+PODFILE CHECKSUM: af56bf1b7edcbcf5c53928a3627bc110158952ab
 
 COCOAPODS: 1.0.1

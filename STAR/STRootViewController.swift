@@ -184,7 +184,7 @@ class STRootViewController: UIViewController {
 			
 			guard let textFields = alertController.textFields,
 				let titleText = textFields.first?.text
-				else
+			else
 			{
 				return
 			}
@@ -206,8 +206,12 @@ class STRootViewController: UIViewController {
 	// MARK: - User actions
 	
 	func didTapCameraButton(sender: STCameraButton){
-		let navigationController = TGCameraNavigationController.new(with: self)
-		present(navigationController!, animated: true, completion: nil)
+		guard let navigationController = TGCameraNavigationController.new(with: self)
+		else
+		{
+			return
+		}
+		present(navigationController, animated: true, completion: nil)
 	}
 	
 	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {

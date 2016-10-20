@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1A7CCC5F0FC7EEBBDBEF4AC510C9AA4E'
-               BlueprintName = 'PARTagPicker'
+               BlueprintIdentifier = 'DD194FD73877A5641C13A3FBF47157A9'
+               BlueprintName = 'WSTagsField'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'PARTagPicker.framework'>
+               BuildableName = 'WSTagsField.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -24,7 +24,7 @@ target 'STAR' do
   pod 'Haneke', '~> 1.0'
   
   # Taglist View
-  pod 'PARTagPicker'
+  pod 'WSTagsField'
   
   
   # Required by Realm to accomadate xcode 8.0

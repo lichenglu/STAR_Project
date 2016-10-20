@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import WSTagsField
 
-class ItemDetailViewController: UIViewController {
+class SCItemDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
