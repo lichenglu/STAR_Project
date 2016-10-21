@@ -38,6 +38,29 @@ enum STHierarchyType: Int {
 		}
 	}
 	
+	func toBgColor() -> UIColor {
+		
+		let color: UIColor
+		let defaultColor = STColors.bgColor.toUIColor()
+		
+		switch self {
+		case .institution:
+			color = UIColor(hexString: "#df6f1d") ?? defaultColor
+		case .collection:
+			color = UIColor(hexString: "#35aadc") ?? defaultColor
+		case .box:
+			color = UIColor(hexString: "#382e2c") ?? defaultColor
+		case .volume:
+			color = UIColor(hexString: "#40bdb9") ?? defaultColor
+		case .folder:
+			color = UIColor(hexString: "#455A64") ?? defaultColor
+		default:
+			color = defaultColor
+		}
+		
+		return color
+	}
+	
 	func plural() -> String{
 		if self == .box {
 			return "boxes"
@@ -79,8 +102,12 @@ class STHierarchy: STBaseModel {
 		return ReamlEnum()
 	}
 	
-	func imageForHierarchy() -> UIImage{
+	func getHierarchyImg() -> UIImage{
 		return type.toUIImage()
+	}
+	
+	func getBgColor() -> UIColor {
+		return type.toBgColor()
 	}
 	
 	var firebaseRef: FIRDatabaseReference? {

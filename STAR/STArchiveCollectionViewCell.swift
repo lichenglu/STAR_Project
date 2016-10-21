@@ -18,7 +18,6 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	var shadowOffset: CGSize = CGSize.zero
 	var shadowRadius: CGFloat = 1.5
 	
-	
 	var isFirstTimeRendered = true
 	
 	override func awakeFromNib() {
@@ -37,6 +36,7 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 			self.contentView.layer.masksToBounds = true;
 			
 			layer.masksToBounds = false
+			layer.cornerRadius = cornerRadius
 			layer.shadowColor = STColors.shadowColor.toUIColor().cgColor
 			layer.shadowOpacity = shadowOpacity
 			layer.shadowOffset = shadowOffset
@@ -48,9 +48,10 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {
 	
 		titleLabel.text = data.title
-	
+		self.backgroundColor = data.getBgColor()
+		
 		DispatchQueue.global().async {
-			let image = data.imageForHierarchy()
+			let image = data.getHierarchyImg()
 			DispatchQueue.main.async {
 				self.imageView.image = image
 			}
