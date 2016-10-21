@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570889751DBA6A4F00A7E767 /* JVFloatLabeledText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570889741DBA6A4F00A7E767 /* JVFloatLabeledText.framework */; };
 		571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986DD1D909D3E00221D27 /* STArchiveListVC.swift */; };
 		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C82DD1D9ED03E00CFC070 /* STInstitution.swift */; };
 		5746D1FE1D98B1970006F72D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5746D1FD1D98B1970006F72D /* STUser.swift */; };
 		5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */; };
 		5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */; };
-		5754F90C1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */; };
 		5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */; };
 		5754F9121DB5E3CB00C3B3A1 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F9111DB5E3CB00C3B3A1 /* Palette.swift */; };
 		5754F9151DB6B84400C3B3A1 /* STItemDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F9141DB6B84400C3B3A1 /* STItemDetailVC.swift */; };
@@ -76,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		074434962672E087ACBF7A16 /* Pods_STAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		570889741DBA6A4F00A7E767 /* JVFloatLabeledText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JVFloatLabeledText.framework; path = Carthage/Build/iOS/JVFloatLabeledText.framework; sourceTree = "<group>"; };
 		571986DC1D9097A200221D27 /* STAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STAR.entitlements; sourceTree = "<group>"; };
 		571986DD1D909D3E00221D27 /* STArchiveListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveListVC.swift; sourceTree = "<group>"; };
 		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
@@ -178,9 +179,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBB6A58F9EAE755FDA773050 /* Pods_STAR.framework in Frameworks */,
-				5754F90C1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework in Frameworks */,
 				5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */,
 				5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */,
+				570889751DBA6A4F00A7E767 /* JVFloatLabeledText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +457,7 @@
 		F422922C6C562931C19F588D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				570889741DBA6A4F00A7E767 /* JVFloatLabeledText.framework */,
 				5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */,
 				5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */,
 				5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */,
@@ -570,9 +572,9 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/TwicketSegmentedControl.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/DZNEmptyDataSet.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JVFloatLabeledText.framework",
 			);
 			outputPaths = (
 			);

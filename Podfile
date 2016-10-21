@@ -26,6 +26,9 @@ target 'STAR' do
   # Taglist View
   pod 'WSTagsField'
   
+  # Keyboards
+  pod 'IQKeyboardManagerSwift'
+  
   
   # Required by Realm to accomadate xcode 8.0
   post_install do |installer|

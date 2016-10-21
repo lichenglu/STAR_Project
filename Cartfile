@@ -3,3 +3,6 @@ github "jdg/MBProgressHUD" ~> 1.0.0
 
 # Empty dataset placeholder
 github "dzenbot/DZNEmptyDataSet"
+
+# Floating label
+github "jverdi/JVFloatLabeledTextField"

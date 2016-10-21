@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import RealmSwift
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Google Login
 		GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
+		
+		// Allow IQKeyboardManagerSwift
+		IQKeyboardManager.sharedManager().enable = true
 		
 //		STRealmDB.deleteRealm()
 //		STRealmDB.migrateRealmModelV1()
