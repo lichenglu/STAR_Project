@@ -6,4 +6,5 @@
 //  Copyright (c) 2015 Tudo Gostoso Internet. All rights reserved.
 //
 @import Foundation;
+
 NSString *TGLocalizedString(NSString* key);

@@ -138,11 +138,12 @@
 
 - (void)saveJPGImageAtDocumentDirectory:(UIImage *)image resultBlock:(TGAssetsResultCompletion)resultBlock failureBlock:(TGAssetsFailureCompletion)failureBlock
 {
+	NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM-dd_HH:mm:SSSSZ"];
     
     NSString *directory = [self directory];
-    
+	
     if (!directory) {
         failureBlock(nil);
         return;
@@ -157,9 +158,13 @@
     }
     
     NSData *data = UIImageJPEGRepresentation(image, 1);
-    [data writeToFile:filePath atomically:YES];
-    
-    NSURL *assetURL = [NSURL URLWithString:filePath];
+	
+	if (![fileManager createFileAtPath:filePath contents:data attributes:nil]) {
+		failureBlock(nil);
+		return;
+	}
+	
+    NSURL *assetURL = [NSURL fileURLWithPath: filePath];
     
     resultBlock(assetURL);
 }
@@ -205,10 +210,11 @@
 - (NSString *)directory
 {
     NSMutableString *path = [NSMutableString new];
-    [path appendString:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+	NSURL *documentPath = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    [path appendString: documentPath.path];
     [path appendString:@"/Images/"];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSError *error;
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:&error];
         

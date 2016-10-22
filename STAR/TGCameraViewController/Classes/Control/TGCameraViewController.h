@@ -28,6 +28,7 @@
 #import "TGAlbum.h"
 #import "TGAssetsLibrary.h"
 #import "TGCamera.h"
+#import "TGCameraColor.h"
 #import "TGCameraNavigationController.h"
 
 @interface TGCameraViewController : UIViewController

@@ -9,13 +9,6 @@
 #import "TGTintedButton.h"
 #import "TGCameraColor.h"
 
-@interface TGTintedButton ()
-
-- (void)updateTintIfNeeded;
-
-@end
-
-
 @implementation TGTintedButton
 
 - (void)setNeedsLayout {
@@ -46,15 +39,14 @@
     
     UIImageRenderingMode renderingMode = self.disableTint ? UIImageRenderingModeAlwaysOriginal : UIImageRenderingModeAlwaysTemplate;
     
-    if(self.tintColor != color) {
+    if (self.tintColor != color) {
         [self setTintColor:color];
         
-        UIImage * __weak backgroundImage = [[self backgroundImageForState:UIControlStateNormal] imageWithRenderingMode:renderingMode];
+        UIImage *backgroundImage = [[self backgroundImageForState:UIControlStateNormal] imageWithRenderingMode:renderingMode];
         [self setBackgroundImage:backgroundImage forState:UIControlStateNormal];
         
-        UIImage * __weak image = [[self imageForState:UIControlStateNormal] imageWithRenderingMode:renderingMode];
+        UIImage *image = [[self imageForState:UIControlStateNormal] imageWithRenderingMode:renderingMode];
         [self setImage:image forState:UIControlStateNormal];
-        
     }
 }
 
