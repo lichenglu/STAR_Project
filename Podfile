@@ -16,20 +16,22 @@ target 'STAR' do
 
   # Realm
   pod 'RealmSwift'
-  
+
   # UI Constraints
   pod 'SnapKit', '~> 3.0'
-  
+
+  # 3rd Party Camera
+
   # Image Caching
   pod 'Haneke', '~> 1.0'
-  
+
   # Taglist View
   pod 'WSTagsField'
-  
+
   # Keyboards
   pod 'IQKeyboardManagerSwift'
-  
-  
+
+
   # Required by Realm to accomadate xcode 8.0
   post_install do |installer|
 	  installer.pods_project.targets.each do |target|

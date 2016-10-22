@@ -202,6 +202,44 @@ class STRootViewController: UIViewController {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
+	// MARK: - Pragma
+	func saveImgToDisk(image: UIImage) {
+		let fileManager = FileManager.default
+		guard let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+		let imageDir = documentURL.appendingPathComponent("Images")
+		let imgName = NSUUID().uuidString.appending(".jpg")
+		
+		let imageURL = imageDir.appendingPathComponent(imgName)
+		
+		print("imageURL \(imageURL)")
+		let imageData = UIImageJPEGRepresentation(image, 1)
+		
+		if fileManager.fileExists(atPath: imageDir.path) {
+			let succeeded = fileManager.createFile(atPath: imageURL.path as String, contents: imageData, attributes: nil)
+			print(succeeded)
+		}else {
+			do {
+				try fileManager.createDirectory(at: imageDir, withIntermediateDirectories: true, attributes: nil)
+				let succeeded = fileManager.createFile(atPath: imageURL.path as String, contents: imageData, attributes: nil)
+				print(succeeded)
+			}catch {
+				print(error)
+			}
+		}
+	}
+
+	func presentItemDetailView(withImageUrl url: URL) {
+		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.itemDetailVC.rawValue) as? SCItemDetailVC
+		else
+		{
+			return
+		}
+		
+		vc.localImageURL = url
+		
+		self.present(vc, animated: true, completion: nil)
+	}
+	
 	
 	// MARK: - User actions
 	
@@ -264,6 +302,9 @@ extension STRootViewController: TGCameraDelegate {
 	
 	func cameraDidSavePhoto(atPath assetURL: URL!) {
 		print("cameraDidSavePhotoAtPath: \(assetURL)")
+
+		guard let assetURL = assetURL else { return }
+		presentItemDetailView(withImageUrl: assetURL)
 	}
 	
 	func cameraDidSavePhotoWithError(_ error: Error!) {

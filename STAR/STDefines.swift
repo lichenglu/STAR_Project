@@ -41,6 +41,7 @@ enum STStoryboardIds: String {
 	case archiveListVC
 	case archiveDetailVC
 	case toDoListVC
+	case itemDetailVC
 }
 
 enum STImageNames: String {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="adU-kZ-gDS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -288,7 +288,7 @@
         <!--itemEditVC-->
         <scene sceneID="PV6-0B-UnL">
             <objects>
-                <viewController id="FVt-tk-yGN" userLabel="itemEditVC" customClass="SCItemDetailVC" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="itemDetailVC" id="FVt-tk-yGN" userLabel="itemEditVC" customClass="SCItemDetailVC" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9ow-oe-WyI"/>
                         <viewControllerLayoutGuide type="bottom" id="DdV-gQ-yoz"/>
@@ -312,7 +312,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="zAY-SU-XzX"/>
                     <connections>
-                        <outlet property="imageView" destination="YGT-fP-xWO" id="tNL-yb-zB0"/>
+                        <outlet property="imageView" destination="YGT-fP-xWO" id="zuX-il-gtW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xgH-qX-uop" userLabel="First Responder" sceneMemberID="firstResponder"/>

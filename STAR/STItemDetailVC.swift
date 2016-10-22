@@ -15,16 +15,20 @@ class SCItemDetailVC: UIViewController {
 
 	@IBOutlet weak var imageView: UIImageView!
 	
+	var localImageURL: URL?
+	var remoteImageURL: URL?
+	
 	let titleField = JVFloatLabeledTextField(frame: .zero)
 	let titleFieldFontSize: CGFloat = 16
 	let titleFieldFloatLabelFontSize: CGFloat = 14
 	
 	let tagsField = WSTagsField()
 	
+	// MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
 		setUpUI()
-        // Do any additional setup after loading the view.
+		setUpImageView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +36,39 @@ class SCItemDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-	func setUpUI() {
+	// MARK: - Pragma
+	fileprivate func  setUpImageView() {
+		
+		let fileManager = FileManager.default
+		
+		guard let localImageURL = localImageURL else { return }
+		
+		if fileManager.fileExists(atPath: localImageURL.path){
+			
+			DispatchQueue.global().async {
+				
+				guard let data = try? Data(contentsOf: localImageURL)
+				else
+				{
+					return
+				}
+				
+				guard let placeholder = STImageNames.emptyData.toUIImage()
+				else
+				{
+					return
+				}
+				
+				let image = UIImage(data: data) ?? placeholder
+				DispatchQueue.main.async {
+					self.imageView.image = image
+				}
+			}
+		}
+	}
+	
+	// MARK: - UI Setups
+	fileprivate func setUpUI() {
 		
 		addDividerToBottom(superView: self.view, referredView: self.imageView, margin: 12)
 		
@@ -67,7 +103,7 @@ class SCItemDetailVC: UIViewController {
 		addDividerToBottom(superView: self.view, referredView: wrapperView)
 	}
 	
-	func setUpTitleField() {
+	fileprivate func setUpTitleField() {
 
 		titleField.font = UIFont.systemFont(ofSize: titleFieldFontSize)
 		
@@ -86,7 +122,7 @@ class SCItemDetailVC: UIViewController {
 
 	}
 	
-	func setUpTagView() {
+	fileprivate func setUpTagView() {
 		tagsField.backgroundColor = .white
 		tagsField.placeholder = "Tags"
 		tagsField.padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -99,7 +135,7 @@ class SCItemDetailVC: UIViewController {
 		tagsField.selectedTextColor = .white
 	}
 	
-	func addDividerToBottom(superView: UIView, referredView: UIView, margin: Int = 8) {
+	fileprivate func addDividerToBottom(superView: UIView, referredView: UIView, margin: Int = 8) {
 		
 		let divider = UIView()
 		divider.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
