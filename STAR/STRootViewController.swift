@@ -16,6 +16,30 @@ class STRootViewController: UIViewController {
 	@IBOutlet weak var segmentedControl: TwicketSegmentedControl!
 	
 	let vcTitle = "STAR"
+	let camera = STCameraButton()
+	var firstTimeRendered = true
+	
+	var isSavingItem = false {
+		didSet {
+			archiveListVC.isSavingItem = isSavingItem
+			
+			if isSavingItem {
+				let saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
+				saveBtn.isEnabled = false
+				
+				let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(STRootViewController.didTapCancelSaveBtn(_:)))
+				
+				self.navigationItem.rightBarButtonItem = saveBtn
+				self.navigationItem.leftBarButtonItem = cancel
+				
+			} else {
+				let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STRootViewController.didTapAddButton(_:)))
+				self.navigationItem.rightBarButtonItem = addBtn
+				self.navigationItem.leftBarButtonItem = nil
+			}
+		}
+	}
+	
 	
 	lazy var archiveListVC: STArchiveListViewController = {
 		
@@ -52,14 +76,45 @@ class STRootViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		
+		print("viewWillAppear")
+		
+		let hasLoggedIn = userHasLoggedin()
+		
+		if hasLoggedIn && firstTimeRendered {
+			firstTimeRendered = false
+			archiveListVC.view.isHidden = false
+		}
+	}
     
 	
 	// MARK: - Helpers
+	private func userHasLoggedin() -> Bool {
+		
+		if STUser.me() == nil {
+			guard let signInVC = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.signInVC.rawValue) as? STSignInController
+			else
+			{
+				return false
+			}
+			
+			self.present(signInVC, animated: false, completion: nil)
+			
+			return false
+		}
+		
+		return true
+	}
 	
 	private func setUpUI() {
 		self.title = vcTitle
 		setUpSegmentControl()
 		setUpCameraBtn()
+		
+		let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STRootViewController.didTapAddButton(_:)))
+		self.navigationItem.rightBarButtonItem = addBtn
 //		generateSeedData()
 		
 //		let realm = try! Realm()
@@ -81,20 +136,18 @@ class STRootViewController: UIViewController {
 		segmentedControl.setSegmentItems(titles)
 		segmentedControl.sliderBackgroundColor = STColors.themeBlue.toUIColor()
 		segmentedControl.delegate = self
-		
-		archiveListVC.view.isHidden = false
 	}
 	
+
 	private func setUpCameraBtn() {
 		
-		let camera = STCameraButton()
-		guard let currentWindow = UIApplication.shared.keyWindow else { return }
-		currentWindow.addSubview(camera)
-		currentWindow.bringSubview(toFront: camera)
+		guard let navView = self.navigationController?.view else { return }
+		navView.addSubview(camera)
+		navView.bringSubview(toFront: camera)
 		
 		camera.snp.makeConstraints { (make) in
-			make.centerX.equalTo(currentWindow)
-			make.bottom.equalTo(currentWindow).offset(-20)
+			make.centerX.equalTo(navView)
+			make.bottom.equalTo(navView).offset(-20)
 		}
 		
 		camera.addTarget(self, action: #selector(STRootViewController.didTapCameraButton(sender:)), for: .touchUpInside)
@@ -109,7 +162,7 @@ class STRootViewController: UIViewController {
 		TGCamera.setOption(kTGCameraOptionHiddenFilterButton, value: true)
 	}
 	
-	func generateSeedData(){
+	private func generateSeedData(){
 
 		guard let me = STUser.me() else { assert(false, "No user logged in");  return }
 		
@@ -160,7 +213,7 @@ class STRootViewController: UIViewController {
 		viewController.didMove(toParentViewController: self)
 	}
 	
-	func addANewInstitution(title: String) {
+	private func addANewInstitution(title: String) {
 		guard let me = STUser.me()else { assert(false, "No user logged in"); return }
 		let realm = try! Realm()
 		let newInstitution = STInstitution()
@@ -170,7 +223,7 @@ class STRootViewController: UIViewController {
 		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
 	}
 	
-	func showTitleInputView() {
+	private func showTitleInputView() {
 		
 		let alertController = UIAlertController(title: "File Name",
 		                                        message: "Enter file name below",
@@ -203,7 +256,7 @@ class STRootViewController: UIViewController {
 	}
 	
 	// MARK: - Pragma
-	func saveImgToDisk(image: UIImage) {
+	private func saveImgToDisk(image: UIImage) {
 		let fileManager = FileManager.default
 		guard let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
 		let imageDir = documentURL.appendingPathComponent("Images")
@@ -228,15 +281,17 @@ class STRootViewController: UIViewController {
 		}
 	}
 
-	func presentItemDetailView(withImageUrl url: URL) {
+	fileprivate func presentItemDetailView(withImageUrl url: URL) {
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.itemDetailVC.rawValue) as? SCItemDetailVC
 		else
 		{
 			return
 		}
-		
+		vc.delegate = self
 		vc.localImageURL = url
-		
+		vc.modalTransition.edge = .left
+		vc.modalTransition.stiffness = 0.8
+		vc.modalTransition.damping = 0.3
 		self.present(vc, animated: true, completion: nil)
 	}
 	
@@ -252,7 +307,11 @@ class STRootViewController: UIViewController {
 		present(navigationController, animated: true, completion: nil)
 	}
 	
-	@IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
+	func didTapCancelSaveBtn(_ sender: UIBarButtonItem) {
+		self.isSavingItem = false
+	}
+	
+	func didTapAddButton(_ sender: UIBarButtonItem) {
 		if segmentedControl.selectedSegmentIndex == 0 {
 			showTitleInputView()
 		}
@@ -275,6 +334,13 @@ extension STRootViewController: TwicketSegmentedControlDelegate {
 		print("didSelect \(segmentIndex)")
 		archiveListVC.view.isHidden = !(segmentIndex == 0)
 		toDoListVC.view.isHidden = !(segmentIndex == 1)
+	}
+}
+
+// MARK: - SCItemDetailVCDelegate
+extension STRootViewController: SCItemDetailVCDelegate {
+	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: [String : Any]) {
+		self.isSavingItem = true
 	}
 }
 

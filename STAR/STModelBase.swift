@@ -21,7 +21,7 @@ protocol STContainer: class {
 }
 
 enum STHierarchyType: Int {
-	case institution = 0, box, collection, volume, folder, unknown
+	case institution = 0, box, collection, volume, folder, item, unknown
 	
 	func toUIImage() -> UIImage {
 		

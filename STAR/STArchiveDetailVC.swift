@@ -32,10 +32,35 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	var sectionTitles: [String]?
 	
+	var saveBtn = UIBarButtonItem()
+	
+	var isSavingItem = false {
+		didSet {
+			if isSavingItem {
+				
+				saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(STArchiveDetailVC.didTapSaveBtn(_:)))
+				
+				let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(STArchiveDetailVC.didTapCancelSaveBtn(_:)))
+				
+				self.navigationItem.rightBarButtonItem = saveBtn
+				self.navigationItem.leftBarButtonItem = cancel
+				
+			} else {
+				let addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STArchiveDetailVC.didTapAddButton(sender:)))
+				self.navigationItem.rightBarButtonItem = addBtn
+				self.navigationItem.leftBarButtonItem = nil
+			}
+		}
+	}
+	
 	// MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
 		setUpUI()
+		
+		// Notification
+		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveDetailVC.savingItemStatusChanged(_:)), name: kSavingItemStatusDidChange, object: nil)
+		
 		guard let owner = self.owner else { return }
 		dataSource = owner.children
 		mapRealmNotifToDataSource()
@@ -65,9 +90,7 @@ class STArchiveDetailVC: UICollectionViewController {
 			self.title = owner.title
 		}
 		
-		// Add button
-		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(STArchiveDetailVC.didTapAddButton(sender:)))
-		self.navigationItem.rightBarButtonItem = addButton
+		saveBtn.isEnabled = sectionTitles?.contains(STHierarchyType.item.plural()) ?? false
 		
 		// Allow bouncing
 		self.collectionView?.alwaysBounceVertical = true
@@ -80,6 +103,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	func openItem(owner: STContainer, titles: [String]){
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 			else { return }
+		vc.isSavingItem = self.isSavingItem
 		vc.owner = owner
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
@@ -119,6 +143,14 @@ class STArchiveDetailVC: UICollectionViewController {
 		}
 		
 		return item
+	}
+	
+	// MARK: - Notification
+	func savingItemStatusChanged(_ notification: Notification) {
+		if let userInfo = notification.userInfo,
+			let isSavingItem = userInfo["isSavingItem"] as? Bool{
+			self.isSavingItem = isSavingItem
+		}
 	}
 	
 	// MARK: - Pragma
@@ -267,6 +299,18 @@ class STArchiveDetailVC: UICollectionViewController {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
+	func createItem() {
+		guard let owner = self.owner as? STHierarchy else { return }
+		let realm = try! Realm()
+		let newItem = STItem()
+		newItem.owner = owner
+		newItem.title = "New item"
+		newItem.imageURL = "1234"
+		
+		STRealmDB.updateObject(inRealm: realm, object: newItem)
+		self.dataSource = self.owner?.children
+	}
+	
 	// MARK: - User Actions
 	func didTapAddButton(sender: UIBarButtonItem) {
 		
@@ -279,6 +323,22 @@ class STArchiveDetailVC: UICollectionViewController {
 		showAddOptions()
 	}
 	
+	func didTapCancelSaveBtn(_ sender: UIBarButtonItem) {
+		self.isSavingItem = false
+		STHelpers.postNotification(withName: kSavingItemStatusDidChange, userInfo: ["isSavingItem": self.isSavingItem])
+		
+		guard let rootVC = AppDelegate.stRootVC else { return }
+		rootVC.isSavingItem = false
+	}
+	
+	func didTapSaveBtn(_ sender: UIBarButtonItem) {
+		createItem()
+		isSavingItem = false
+		STHelpers.postNotification(withName: kSavingItemStatusDidChange, userInfo: ["isSavingItem": self.isSavingItem])
+		
+		guard let rootVC = AppDelegate.stRootVC else { return }
+		rootVC.isSavingItem = false
+	}
 	
     /*
     // MARK: - Navigation

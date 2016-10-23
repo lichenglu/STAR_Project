@@ -29,22 +29,23 @@ class STArchiveListViewController: UICollectionViewController {
 		}
 	}
 	var notificationToken: NotificationToken?
+	var isSavingItem = false
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
 		
-//		self.collectionView?.alwaysBounceVertical = true
-		
+		guard STUser.me() != nil else { return }
 		dataSource = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "ownerId = '\(STUser.currentUserId)'")
 		observeRealmChange(dataSource: dataSource)
 		self.collectionView?.emptyDataSetSource = self;
 		self.collectionView?.emptyDataSetDelegate = self;
 		
+		// Notification
+		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveDetailVC.savingItemStatusChanged(_:)), name: kSavingItemStatusDidChange, object: nil)
+		
 		// Allow bouncing
 		self.collectionView?.alwaysBounceVertical = true
 		
-//		print("results ", results.description)
-//		try! FIRAuth.auth()?.signOut()
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +96,7 @@ class STArchiveListViewController: UICollectionViewController {
 		else { return }
 		vc.owner = owner
 		vc.sectionTitles = titles
+		vc.isSavingItem = self.isSavingItem
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
@@ -131,7 +133,16 @@ class STArchiveListViewController: UICollectionViewController {
 		}
 	}
 	
-    // MARK: UICollectionViewDelegate
+	// MARK: - Notification
+	func savingItemStatusChanged(_ notification: Notification) {
+		if let userInfo = notification.userInfo,
+			let isSavingItem = userInfo["isSavingItem"] as? Bool{
+			self.isSavingItem = isSavingItem
+		}
+	}
+	
+	
+    // MARK: - UICollectionViewDelegate
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		
