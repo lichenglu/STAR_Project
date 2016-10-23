@@ -27,6 +27,7 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	var shadowRadius: CGFloat = 1.5
 	
 	var isFirstTimeRendered = true
+	var isInstitution = false
 	
 	let kRenameFile = 0
 	let kDeleteFile = 1
@@ -63,7 +64,8 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 		
 		print("More btn tapped!")
 		let tapPoint = sender.location(in: self.superview)
-		let point = CGPoint(x: tapPoint.x - 10, y: tapPoint.y + 82)
+		let yMargin: CGFloat = isInstitution ? 92 : 76
+		let point = CGPoint(x: tapPoint.x - 10, y: tapPoint.y + yMargin)
 		let titles = ["Rename File","Delete File"]
 		let popView = SCPopoverView(point: point, titles: titles, images: nil)
 		
@@ -92,6 +94,7 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 
 		itemImg?.isHidden = !(data.type == .item)
 		iconImg.isHidden = (data.type == .item)
+		isInstitution = (data.type == .institution)
 		
 		if  let itemImg = itemImg,
 			let data = data as? STItem,
