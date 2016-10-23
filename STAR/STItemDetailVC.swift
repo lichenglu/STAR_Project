@@ -12,9 +12,8 @@ import WSTagsField
 import JVFloatLabeledText
 
 protocol SCItemDetailVCDelegate {
-	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: [String: Any])
+	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: STItemData)
 }
-
 
 class SCItemDetailVC: ElasticModalViewController {
 
@@ -78,9 +77,19 @@ class SCItemDetailVC: ElasticModalViewController {
 	// MARK: - User Actions
 	@IBAction func didClickSaveToBtn(_ sender: UIButton) {
 		
-		self.dismiss(animated: true) {
-			self.delegate?.itemDetailVC(didTapSaveToBtn: self, item: ["test": "Luv ya"])
+		guard let titleText = titleField.text else { return }
+		guard let localImgPath = localImageURL?.path else { return }
+		
+		let title = (titleText.replacingOccurrences(of: " ", with: "") == "") ? "New" : titleText
+		
+		let tags = tagsField.tags.map { (tag) -> String in
+			return tag.text
 		}
+		
+		let newItem = STItemData(title: title, tags: tags, localImgPath: localImgPath)
+		
+		self.delegate?.itemDetailVC(didTapSaveToBtn: self, item: newItem)
+		self.dismiss(animated: true)
 	}
 	
 

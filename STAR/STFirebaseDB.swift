@@ -50,10 +50,14 @@ class STFirebaseDB {
 		ref.updateChildValues(data)
 	}
 	
-	func uploadImageToFirebase(withUID uid: String, imageId: String, image: UIImage, metaData: STItem?, completion: ((FIRStorageMetadata?, Error?) -> Void)?) {
+	func uploadImageToFirebase(withUID uid: String, imageId: String, imagePath: String, metaData: STItem?, completion: ((FIRStorageMetadata?, Error?) -> Void)?) {
+		
+		let imgURL = URL(fileURLWithPath: imagePath)
+		guard let imageData = try? Data(contentsOf: imgURL) else { return }
+		guard let img = UIImage(data: imageData) else { return }
 		
 		// Img to data
-		guard let imgData = UIImageJPEGRepresentation(image, 0.5) else {
+		guard let imgData = UIImageJPEGRepresentation(img, 0.5) else {
 			print("Failed to convert image to Data")
 			return
 		}

@@ -47,6 +47,7 @@
 		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C82DD1D9ED03E00CFC070 /* STInstitution.swift */; };
 		5746D1FE1D98B1970006F72D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5746D1FD1D98B1970006F72D /* STUser.swift */; };
+		5747CBF61DBD1C430041F59B /* STItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747CBF51DBD1C430041F59B /* STItemWrapper.swift */; };
 		5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */; };
 		5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */; };
 		5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */; };
@@ -147,6 +148,7 @@
 		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
 		571C82DD1D9ED03E00CFC070 /* STInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STInstitution.swift; sourceTree = "<group>"; };
 		5746D1FD1D98B1970006F72D /* STUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUser.swift; sourceTree = "<group>"; };
+		5747CBF51DBD1C430041F59B /* STItemWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STItemWrapper.swift; sourceTree = "<group>"; };
 		5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwicketSegmentedControl.framework; path = Carthage/Build/iOS/TwicketSegmentedControl.framework; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			children = (
 				5746D1FD1D98B1970006F72D /* STUser.swift */,
 				57FEEF7F1D9DC99C00BF32AB /* STItem.swift */,
+				5747CBF51DBD1C430041F59B /* STItemWrapper.swift */,
 				571C82DD1D9ED03E00CFC070 /* STInstitution.swift */,
 				57558E051D9F69A7002AA922 /* STBox.swift */,
 				57558E071D9F69C1002AA922 /* STCollection.swift */,
@@ -680,6 +683,7 @@
 				570889C11DBB1AFC00A7E767 /* TGCameraFlash.m in Sources */,
 				57FEEF821D9DD2AF00BF32AB /* STModelBase.swift in Sources */,
 				570889C81DBB1AFC00A7E767 /* TGCameraFilterView.m in Sources */,
+				5747CBF61DBD1C430041F59B /* STItemWrapper.swift in Sources */,
 				570889BC1DBB1AFC00A7E767 /* TGPhotoViewController.m in Sources */,
 				57088AEC1DBC2BC100A7E767 /* ElasticShapeLayer.swift in Sources */,
 				57FEEF7C1D9B62C900BF32AB /* STRealmDB.swift in Sources */,

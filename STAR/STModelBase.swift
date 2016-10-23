@@ -54,6 +54,8 @@ enum STHierarchyType: Int {
 			color = UIColor(hexString: "#40bdb9") ?? defaultColor
 		case .folder:
 			color = UIColor(hexString: "#455A64") ?? defaultColor
+		case .item:
+			color = UIColor(hexString: "#455A64") ?? defaultColor
 		default:
 			color = defaultColor
 		}

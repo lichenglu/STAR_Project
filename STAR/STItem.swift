@@ -12,7 +12,9 @@ import Firebase
 
 class STItem: STHierarchy {
 	
-	dynamic var imageURL: String!
+	dynamic var localImgURL: String!
+	dynamic var remoteImgURL: String? = nil
+	
 	var tags: [String] {
 		get {
 			return _backingTags.map { $0.stringValue }
@@ -27,6 +29,10 @@ class STItem: STHierarchy {
 	
 	override static func ignoredProperties() -> [String] {
 		return ["tags"]
+	}
+	
+	override dynamic var _type: ReamlEnum {
+		return ReamlEnum(value: ["rawValue": STHierarchyType.item.rawValue])
 	}
 	
 	override var firebaseRef: FIRDatabaseReference? {

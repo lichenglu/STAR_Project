@@ -40,6 +40,12 @@ class STRootViewController: UIViewController {
 		}
 	}
 	
+	var itemBeingSaved: STItemData? {
+		didSet {
+			archiveListVC.itemBeingSaved = itemBeingSaved
+		}
+	}
+	
 	
 	lazy var archiveListVC: STArchiveListViewController = {
 		
@@ -339,8 +345,11 @@ extension STRootViewController: TwicketSegmentedControlDelegate {
 
 // MARK: - SCItemDetailVCDelegate
 extension STRootViewController: SCItemDetailVCDelegate {
-	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: [String : Any]) {
+	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: STItemData)
+	{
 		self.isSavingItem = true
+		self.itemBeingSaved = item
+		STHelpers.postNotification(withName: kSavingItemStatusDidChange, userInfo: ["isSavingItem": self.isSavingItem, "item": item])
 	}
 }
 

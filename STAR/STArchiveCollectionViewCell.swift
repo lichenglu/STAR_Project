@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var iconImg: UIImageView!
+	@IBOutlet weak var itemImg: UIImageView?
 	
 	var cornerRadius: CGFloat = 5
 	var shadowOpacity: Float = 0.8
@@ -22,6 +24,7 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+		itemImg?.isHidden = true
 	}
 	
 	override func layoutSubviews() {
@@ -49,12 +52,65 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 		titleLabel.text = data.title
 		self.backgroundColor = data.getBgColor()
+
+		itemImg?.isHidden = !(data.type == .item)
+		iconImg.isHidden = (data.type == .item)
 		
-		DispatchQueue.global().async {
-			let image = data.getHierarchyImg()
-			DispatchQueue.main.async {
-				self.imageView.image = image
+		if  let itemImg = itemImg,
+			let data = data as? STItem,
+			!(itemImg.isHidden) {
+			setUpImageView(with: data)
+			
+		} else {
+			DispatchQueue.global().async {
+				let image = data.getHierarchyImg()
+				DispatchQueue.main.async {
+					self.iconImg.image = image
+				}
 			}
+		}
+	}
+	
+	fileprivate func setUpImageView(with item: STItem) {
+		
+		let fileManager = FileManager.default
+		
+		guard let localImagePath = item.localImgURL else { return }
+		
+		guard let placeholder = STImageNames.emptyData.toUIImage()
+		else
+		{
+			return
+		}
+		
+		let url = URL(fileURLWithPath: localImagePath)
+		
+		if fileManager.fileExists(atPath: url.path) {
+			
+			DispatchQueue.global().async {
+				
+				guard let data = try? Data(contentsOf: url)
+				else
+				{
+					return
+				}
+				
+				let image = UIImage(data: data) ?? placeholder
+				DispatchQueue.main.async {
+					self.itemImg?.image = image
+				}
+			}
+			
+		} else {
+			
+			guard let remoteURL = item.remoteImgURL,
+				let url = URL(string: remoteURL)
+			else
+			{
+				return
+			}
+			
+			self.itemImg?.hnk_setImage(from: url, placeholder: placeholder)
 		}
 	}
 }

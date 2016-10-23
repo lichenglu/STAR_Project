@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import DZNEmptyDataSet
+import MBProgressHUD
 
 private let cellIdentifier = "archiveListCell"
 private let headerIdentifier = "archiveHeader"
@@ -37,7 +38,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	var isSavingItem = false {
 		didSet {
 			if isSavingItem {
-				
+
 				saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(STArchiveDetailVC.didTapSaveBtn(_:)))
 				
 				let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(STArchiveDetailVC.didTapCancelSaveBtn(_:)))
@@ -53,6 +54,8 @@ class STArchiveDetailVC: UICollectionViewController {
 		}
 	}
 	
+	var itemBeingSaved: STItemData?
+	
 	// MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +66,17 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		guard let owner = self.owner else { return }
 		dataSource = owner.children
-		mapRealmNotifToDataSource()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		mapRealmNotifToDataSource()
+	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
@@ -80,6 +87,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	deinit {
 		print("STArchiveDetailVC is gone")
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	// MARK: - Helpers
@@ -104,6 +112,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 			else { return }
 		vc.isSavingItem = self.isSavingItem
+		vc.itemBeingSaved = self.itemBeingSaved
 		vc.owner = owner
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
@@ -150,17 +159,28 @@ class STArchiveDetailVC: UICollectionViewController {
 		if let userInfo = notification.userInfo,
 			let isSavingItem = userInfo["isSavingItem"] as? Bool{
 			self.isSavingItem = isSavingItem
+			
+			if let itemBeingSaved = userInfo["item"] as? STItemData {
+				print("itemBeingSaved exists")
+				self.itemBeingSaved = itemBeingSaved
+				mapRealmNotifToDataSource()
+				saveBtn.isEnabled = sectionTitles?.contains(STHierarchyType.item.plural()) ?? false
+			}
 		}
 	}
 	
 	// MARK: - Pragma
 	func mapRealmNotifToDataSource() {
-		guard let dataSource = dataSource,
-			  dataSource.count > 0
+		guard let dataSource = dataSource, dataSource.count > 0
 		else
 		{
 			return
 		}
+		
+		if self.notifTokens.count > 0 {
+			self.notifTokens.removeAll()
+		}
+		self.notifTokens.reserveCapacity(6)
 		
 		for (section, results) in dataSource.enumerated() {
 			
@@ -285,6 +305,7 @@ class STArchiveDetailVC: UICollectionViewController {
 					newItem.title = title
 				default:
 					print("unknown type")
+					return
 				}
 				
 				STRealmDB.updateObject(inRealm: realm, object: newItem)
@@ -301,13 +322,38 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	func createItem() {
 		guard let owner = self.owner as? STHierarchy else { return }
+		guard let itemData = self.itemBeingSaved else { return }
 		let realm = try! Realm()
-		let newItem = STItem()
+		let newItem = itemData.toSTItem()
 		newItem.owner = owner
-		newItem.title = "New item"
-		newItem.imageURL = "1234"
+		
+		let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
+		spinner.label.text = "Uploading Image"
 		
 		STRealmDB.updateObject(inRealm: realm, object: newItem)
+		
+		STFirebaseDB.db.uploadImageToFirebase(withUID: STUser.currentUserId, imageId: newItem.id, imagePath: newItem.localImgURL, metaData: newItem) { (metaData, error) in
+			
+			if error != nil {
+				print(error)
+			} else {
+				guard let remoteURL = metaData?.downloadURL()
+				else
+				{
+					print("Failed to get remoteURL")
+					return
+				}
+				
+				try! realm.write {
+					newItem.remoteImgURL = remoteURL.absoluteString
+				}
+				
+				print("The image's url is \(remoteURL.absoluteString)")
+			}
+			
+			MBProgressHUD.hide(for: self.view, animated: true)
+		}
+		
 		self.dataSource = self.owner?.children
 	}
 	
@@ -325,10 +371,6 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	func didTapCancelSaveBtn(_ sender: UIBarButtonItem) {
 		self.isSavingItem = false
-		STHelpers.postNotification(withName: kSavingItemStatusDidChange, userInfo: ["isSavingItem": self.isSavingItem])
-		
-		guard let rootVC = AppDelegate.stRootVC else { return }
-		rootVC.isSavingItem = false
 	}
 	
 	func didTapSaveBtn(_ sender: UIBarButtonItem) {

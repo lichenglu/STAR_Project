@@ -30,6 +30,7 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	var notificationToken: NotificationToken?
 	var isSavingItem = false
+	var itemBeingSaved: STItemData?
 	
     override func viewDidLoad() {
 		super.viewDidLoad()
@@ -55,6 +56,7 @@ class STArchiveListViewController: UICollectionViewController {
 	
 	deinit {
 		notificationToken?.stop()
+		NotificationCenter.default.removeObserver(self)
 	}
 
     // MARK: UICollectionViewDataSource
@@ -97,6 +99,7 @@ class STArchiveListViewController: UICollectionViewController {
 		vc.owner = owner
 		vc.sectionTitles = titles
 		vc.isSavingItem = self.isSavingItem
+		vc.itemBeingSaved = self.itemBeingSaved
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
