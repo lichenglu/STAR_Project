@@ -261,6 +261,15 @@ class STRootViewController: UIViewController {
 		self.present(alertController, animated: true, completion: nil)
 	}
 	
+	func showCamera() {
+		guard let navigationController = TGCameraNavigationController.new(with: self)
+			else
+		{
+			return
+		}
+		present(navigationController, animated: true, completion: nil)
+	}
+	
 	// MARK: - Pragma
 	private func saveImgToDisk(image: UIImage) {
 		let fileManager = FileManager.default
@@ -305,12 +314,7 @@ class STRootViewController: UIViewController {
 	// MARK: - User actions
 	
 	func didTapCameraButton(sender: STCameraButton){
-		guard let navigationController = TGCameraNavigationController.new(with: self)
-		else
-		{
-			return
-		}
-		present(navigationController, animated: true, completion: nil)
+		showCamera()
 	}
 	
 	func didTapCancelSaveBtn(_ sender: UIBarButtonItem) {

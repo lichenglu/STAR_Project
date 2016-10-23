@@ -242,10 +242,19 @@ class STArchiveDetailVC: UICollectionViewController {
 	func showAddOptions() {
 		let actionSheet = UIAlertController(title: "Add Something", message: "What hierarchy do you wanna add to?", preferredStyle: .actionSheet)
 		self.sectionTitles?.forEach({ (title) in
+			
 			let action = UIAlertAction(title: title.capitalized, style: .default, handler: { [unowned self] (action) in
 				
 				guard let title = action.title?.lowercased(),
 					 let owner = self.owner as? STHierarchy else { return }
+				
+				// If it users choose to create an item, then we open the
+				// camera for them directly.
+				if title == STHierarchyType.item.plural() {
+					guard let rootVC = AppDelegate.stRootVC else { return }
+					rootVC.showCamera()
+					return
+				}
 				
 				self.showTitleInputView(fileType: title, owner: owner)
 			})
@@ -304,7 +313,7 @@ class STArchiveDetailVC: UICollectionViewController {
 					newItem.owner = owner
 					newItem.title = title
 				default:
-					print("unknown type")
+					print("About to create new item")
 					return
 				}
 				
