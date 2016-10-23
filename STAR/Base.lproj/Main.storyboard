@@ -229,7 +229,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LU-G6-fPD">
+                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LU-G6-fPD" userLabel="topImgView">
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lv3-w3-oqe">
                                                     <constraints>
@@ -243,7 +243,7 @@
                                                 <constraint firstItem="Lv3-w3-oqe" firstAttribute="centerY" secondItem="5LU-G6-fPD" secondAttribute="centerY" id="FYb-K4-SGf"/>
                                             </constraints>
                                         </view>
-                                        <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7b-Dd-a7E">
+                                        <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7b-Dd-a7E" userLabel="bottomLabelView">
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please type the institution name here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geg-QN-weN">
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -260,6 +260,22 @@
                                                 <constraint firstAttribute="trailing" secondItem="geg-QN-weN" secondAttribute="trailing" constant="8" id="qJK-i2-3on"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JxQ-Ua-JnK" userLabel="moreBtnWrapper">
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreBtn" translatesAutoresizingMaskIntoConstraints="NO" id="rPd-l8-8SU" userLabel="moreBtn">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="dDR-9F-Dhd"/>
+                                                        <constraint firstAttribute="height" constant="40" id="l65-8I-9k0"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rPd-l8-8SU" firstAttribute="top" secondItem="JxQ-Ua-JnK" secondAttribute="top" constant="5" id="DPF-Ct-qjY"/>
+                                                <constraint firstAttribute="height" constant="60" id="Jt6-QB-7vv"/>
+                                                <constraint firstAttribute="width" constant="60" id="kH9-fP-LuX"/>
+                                                <constraint firstAttribute="trailing" secondItem="rPd-l8-8SU" secondAttribute="trailing" constant="10" id="ocJ-i8-f7N"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -267,13 +283,17 @@
                                     <constraint firstAttribute="trailing" secondItem="P7b-Dd-a7E" secondAttribute="trailing" id="0xC-xk-RLe"/>
                                     <constraint firstItem="5LU-G6-fPD" firstAttribute="top" secondItem="Ybb-Gk-7k0" secondAttribute="top" id="1XM-Sr-ZAu"/>
                                     <constraint firstItem="5LU-G6-fPD" firstAttribute="leading" secondItem="Ybb-Gk-7k0" secondAttribute="leading" id="EGu-tZ-l0O"/>
+                                    <constraint firstItem="JxQ-Ua-JnK" firstAttribute="top" secondItem="Ybb-Gk-7k0" secondAttribute="top" id="Jrj-oO-hcp"/>
                                     <constraint firstAttribute="trailing" secondItem="5LU-G6-fPD" secondAttribute="trailing" id="MKa-wE-GzF"/>
+                                    <constraint firstAttribute="trailing" secondItem="JxQ-Ua-JnK" secondAttribute="trailing" id="NFz-Ji-vMF"/>
                                     <constraint firstItem="P7b-Dd-a7E" firstAttribute="leading" secondItem="Ybb-Gk-7k0" secondAttribute="leading" id="OcU-Ic-Lnv"/>
                                     <constraint firstItem="P7b-Dd-a7E" firstAttribute="top" secondItem="5LU-G6-fPD" secondAttribute="bottom" id="Yb2-jv-H7Q"/>
                                     <constraint firstAttribute="bottom" secondItem="P7b-Dd-a7E" secondAttribute="bottom" id="q3R-Br-VE4"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="iconImg" destination="Lv3-w3-oqe" id="BjY-dW-SA8"/>
+                                    <outlet property="moreBtnView" destination="rPd-l8-8SU" id="58k-XR-Jc8"/>
+                                    <outlet property="moreBtnWrapper" destination="JxQ-Ua-JnK" id="O0k-Sg-HdV"/>
                                     <outlet property="titleLabel" destination="geg-QN-weN" id="kbH-Pi-fBM"/>
                                 </connections>
                             </collectionViewCell>
@@ -427,12 +447,31 @@
                                             <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBq-gF-Gp9" userLabel="moreBtnWrapper">
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreBtn" translatesAutoresizingMaskIntoConstraints="NO" id="vHy-39-FgT" userLabel="moreBtn">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="10" id="Mwa-Oh-Vzy"/>
+                                                        <constraint firstAttribute="height" constant="35" id="z7a-wN-wmS"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="vHy-39-FgT" secondAttribute="bottom" id="5g4-NX-eri"/>
+                                                <constraint firstAttribute="width" constant="40" id="8M1-MX-jMu"/>
+                                                <constraint firstItem="vHy-39-FgT" firstAttribute="top" secondItem="qBq-gF-Gp9" secondAttribute="top" id="9YZ-8O-2Bv"/>
+                                                <constraint firstAttribute="trailing" secondItem="vHy-39-FgT" secondAttribute="trailing" constant="8" id="JSV-JU-Vi2"/>
+                                                <constraint firstAttribute="height" constant="35" id="SvM-u8-Pnm"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="9re-Pn-LAC" firstAttribute="top" secondItem="Cly-Rs-uw2" secondAttribute="top" id="9SD-nD-TKt"/>
                                     <constraint firstItem="9re-Pn-LAC" firstAttribute="leading" secondItem="Cly-Rs-uw2" secondAttribute="leading" id="P57-7K-bw9"/>
+                                    <constraint firstItem="qBq-gF-Gp9" firstAttribute="top" secondItem="Cly-Rs-uw2" secondAttribute="top" id="Qks-iv-nOA"/>
+                                    <constraint firstAttribute="trailing" secondItem="qBq-gF-Gp9" secondAttribute="trailing" id="STG-jy-MMp"/>
                                     <constraint firstAttribute="bottom" secondItem="9re-Pn-LAC" secondAttribute="bottom" id="YK9-v2-Zek"/>
                                     <constraint firstAttribute="bottom" secondItem="kHt-ZY-BWl" secondAttribute="bottom" constant="8" id="giH-1D-dNi"/>
                                     <constraint firstItem="kHt-ZY-BWl" firstAttribute="leading" secondItem="Cly-Rs-uw2" secondAttribute="leading" constant="8" id="jdB-VY-p2z"/>
@@ -442,6 +481,8 @@
                                 <connections>
                                     <outlet property="iconImg" destination="xNy-TH-sUY" id="rDc-9l-Nnt"/>
                                     <outlet property="itemImg" destination="FFE-Nk-sxX" id="ThJ-bQ-SEx"/>
+                                    <outlet property="moreBtnView" destination="vHy-39-FgT" id="vT8-nD-zej"/>
+                                    <outlet property="moreBtnWrapper" destination="qBq-gF-Gp9" id="ZUl-rZ-Mvq"/>
                                     <outlet property="titleLabel" destination="kHt-ZY-BWl" id="GlW-2d-3Dh"/>
                                 </connections>
                             </collectionViewCell>
@@ -479,6 +520,7 @@
     </scenes>
     <resources>
         <image name="close" width="40" height="40"/>
+        <image name="moreBtn" width="15" height="40"/>
         <image name="placeholder_emptyData" width="240" height="229"/>
     </resources>
 </document>

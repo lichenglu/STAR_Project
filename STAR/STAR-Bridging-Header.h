@@ -6,3 +6,4 @@
 #import <Haneke/Haneke.h>
 #import "TGCameraViewController.h"
 #import "TGCameraColor.h"
+#import "SCPopoverView.h"

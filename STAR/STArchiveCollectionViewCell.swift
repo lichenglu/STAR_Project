@@ -9,11 +9,17 @@
 import UIKit
 import SnapKit
 
+protocol STArchiveCellDelegate {
+	func archiveCell(didTapRenameBtn cell: STArchiveCollectionViewCell)
+}
+
 class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var iconImg: UIImageView!
 	@IBOutlet weak var itemImg: UIImageView?
+	@IBOutlet weak var moreBtnWrapper: UIView!
+	@IBOutlet weak var moreBtnView: UIImageView!
 	
 	var cornerRadius: CGFloat = 5
 	var shadowOpacity: Float = 0.8
@@ -22,9 +28,14 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	var isFirstTimeRendered = true
 	
+	let kRenameFile = 0
+	let kDeleteFile = 1
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		itemImg?.isHidden = true
+
+		let tap = UITapGestureRecognizer(target: self, action: #selector(STArchiveCollectionViewCell.didTapMoreBtn(_:)))
+		moreBtnWrapper.addGestureRecognizer(tap)
 	}
 	
 	override func layoutSubviews() {
@@ -46,6 +57,32 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 			layer.shadowRadius = shadowRadius
 			layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).cgPath
 		}
+	}
+	
+	func didTapMoreBtn(_ sender: UITapGestureRecognizer) {
+		
+		print("More btn tapped!")
+		let tapPoint = sender.location(in: self.superview)
+		let point = CGPoint(x: tapPoint.x - 10, y: tapPoint.y + 82)
+		let titles = ["Rename File","Delete File"]
+		let popView = SCPopoverView(point: point, titles: titles, images: nil)
+		
+		popView?.selectRowAtIndex = {
+			[unowned self] index in
+			
+			switch index {
+			case self.kRenameFile:
+				break
+			case self.kDeleteFile:
+				break
+			default:
+				break
+			}
+			
+			popView?.dismiss()
+		}
+		
+		popView?.show(withSelectedIndex: 10)
 	}
 	
 	func configureUI<T: STHierarchy>(withHierarchy data: T) {

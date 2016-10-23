@@ -48,6 +48,7 @@
 		571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C82DD1D9ED03E00CFC070 /* STInstitution.swift */; };
 		5746D1FE1D98B1970006F72D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5746D1FD1D98B1970006F72D /* STUser.swift */; };
 		5747CBF61DBD1C430041F59B /* STItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5747CBF51DBD1C430041F59B /* STItemWrapper.swift */; };
+		5747CBFB1DBD56C90041F59B /* SCPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5747CBFA1DBD56C90041F59B /* SCPopoverView.m */; };
 		5754F9081DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */; };
 		5754F90A1DB5DEB300C3B3A1 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */; };
 		5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5754F90F1DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift */; };
@@ -149,6 +150,8 @@
 		571C82DD1D9ED03E00CFC070 /* STInstitution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STInstitution.swift; sourceTree = "<group>"; };
 		5746D1FD1D98B1970006F72D /* STUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUser.swift; sourceTree = "<group>"; };
 		5747CBF51DBD1C430041F59B /* STItemWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STItemWrapper.swift; sourceTree = "<group>"; };
+		5747CBF91DBD56C90041F59B /* SCPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPopoverView.h; sourceTree = "<group>"; };
+		5747CBFA1DBD56C90041F59B /* SCPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPopoverView.m; sourceTree = "<group>"; };
 		5754F9071DB5DEB000C3B3A1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		5754F9091DB5DEB300C3B3A1 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
 		5754F90B1DB5DEB700C3B3A1 /* TwicketSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwicketSegmentedControl.framework; path = Carthage/Build/iOS/TwicketSegmentedControl.framework; sourceTree = "<group>"; };
@@ -372,6 +375,7 @@
 		574523891D931F7A000A892A /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				5747CBF81DBD56BB0041F59B /* PopOverView */,
 				57088AE51DBC2BA300A7E767 /* ElasticTransition */,
 				570889771DBB1AFC00A7E767 /* TGCameraViewController */,
 				5754F9131DB5E3CF00C3B3A1 /* TwicketSegmentedControl */,
@@ -388,6 +392,15 @@
 				57FEEF7D1D9C5A5100BF32AB /* STFirebaseDB.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		5747CBF81DBD56BB0041F59B /* PopOverView */ = {
+			isa = PBXGroup;
+			children = (
+				5747CBF91DBD56C90041F59B /* SCPopoverView.h */,
+				5747CBFA1DBD56C90041F59B /* SCPopoverView.m */,
+			);
+			name = PopOverView;
 			sourceTree = "<group>";
 		};
 		5754F9131DB5E3CF00C3B3A1 /* TwicketSegmentedControl */ = {
@@ -681,6 +694,7 @@
 				5754F9101DB5E3C100C3B3A1 /* TwicketSegmentedControl.swift in Sources */,
 				570889C61DBB1AFC00A7E767 /* TGCameraToggle.m in Sources */,
 				570889C11DBB1AFC00A7E767 /* TGCameraFlash.m in Sources */,
+				5747CBFB1DBD56C90041F59B /* SCPopoverView.m in Sources */,
 				57FEEF821D9DD2AF00BF32AB /* STModelBase.swift in Sources */,
 				570889C81DBB1AFC00A7E767 /* TGCameraFilterView.m in Sources */,
 				5747CBF61DBD1C430041F59B /* STItemWrapper.swift in Sources */,
