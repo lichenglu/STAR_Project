@@ -11,6 +11,7 @@ import Firebase
 
 // MARK: - Notifications
 let kUserLoginStatusDidChange = "userLoginStatusDidChange"
+let kSavingItemStatusDidChange = "savingItemStatusDidChange"
 
 // MARK: - Segue Identifiers
 
@@ -38,6 +39,7 @@ enum STColors: String{
 }
 
 enum STStoryboardIds: String {
+	case signInVC
 	case archiveListVC
 	case archiveDetailVC
 	case toDoListVC

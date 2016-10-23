@@ -11,18 +11,26 @@ import SnapKit
 import WSTagsField
 import JVFloatLabeledText
 
-class SCItemDetailVC: UIViewController {
+protocol SCItemDetailVCDelegate {
+	func itemDetailVC(didTapSaveToBtn vc: SCItemDetailVC, item: [String: Any])
+}
+
+
+class SCItemDetailVC: ElasticModalViewController {
 
 	@IBOutlet weak var imageView: UIImageView!
 	
 	var localImageURL: URL?
 	var remoteImageURL: URL?
+	var delegate: SCItemDetailVCDelegate?
 	
 	let titleField = JVFloatLabeledTextField(frame: .zero)
 	let titleFieldFontSize: CGFloat = 16
 	let titleFieldFloatLabelFontSize: CGFloat = 14
 	
 	let tagsField = WSTagsField()
+	
+	let confirmBtn = UIButton()
 	
 	// MARK: - Lifecycles
     override func viewDidLoad() {
@@ -67,6 +75,19 @@ class SCItemDetailVC: UIViewController {
 		}
 	}
 	
+	// MARK: - User Actions
+	@IBAction func didClickSaveToBtn(_ sender: UIButton) {
+		
+		self.dismiss(animated: true) {
+			self.delegate?.itemDetailVC(didTapSaveToBtn: self, item: ["test": "Luv ya"])
+		}
+	}
+	
+
+	@IBAction func didClickCloseBtn(_ sender: UIButton) {
+		self.dismiss(animated: true, completion: nil)
+	}
+	
 	// MARK: - UI Setups
 	fileprivate func setUpUI() {
 		
@@ -74,6 +95,7 @@ class SCItemDetailVC: UIViewController {
 		
 		setUpTitleField()
 		setUpTagView()
+		setUpBtn()
 		
 		self.view.addSubview(titleField)
 		titleField.snp.makeConstraints { (make) in
@@ -101,6 +123,14 @@ class SCItemDetailVC: UIViewController {
 		}
 		
 		addDividerToBottom(superView: self.view, referredView: wrapperView)
+		
+		self.view.addSubview(confirmBtn)
+		confirmBtn.snp.makeConstraints { (make) in
+			make.left.equalTo(imageView)
+			make.right.equalTo(imageView)
+			make.height.equalTo(35)
+			make.top.equalTo(wrapperView.snp.bottom).offset(15)
+		}
 	}
 	
 	fileprivate func setUpTitleField() {
@@ -135,6 +165,11 @@ class SCItemDetailVC: UIViewController {
 		tagsField.selectedTextColor = .white
 	}
 	
+	fileprivate func setUpBtn() {
+		confirmBtn.setTitle("Save", for: .normal)
+		confirmBtn.backgroundColor = STColors.themeBlue.toUIColor()
+	}
+	
 	fileprivate func addDividerToBottom(superView: UIView, referredView: UIView, margin: Int = 8) {
 		
 		let divider = UIView()
@@ -159,4 +194,10 @@ class SCItemDetailVC: UIViewController {
     }
     */
 
+}
+
+extension SCItemDetailVC {
+	func elasticTransitionDidDismiss(_ transition: ElasticTransition) {
+		print("I am dismissed")
+	}
 }

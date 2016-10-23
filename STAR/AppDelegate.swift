@@ -15,23 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	
-//	lazy var archiveListVC: STArchiveListViewController? = {
-//		
-//		let appDelegate = UIApplication.shared.delegate
-//		
-//		if let tabBarVC = appDelegate?.window??.rootViewController as? UITabBarController,
-//			let navs = tabBarVC.viewControllers,
-//			let nav = navs[0] as? UINavigationController {
-//			
-//			let vcs = nav.viewControllers
-//			
-//			if let archiveListVC = vcs[0] as? STArchiveListViewController{
-//				return archiveListVC
-//			}
-//		}
-//		
-//		return nil
-//	}()
+	
+	static let stRootVC: STRootViewController? = {
+		
+		let appDelegate = UIApplication.shared.delegate
+
+		if let nav = appDelegate?.window??.rootViewController as? UINavigationController
+		{
+			let viewControllers  = nav.viewControllers
+			for vc in viewControllers {
+				if let root = vc as? STRootViewController {
+					return root
+				}
+			}
+		}
+		
+		return nil
+	}()
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		

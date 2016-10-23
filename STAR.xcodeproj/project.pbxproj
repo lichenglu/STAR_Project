@@ -37,6 +37,12 @@
 		570889D21DBB1AFC00A7E767 /* TGPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 570889B31DBB1AFC00A7E767 /* TGPhotoViewController.xib */; };
 		570889D31DBB1AFC00A7E767 /* TGCameraViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 570889B61DBB1AFC00A7E767 /* TGCameraViewController.bundle */; };
 		570889D41DBB1AFC00A7E767 /* TGCameraViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 570889B71DBB1AFC00A7E767 /* TGCameraViewController.xcassets */; };
+		57088AEB1DBC2BC100A7E767 /* EdgePanTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AE61DBC2BC100A7E767 /* EdgePanTransition.swift */; };
+		57088AEC1DBC2BC100A7E767 /* ElasticShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AE71DBC2BC100A7E767 /* ElasticShapeLayer.swift */; };
+		57088AED1DBC2BC100A7E767 /* ElasticTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AE81DBC2BC100A7E767 /* ElasticTransition.swift */; };
+		57088AEE1DBC2BC100A7E767 /* ElasticTransitionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AE91DBC2BC100A7E767 /* ElasticTransitionPresentationController.swift */; };
+		57088AEF1DBC2BC100A7E767 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AEA1DBC2BC100A7E767 /* Util.swift */; };
+		57088AF11DBC2BCB00A7E767 /* ElasticModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57088AF01DBC2BCB00A7E767 /* ElasticModalViewController.swift */; };
 		571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986DD1D909D3E00221D27 /* STArchiveListVC.swift */; };
 		571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571986E01D90AB2D00221D27 /* STHelpers.swift */; };
 		571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571C82DD1D9ED03E00CFC070 /* STInstitution.swift */; };
@@ -130,6 +136,12 @@
 		570889B41DBB1AFC00A7E767 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TGPhotoViewController.xib; sourceTree = "<group>"; };
 		570889B61DBB1AFC00A7E767 /* TGCameraViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TGCameraViewController.bundle; sourceTree = "<group>"; };
 		570889B71DBB1AFC00A7E767 /* TGCameraViewController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TGCameraViewController.xcassets; sourceTree = "<group>"; };
+		57088AE61DBC2BC100A7E767 /* EdgePanTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgePanTransition.swift; sourceTree = "<group>"; };
+		57088AE71DBC2BC100A7E767 /* ElasticShapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticShapeLayer.swift; sourceTree = "<group>"; };
+		57088AE81DBC2BC100A7E767 /* ElasticTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticTransition.swift; sourceTree = "<group>"; };
+		57088AE91DBC2BC100A7E767 /* ElasticTransitionPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticTransitionPresentationController.swift; sourceTree = "<group>"; };
+		57088AEA1DBC2BC100A7E767 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		57088AF01DBC2BCB00A7E767 /* ElasticModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticModalViewController.swift; sourceTree = "<group>"; };
 		571986DC1D9097A200221D27 /* STAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = STAR.entitlements; sourceTree = "<group>"; };
 		571986DD1D909D3E00221D27 /* STArchiveListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STArchiveListVC.swift; sourceTree = "<group>"; };
 		571986E01D90AB2D00221D27 /* STHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHelpers.swift; sourceTree = "<group>"; };
@@ -321,6 +333,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		57088AE51DBC2BA300A7E767 /* ElasticTransition */ = {
+			isa = PBXGroup;
+			children = (
+				57088AF01DBC2BCB00A7E767 /* ElasticModalViewController.swift */,
+				57088AE61DBC2BC100A7E767 /* EdgePanTransition.swift */,
+				57088AE71DBC2BC100A7E767 /* ElasticShapeLayer.swift */,
+				57088AE81DBC2BC100A7E767 /* ElasticTransition.swift */,
+				57088AE91DBC2BC100A7E767 /* ElasticTransitionPresentationController.swift */,
+				57088AEA1DBC2BC100A7E767 /* Util.swift */,
+			);
+			name = ElasticTransition;
+			sourceTree = "<group>";
+		};
 		571986E21D90E44800221D27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +370,7 @@
 		574523891D931F7A000A892A /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				57088AE51DBC2BA300A7E767 /* ElasticTransition */,
 				570889771DBB1AFC00A7E767 /* TGCameraViewController */,
 				5754F9131DB5E3CF00C3B3A1 /* TwicketSegmentedControl */,
 			);
@@ -640,9 +666,11 @@
 				570889CB1DBB1AFC00A7E767 /* TGCameraSlideDownView.m in Sources */,
 				570889CE1DBB1AFC00A7E767 /* TGTintedButton.m in Sources */,
 				5754F9151DB6B84400C3B3A1 /* STItemDetailVC.swift in Sources */,
+				57088AF11DBC2BCB00A7E767 /* ElasticModalViewController.swift in Sources */,
 				570889BA1DBB1AFC00A7E767 /* TGCameraNavigationController.m in Sources */,
 				57558E081D9F69C1002AA922 /* STCollection.swift in Sources */,
 				575D511F1D904AD100788BFA /* STSignInController.swift in Sources */,
+				57088AED1DBC2BC100A7E767 /* ElasticTransition.swift in Sources */,
 				5782F1711D99DBF10004F4BF /* UIView+Shadow.swift in Sources */,
 				571986E11D90AB2D00221D27 /* STHelpers.swift in Sources */,
 				575D51081D9047BB00788BFA /* AppDelegate.swift in Sources */,
@@ -653,8 +681,10 @@
 				57FEEF821D9DD2AF00BF32AB /* STModelBase.swift in Sources */,
 				570889C81DBB1AFC00A7E767 /* TGCameraFilterView.m in Sources */,
 				570889BC1DBB1AFC00A7E767 /* TGPhotoViewController.m in Sources */,
+				57088AEC1DBC2BC100A7E767 /* ElasticShapeLayer.swift in Sources */,
 				57FEEF7C1D9B62C900BF32AB /* STRealmDB.swift in Sources */,
 				571C82DE1D9ED03E00CFC070 /* STInstitution.swift in Sources */,
+				57088AEF1DBC2BC100A7E767 /* Util.swift in Sources */,
 				570889CF1DBB1AFC00A7E767 /* TGTintedLabel.m in Sources */,
 				571986DE1D909D3E00221D27 /* STArchiveListVC.swift in Sources */,
 				5782F1771D99DCEC0004F4BF /* STToDoListVC.swift in Sources */,
@@ -664,7 +694,9 @@
 				570889C21DBB1AFC00A7E767 /* TGCameraFocus.m in Sources */,
 				57558E0C1D9F6AAC002AA922 /* STFolder.swift in Sources */,
 				57558E061D9F69A7002AA922 /* STBox.swift in Sources */,
+				57088AEE1DBC2BC100A7E767 /* ElasticTransitionPresentationController.swift in Sources */,
 				570889B81DBB1AFC00A7E767 /* UIImage+CameraFilters.m in Sources */,
+				57088AEB1DBC2BC100A7E767 /* EdgePanTransition.swift in Sources */,
 				570889C41DBB1AFC00A7E767 /* TGCameraGrid.m in Sources */,
 				570889BF1DBB1AFC00A7E767 /* TGCamera.m in Sources */,
 				570889C91DBB1AFC00A7E767 /* TGCameraFocusView.m in Sources */,

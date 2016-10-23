@@ -53,9 +53,6 @@ class STSignInController: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		// Auth checking
-		checkIfUserHasLoggedin()
-		
 		// Animation
 		if !hasSeenAnimation{
 			self.entryAnimation()
@@ -99,13 +96,6 @@ class STSignInController: UIViewController {
 		return (nil, nil, false)
 	}
 	
-	private func checkIfUserHasLoggedin(){
-		
-		if STUser.me() != nil {
-			self.performSegue(withIdentifier: STSegueIds.authToRootView.rawValue, sender: nil)
-		}
-	}
-	
 	// MARK: - Notification
 	@objc private func userLoginStatusDidChange(notification: Notification){
 		
@@ -125,7 +115,7 @@ class STSignInController: UIViewController {
 				STFirebaseDB.db.createUserOnFirebase(withSTUser: currentUser)
 			}
 			
-			self.performSegue(withIdentifier: STSegueIds.authToRootView.rawValue, sender: nil)
+			self.dismiss(animated: true, completion: nil)
 			
 		case .failed(let error):
 

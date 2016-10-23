@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MotionAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-STAR.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0A4848A4120D8E05E68A5C152E305332</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1520003FEBEC114D6C84F832AFEDB994</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1B27D9650DD6381B89143896BE6013E1</key>
+		<key>1CC8EB5D4390382EAFA045F03CE6FFDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,22 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>741A283937A37EE6C6352137B2EC42B0</key>
+		<key>8BFC6AB90CFE95F159C6A1F96565ED38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8AB5C66E7620512D41490C29AA6AD0F0</key>
+		<key>BC92CE0E42E1C98B75F78661BA01AA37</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F21F31C9A855F92E3512CCAAD64A9E0</key>
+		<key>C0EA8C6C566BECD61000799990029709</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BBAED091088A6D3A1B2683EC40155FD0</key>
+		<key>EF8D7160BEB7EAA0CEC1465B4C85E7B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -30,6 +30,9 @@ target 'STAR' do
 
   # Keyboards
   pod 'IQKeyboardManagerSwift'
+  
+  # Dependency for eslactic modal transition
+  pod 'MotionAnimation', :git => 'https://github.com/lkzhao/MotionAnimation.git', :branch => 'swift3'
 
 
   # Required by Realm to accomadate xcode 8.0

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0A4848A4120D8E05E68A5C152E305332'
-               BlueprintName = 'Realm'
+               BlueprintIdentifier = '8BFC6AB90CFE95F159C6A1F96565ED38'
+               BlueprintName = 'MotionAnimation'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Realm.framework'>
+               BuildableName = 'MotionAnimation.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
