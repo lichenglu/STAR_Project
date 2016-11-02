@@ -54,6 +54,18 @@ enum STImageNames: String {
 	}
 }
 
+enum STTextPlaceholders: String {
+	
+	case createHierarchyAlertTitle = "File Name"
+	case createHierarchyAlertMessage = "Enter file name below"
+	
+	case renameHierarchyAlertTitle = "Rename This Item?"
+	case renameHierarchyAlertMessage = "Rename it!"
+	
+	case deleteHierarchyAlertTitle = "Delete This Item?"
+	case deleteHierarchyAlertMessage = "Do you really want to delete it? All related content will also be deleted and cannot be reversed"
+}
+
 enum STSegueIds: String {
 	case authToRootView
 }

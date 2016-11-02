@@ -231,8 +231,8 @@ class STRootViewController: UIViewController {
 	
 	private func showTitleInputView() {
 		
-		let title = "File Name"
-		let message = "Enter file name below"
+		let title = STTextPlaceholders.createHierarchyAlertTitle.rawValue
+		let message = STTextPlaceholders.createHierarchyAlertMessage.rawValue
 		let textFieldPlaceholder = "What is the file name?"
 		let confirmActionTitle = "Create"
 		let cancelActionTitle = "Cancel"

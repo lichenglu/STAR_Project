@@ -282,8 +282,8 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	func showTitleInputView(fileType: String, owner: STHierarchy) {
 		
-		let title = "File Name"
-		let message = "Enter file name below"
+		let title = STTextPlaceholders.createHierarchyAlertTitle.rawValue
+		let message = STTextPlaceholders.createHierarchyAlertMessage.rawValue
 		let textFieldPlaceholder = "What is the file name?"
 		let confirmActionTitle = "Create"
 		let cancelActionTitle = "Cancel"
@@ -522,8 +522,8 @@ extension STArchiveDetailVC: STArchiveCellDelegate {
 	
 	func archiveCell(didTapRenameBtn cell: STArchiveCollectionViewCell) {
 		
-		let title = "Rename This Item?"
-		let message =  "Rename it!"
+		let title = STTextPlaceholders.renameHierarchyAlertTitle.rawValue
+		let message = STTextPlaceholders.renameHierarchyAlertMessage.rawValue
 		
 		let confirmAction = {
 			[weak self] (title: String) in
@@ -552,8 +552,8 @@ extension STArchiveDetailVC: STArchiveCellDelegate {
 	
 	func archiveCell(didTapDeleteBtn cell: STArchiveCollectionViewCell) {
 		
-		let title = "Delete This Item?"
-		let message =  "Do you really want to delete it? All related content will also be deleted and cannot be reversed"
+		let title = STTextPlaceholders.deleteHierarchyAlertTitle.rawValue
+		let message = STTextPlaceholders.deleteHierarchyAlertMessage.rawValue
 		let confirmAction = {
 			[weak self] (action: UIAlertAction) in
 			guard let this = self else { return }
