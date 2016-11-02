@@ -37,7 +37,7 @@ class STArchiveListViewController: UICollectionViewController {
 		
 		guard STUser.me() != nil else { return }
 		dataSource = STRealmDB.query(fromRealm: realm, ofType: STInstitution.self, query: "ownerId = '\(STUser.currentUserId)'")
-		observeRealmChange(dataSource: dataSource)
+		observeRealmChange(of: dataSource)
 		self.collectionView?.emptyDataSetSource = self;
 		self.collectionView?.emptyDataSetDelegate = self;
 		
@@ -95,7 +95,7 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	
 	// MARK: Helpers
-	func pushToDetailView(owner: STContainer, titles: [String]) {
+	fileprivate func pushToDetailView(owner: STContainer, titles: [String]) {
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 		else { return }
 		vc.owner = owner
@@ -105,7 +105,7 @@ class STArchiveListViewController: UICollectionViewController {
 		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
-	func observeRealmChange(dataSource: Results<STInstitution>?) {
+	fileprivate func observeRealmChange(of dataSource: Results<STInstitution>?) {
 		// Set results notification block
 		self.notificationToken = dataSource?.addNotificationBlock { (changes: RealmCollectionChange) in
 			
@@ -139,12 +139,6 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	
 	// MARK: - Notification
-	func savingItemStatusChanged(_ notification: Notification) {
-		if let userInfo = notification.userInfo,
-			let isSavingItem = userInfo["isSavingItem"] as? Bool{
-			self.isSavingItem = isSavingItem
-		}
-	}
 	
 	
     // MARK: - UICollectionViewDelegate
