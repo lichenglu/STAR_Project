@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import Firebase
 
 class STRealmDB {
 	
@@ -27,6 +28,17 @@ class STRealmDB {
 			   let ref = object.firebaseRef{
 				STFirebaseDB.db.updateHierarchyOnFirebase(withRef: ref, data: object.toDictionary())
 			}
+		}
+	}
+	
+	static func deleteObject(in realmRef: Realm, object: Object) {
+		
+		try! realmRef.write {
+			if let object = object as? STHierarchy,
+				let reference = object.firebaseRef {
+				STFirebaseDB.db.deleteHierarchy(on: reference)
+			}
+			realmRef.delete(object)
 		}
 	}
 	

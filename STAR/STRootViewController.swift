@@ -231,34 +231,21 @@ class STRootViewController: UIViewController {
 	
 	private func showTitleInputView() {
 		
-		let alertController = UIAlertController(title: "File Name",
-		                                        message: "Enter file name below",
-		                                        preferredStyle: .alert)
+		let title = "File Name"
+		let message = "Enter file name below"
+		let textFieldPlaceholder = "What is the file name?"
+		let confirmActionTitle = "Create"
+		let cancelActionTitle = "Cancel"
 		
-		alertController.addTextField { (textField) in
-			textField.placeholder = "What is the file name?"
+		let submitAction = {
+			[weak self] (title: String) in
+			
+			guard let this = self else { return }
+			
+			this.addANewInstitution(title: title)
 		}
 		
-		let submitAction = UIAlertAction(title: "Create", style: .default) { [weak self](paramAction) in
-			
-			guard let textFields = alertController.textFields,
-				let titleText = textFields.first?.text
-			else
-			{
-				return
-			}
-			
-			let title = (titleText.replacingOccurrences(of: " ", with: "") == "") ? "New" : titleText
-			
-			self?.addANewInstitution(title: title)
-		}
-		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		
-		alertController.addAction(submitAction)
-		alertController.addAction(cancelAction)
-		
-		self.present(alertController, animated: true, completion: nil)
+		STHelpers.showAlertWithTextfield(title: title, message: message, textFieldPlaceholder: textFieldPlaceholder, confirmActionTitle: confirmActionTitle, confirmAction: submitAction, cancelActionTitle: cancelActionTitle, cancelAction: nil, vc: self)
 	}
 	
 	func showCamera() {

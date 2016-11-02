@@ -23,12 +23,14 @@ class STArchiveDetailVC: UICollectionViewController {
 	let sectionInsets = UIEdgeInsetsMake(8, 8, 8, 8)
 	let headerViewHeight: CGFloat = 26
 	
+	let realm = try! Realm()
 	var owner: STContainer?
 	var dataSource:[AnyObject]? {
 		didSet {
 			print("dataSource", dataSource?.count)
 		}
 	}
+	
 	var notifTokens = [NotificationToken]()
 	
 	var sectionTitles: [String]?
@@ -108,7 +110,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		self.collectionView?.emptyDataSetDelegate = self
 	}
 	
-	func openItem(owner: STContainer, titles: [String]){
+	func open(container owner: STContainer, titles: [String]){
 		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveDetailVC.rawValue) as? STArchiveDetailVC
 			else { return }
 		vc.isSavingItem = self.isSavingItem
@@ -116,6 +118,17 @@ class STArchiveDetailVC: UICollectionViewController {
 		vc.owner = owner
 		vc.sectionTitles = titles
 		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func open(item: STItem) {
+		guard let vc = storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.itemDetailVC.rawValue) as? SCItemDetailVC
+			else { return }
+		vc.itemTitle = item.title
+		vc.tags = item.tags
+		vc.remoteImageURL = item.remoteImgURL
+		let localImageURL = URL(fileURLWithPath: item.localImgURL)
+		vc.localImageURL = localImageURL
+		self.present(vc, animated: true, completion: nil)
 	}
 	
 	func getItem(fromIndexPath indexPath: IndexPath) -> STHierarchy? {
@@ -269,64 +282,51 @@ class STArchiveDetailVC: UICollectionViewController {
 	
 	func showTitleInputView(fileType: String, owner: STHierarchy) {
 		
-		let alertController = UIAlertController(title: "File Name",
-		                                    message: "Enter file name below",
-		                                    preferredStyle: .alert)
+		let title = "File Name"
+		let message = "Enter file name below"
+		let textFieldPlaceholder = "What is the file name?"
+		let confirmActionTitle = "Create"
+		let cancelActionTitle = "Cancel"
 		
-		alertController.addTextField { (textField) in
-			textField.placeholder = "What is the file name?"
+		let submitAction = {
+			[weak self] (title: String) in
+			
+			guard let this = self else { return }
+			
+			let realm = try! Realm()
+			var newItem: STHierarchy!
+			
+			switch fileType.lowercased() {
+			case STHierarchyType.box.plural():
+				print("new box added")
+				newItem = STBox()
+				newItem.owner = owner
+				newItem.title = title
+			case STHierarchyType.collection.plural():
+				print("new collection added")
+				newItem = STCollection()
+				newItem.owner = owner
+				newItem.title = title
+			case STHierarchyType.folder.plural():
+				print("new folder added")
+				newItem = STFolder()
+				newItem.owner = owner
+				newItem.title = title
+			case STHierarchyType.volume.plural():
+				print("new volume added")
+				newItem = STVolume()
+				newItem.owner = owner
+				newItem.title = title
+			default:
+				print("About to create new item")
+				return
+			}
+			
+			STRealmDB.updateObject(inRealm: realm, object: newItem)
+			this.dataSource = this.owner?.children
 		}
 		
-		let submitAction = UIAlertAction(title: "Create", style: .default) { [weak self](paramAction) in
-			
-				guard let textFields = alertController.textFields,
-					let titleText = textFields.first?.text
-				else
-				{
-					return
-				}
-			
-				let realm = try! Realm()
-				var newItem: STHierarchy!
-			
-				let title = (titleText.replacingOccurrences(of: " ", with: "") == "") ? "New" : titleText
-			
-				switch fileType.lowercased() {
-				case STHierarchyType.box.plural():
-					print("new box added")
-					newItem = STBox()
-					newItem.owner = owner
-					newItem.title = title
-				case STHierarchyType.collection.plural():
-					print("new collection added")
-					newItem = STCollection()
-					newItem.owner = owner
-					newItem.title = title
-				case STHierarchyType.folder.plural():
-					print("new folder added")
-					newItem = STFolder()
-					newItem.owner = owner
-					newItem.title = title
-				case STHierarchyType.volume.plural():
-					print("new volume added")
-					newItem = STVolume()
-					newItem.owner = owner
-					newItem.title = title
-				default:
-					print("About to create new item")
-					return
-				}
-				
-				STRealmDB.updateObject(inRealm: realm, object: newItem)
-				self?.dataSource = self?.owner?.children
-		}
-		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		
-		alertController.addAction(submitAction)
-		alertController.addAction(cancelAction)
-		
-		self.present(alertController, animated: true, completion: nil)
+		STHelpers.showAlertWithTextfield(title: title, message: message, textFieldPlaceholder: textFieldPlaceholder, confirmActionTitle: confirmActionTitle, confirmAction: submitAction, cancelActionTitle: cancelActionTitle, cancelAction: nil, vc: self)
 	}
 	
 	func createItem() {
@@ -419,6 +419,8 @@ class STArchiveDetailVC: UICollectionViewController {
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! STArchiveCollectionViewCell
 		
+		cell.delegate = self
+		
 		guard let item = getItem(fromIndexPath: indexPath) else { return cell }
 		
 		cell.configureUI(withHierarchy: item)
@@ -452,10 +454,10 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		guard let item = getItem(fromIndexPath: indexPath) else { return }
 		
-		if item is STItem {
-			
+		if let item = item as? STItem {
+			self.open(item: item)
 		}else if let itemData = item as? STContainer{
-			self.openItem(owner: itemData, titles: itemData.hierarchyProperties)
+			self.open(container: itemData, titles: itemData.hierarchyProperties)
 		}
 
 	}
@@ -483,6 +485,7 @@ class STArchiveDetailVC: UICollectionViewController {
 
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension STArchiveDetailVC: UICollectionViewDelegateFlowLayout{
 	
 	// Make each cell equal width, the amount of three equals window width
@@ -505,6 +508,75 @@ extension STArchiveDetailVC: UICollectionViewDelegateFlowLayout{
 	
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
+extension STArchiveDetailVC: STArchiveCellDelegate {
+	
+	func getIndexPathBy(cell: UICollectionViewCell) -> IndexPath? {
+		guard let indexPath = self.collectionView?.indexPath(for: cell)
+			else
+		{
+			return nil
+		}
+		
+		return indexPath
+	}
+	
+	func archiveCell(didTapRenameBtn cell: STArchiveCollectionViewCell) {
+		
+		let title = "Rename This Item?"
+		let message =  "Rename it!"
+		
+		let confirmAction = {
+			[weak self] (title: String) in
+			guard let this = self else { return }
+			guard let indexPath = this.getIndexPathBy(cell: cell)
+			else
+			{
+				return
+			}
+			
+			guard let target = this.getItem(fromIndexPath: indexPath)
+			else
+			{
+				return
+				
+			}
+			
+			try! this.realm.write {
+				target.title = title
+			}
+		}
+		
+		STHelpers.showAlertWithTextfield(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)
+
+	}
+	
+	func archiveCell(didTapDeleteBtn cell: STArchiveCollectionViewCell) {
+		
+		let title = "Delete This Item?"
+		let message =  "Do you really want to delete it? All related content will also be deleted and cannot be reversed"
+		let confirmAction = {
+			[weak self] (action: UIAlertAction) in
+			guard let this = self else { return }
+			guard let indexPath = this.getIndexPathBy(cell: cell)
+			else
+			{
+				return
+			}
+			
+			guard let target = this.getItem(fromIndexPath: indexPath)
+			else
+			{
+				return
+				
+			}
+			
+			STRealmDB.deleteObject(in: this.realm, object: target)
+		}
+		
+		STHelpers.showAlert(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)
+	}
+}
 
 // MARK: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate
 extension STArchiveDetailVC: DZNEmptyDataSetSource {

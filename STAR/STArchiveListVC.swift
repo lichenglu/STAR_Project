@@ -76,6 +76,8 @@ class STArchiveListViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! STArchiveCollectionViewCell
 		
+		cell.delegate = self
+		
 		guard let dataSource = dataSource,
 			dataSource.count > indexPath.row else {
 				return cell
@@ -194,6 +196,64 @@ extension STArchiveListViewController: UICollectionViewDelegateFlowLayout{
 		return self.sectionInsets
 	}
 	
+}
+
+ // MARK: STArchiveCellDelegate
+extension STArchiveListViewController: STArchiveCellDelegate {
+	
+	func getIndexPathBy(cell: UICollectionViewCell) -> IndexPath? {
+		guard let indexPath = self.collectionView?.indexPath(for: cell)
+		else
+		{
+			return nil
+		}
+		
+		return indexPath
+	}
+	
+	func archiveCell(didTapDeleteBtn cell: STArchiveCollectionViewCell) {
+		
+		let title = "Delete This Item?"
+		let message =  "Do you really want to delete it? All related content will also be deleted and cannot be reversed"
+		let confirmAction = {
+			[weak self] (action: UIAlertAction) in
+			guard let this = self else { return }
+			guard let indexPath = this.getIndexPathBy(cell: cell)
+			else
+			{
+				return
+			}
+			
+			guard let target = this.dataSource?[indexPath.row] else { return }
+			
+			STRealmDB.deleteObject(in: this.realm, object: target)
+		}
+		
+		STHelpers.showAlert(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)
+	}
+	
+	func archiveCell(didTapRenameBtn cell: STArchiveCollectionViewCell) {
+		let title = "Rename This Item?"
+		let message =  "Rename it!"
+		
+		let confirmAction = {
+			[weak self] (title: String) in
+			guard let this = self else { return }
+			guard let indexPath = this.getIndexPathBy(cell: cell)
+				else
+			{
+				return
+			}
+
+			guard let target = this.dataSource?[indexPath.row] else { return }
+			
+			try! this.realm.write {
+				target.title = title
+			}
+		}
+		
+		STHelpers.showAlertWithTextfield(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)
+	}
 }
 
  // MARK: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate

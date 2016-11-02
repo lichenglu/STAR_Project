@@ -20,7 +20,10 @@ class SCItemDetailVC: ElasticModalViewController {
 	@IBOutlet weak var imageView: UIImageView!
 	
 	var localImageURL: URL?
-	var remoteImageURL: URL?
+	var remoteImageURL: String?
+	var itemTitle: String?
+	var tags: [String]?
+	
 	var delegate: SCItemDetailVCDelegate?
 	
 	let titleField = JVFloatLabeledTextField(frame: .zero)
@@ -30,6 +33,7 @@ class SCItemDetailVC: ElasticModalViewController {
 	let tagsField = WSTagsField()
 	
 	let confirmBtn = UIButton()
+	@IBOutlet weak var saveToBtn: UIButton!
 	
 	// MARK: - Lifecycles
     override func viewDidLoad() {
@@ -48,7 +52,13 @@ class SCItemDetailVC: ElasticModalViewController {
 		
 		let fileManager = FileManager.default
 		
-		guard let localImageURL = localImageURL else { return }
+		guard let localImageURL = localImageURL,
+			  let placeholder = STImageNames.emptyData.toUIImage()
+		else
+		{
+			return
+		}
+		
 		
 		if fileManager.fileExists(atPath: localImageURL.path){
 			
@@ -60,17 +70,22 @@ class SCItemDetailVC: ElasticModalViewController {
 					return
 				}
 				
-				guard let placeholder = STImageNames.emptyData.toUIImage()
-				else
-				{
-					return
-				}
-				
 				let image = UIImage(data: data) ?? placeholder
 				DispatchQueue.main.async {
 					self.imageView.image = image
 				}
 			}
+			
+		} else {
+			
+			guard let remoteImageURL = remoteImageURL,
+				  let url = URL(string: remoteImageURL)
+			else
+			{
+				return
+			}
+			
+			self.imageView.hnk_setImage(from: url, placeholder: placeholder)
 		}
 	}
 	
@@ -139,6 +154,16 @@ class SCItemDetailVC: ElasticModalViewController {
 			make.right.equalTo(imageView)
 			make.height.equalTo(35)
 			make.top.equalTo(wrapperView.snp.bottom).offset(15)
+		}
+		
+		if let itemTitle = itemTitle {
+			titleField.text = itemTitle
+			confirmBtn.isHidden = true
+			saveToBtn.isHidden = true
+		}
+			
+		if let tags = tags {
+			tagsField.addTags(tags)
 		}
 	}
 	

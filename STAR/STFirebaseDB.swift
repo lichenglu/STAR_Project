@@ -50,6 +50,10 @@ class STFirebaseDB {
 		ref.updateChildValues(data)
 	}
 	
+	func deleteHierarchy(on ref: FIRDatabaseReference) {
+		ref.removeValue()
+	}
+	
 	func uploadImageToFirebase(withUID uid: String, imageId: String, imagePath: String, metaData: STItem?, completion: ((FIRStorageMetadata?, Error?) -> Void)?) {
 		
 		let imgURL = URL(fileURLWithPath: imagePath)

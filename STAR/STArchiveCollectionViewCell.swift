@@ -9,8 +9,9 @@
 import UIKit
 import SnapKit
 
-protocol STArchiveCellDelegate {
+protocol STArchiveCellDelegate: class {
 	func archiveCell(didTapRenameBtn cell: STArchiveCollectionViewCell)
+	func archiveCell(didTapDeleteBtn cell: STArchiveCollectionViewCell)
 }
 
 class STArchiveCollectionViewCell: UICollectionViewCell {
@@ -28,6 +29,8 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 	
 	var isFirstTimeRendered = true
 	var isInstitution = false
+	
+	weak var delegate: STArchiveCellDelegate?
 	
 	let kRenameFile = 0
 	let kDeleteFile = 1
@@ -74,8 +77,10 @@ class STArchiveCollectionViewCell: UICollectionViewCell {
 			
 			switch index {
 			case self.kRenameFile:
+				self.delegate?.archiveCell(didTapRenameBtn: self)
 				break
 			case self.kDeleteFile:
+				self.delegate?.archiveCell(didTapDeleteBtn: self)
 				break
 			default:
 				break
