@@ -53,7 +53,7 @@ class STRootViewController: UIViewController {
 		let viewController = self.storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.archiveListVC.rawValue) as! STArchiveListViewController
 		
 		// Add View Controller as Child View Controller
-		self.addViewControllerAsChildViewController(viewController: viewController)
+		self.addAsChildViewController(viewController: viewController)
 		
 		return viewController
 	}()
@@ -64,7 +64,7 @@ class STRootViewController: UIViewController {
 		var viewController = self.storyboard?.instantiateViewController(withIdentifier: STStoryboardIds.toDoListVC.rawValue) as! STToDoListVC
 		
 		// Add View Controller as Child View Controller
-		self.addViewControllerAsChildViewController(viewController: viewController)
+		self.addAsChildViewController(viewController: viewController)
 		
 		return viewController
 	}()
@@ -203,7 +203,7 @@ class STRootViewController: UIViewController {
 //		}
 	}
 	
-	private func addViewControllerAsChildViewController(viewController: UIViewController) {
+	private func addAsChildViewController(viewController: UIViewController) {
 		
 		// Add Child View Controller
 		addChildViewController(viewController)
@@ -219,7 +219,7 @@ class STRootViewController: UIViewController {
 		viewController.didMove(toParentViewController: self)
 	}
 	
-	private func addANewInstitution(title: String) {
+	private func addNewInstitutionWith(title: String) {
 		guard let me = STUser.me()else { assert(false, "No user logged in"); return }
 		let realm = try! Realm()
 		let newInstitution = STInstitution()
@@ -242,7 +242,7 @@ class STRootViewController: UIViewController {
 			
 			guard let this = self else { return }
 			
-			this.addANewInstitution(title: title)
+			this.addNewInstitutionWith(title: title)
 		}
 		
 		STHelpers.showAlertWithTextfield(title: title, message: message, textFieldPlaceholder: textFieldPlaceholder, confirmActionTitle: confirmActionTitle, confirmAction: submitAction, cancelActionTitle: cancelActionTitle, cancelAction: nil, vc: self)
