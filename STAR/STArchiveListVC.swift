@@ -42,7 +42,7 @@ class STArchiveListViewController: UICollectionViewController {
 		self.collectionView?.emptyDataSetDelegate = self;
 		
 		// Notification
-		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveListViewController.itemBeingSavedStatusDidChanged(_:)), name: kSavingItemStatusDidChange, object: nil)
+		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveListViewController.itemBeingSavedStatusDidChange(_:)), name: kSavingItemStatusDidChange, object: nil)
 		
 		// Allow bouncing
 		self.collectionView?.alwaysBounceVertical = true
@@ -139,7 +139,7 @@ class STArchiveListViewController: UICollectionViewController {
 	}
 	
 	// MARK: - Notification
-	func itemBeingSavedStatusDidChanged(_ notification: Notification) {
+	func itemBeingSavedStatusDidChange(_ notification: Notification) {
 		if let userInfo = notification.userInfo,
 			let isSavingItem = userInfo["isSavingItem"] as? Bool{
 			self.isSavingItem = isSavingItem

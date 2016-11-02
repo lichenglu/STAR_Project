@@ -64,7 +64,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		setUpUI()
 		
 		// Notification
-		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveDetailVC.savingItemStatusChanged(_:)), name: kSavingItemStatusDidChange, object: nil)
+		STHelpers.addNotifObserver(to: self, selector: #selector(STArchiveDetailVC.itemBeingSavedStatusDidChange(_:)), name: kSavingItemStatusDidChange, object: nil)
 		
 		guard let owner = self.owner else { return }
 		dataSource = owner.children
@@ -168,7 +168,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	}
 	
 	// MARK: - Notification
-	func savingItemStatusChanged(_ notification: Notification) {
+	func itemBeingSavedStatusDidChange(_ notification: Notification) {
 		if let userInfo = notification.userInfo,
 			let isSavingItem = userInfo["isSavingItem"] as? Bool{
 			self.isSavingItem = isSavingItem
@@ -199,28 +199,28 @@ class STArchiveDetailVC: UICollectionViewController {
 			
 			if let results = results as? Results<STBox>
 			{
-				addRealmNotif(results: results, section: section)
+				addRealmNotif(to: results, in: section)
 			}
 			else if let results = results as? Results<STCollection>
 			{
-				addRealmNotif(results: results, section: section)
+				addRealmNotif(to: results, in: section)
 			}
 			else if let results = results as? Results<STVolume>
 			{
-				addRealmNotif(results: results, section: section)
+				addRealmNotif(to: results, in: section)
 			}
 			else if let results = results as? Results<STFolder>
 			{
-				addRealmNotif(results: results, section: section)
+				addRealmNotif(to: results, in: section)
 			}
 			else if let results = results as? Results<STItem>
 			{
-				addRealmNotif(results: results, section: section)
+				addRealmNotif(to: results, in: section)
 			}
 		}
 	}
 	
-	func addRealmNotif<T: STHierarchy>(results: Results<T>, section: Int) {
+	func addRealmNotif<T: STHierarchy>(to results: Results<T>, in section: Int) {
 		let token = results.addNotificationBlock { (changes: RealmCollectionChange) in
 			guard let collectionView = self.collectionView else { return }
 			switch changes {
@@ -510,7 +510,7 @@ extension STArchiveDetailVC: UICollectionViewDelegateFlowLayout{
 // MARK: UICollectionViewDelegateFlowLayout
 extension STArchiveDetailVC: STArchiveCellDelegate {
 	
-	func getIndexPathBy(cell: UICollectionViewCell) -> IndexPath? {
+	fileprivate func getIndexPathBy(cell: UICollectionViewCell) -> IndexPath? {
 		guard let indexPath = self.collectionView?.indexPath(for: cell)
 			else
 		{
