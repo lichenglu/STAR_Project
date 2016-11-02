@@ -55,7 +55,7 @@ class STSignInController: UIViewController {
 		
 		// Animation
 		if !hasSeenAnimation{
-			self.entryAnimation()
+			self.animateWhenEntering()
 			hasSeenAnimation = true
 		}
 	}
@@ -70,7 +70,7 @@ class STSignInController: UIViewController {
 	}
 	
 	// MARK: - helpers
-	private func entryAnimation(){
+	private func animateWhenEntering(){
 		let originalFrame = self.signInStackView.frame
 		self.signInStackView.frame = CGRect(x: originalFrame.origin.x, y: self.view.frame.height, width: originalFrame.width, height: originalFrame.height)
 		UIView.animate(withDuration: 1) {
