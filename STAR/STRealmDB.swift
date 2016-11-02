@@ -11,7 +11,7 @@ import Firebase
 
 class STRealmDB {
 	
-	static func addObject(toRealm realmRef: Realm, object: Object) {
+	static func add(object: Object, toRealm realmRef: Realm) {
 		try! realmRef.write {
 			realmRef.add(object)
 			if let object = object as? STHierarchy,
@@ -21,7 +21,7 @@ class STRealmDB {
 		}
 	}
 	
-	static func updateObject(inRealm realmRef: Realm, object: Object) {
+	static func update(object: Object, inRealm realmRef: Realm) {
 		try! realmRef.write {
 			realmRef.add(object, update: true)
 			if let object = object as? STHierarchy,
@@ -31,7 +31,7 @@ class STRealmDB {
 		}
 	}
 	
-	static func deleteObject(in realmRef: Realm, object: Object) {
+	static func delete(object: Object, inRealm realmRef: Realm) {
 		
 		try! realmRef.write {
 			if let object = object as? STHierarchy,

@@ -111,7 +111,7 @@ class STSignInController: UIViewController {
 			if let user = user {
 				UserDefaults.standard.setValue(user.uid, forKey: kCurrentUserUID)
 				let currentUser = STUser(withFIRUser: user)
-				STRealmDB.updateObject(inRealm: realmRef, object: currentUser)
+				STRealmDB.update(object: currentUser, inRealm: realmRef)
 				STFirebaseDB.db.createUserOnFirebase(withSTUser: currentUser)
 			}
 			

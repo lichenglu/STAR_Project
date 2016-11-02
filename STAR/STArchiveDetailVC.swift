@@ -321,8 +321,7 @@ class STArchiveDetailVC: UICollectionViewController {
 				print("About to create new item")
 				return
 			}
-			
-			STRealmDB.updateObject(inRealm: realm, object: newItem)
+			STRealmDB.update(object: newItem, inRealm: realm)
 			this.dataSource = this.owner?.children
 		}
 		
@@ -339,7 +338,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		let spinner = MBProgressHUD.showAdded(to: self.view, animated: true)
 		spinner.label.text = "Uploading Image"
 		
-		STRealmDB.updateObject(inRealm: realm, object: newItem)
+		STRealmDB.update(object: newItem, inRealm: realm)
 		
 		STFirebaseDB.db.uploadImageToFirebase(withUID: STUser.currentUserId, imageId: newItem.id, imagePath: newItem.localImgURL, metaData: newItem) { (metaData, error) in
 			
@@ -570,8 +569,7 @@ extension STArchiveDetailVC: STArchiveCellDelegate {
 				return
 				
 			}
-			
-			STRealmDB.deleteObject(in: this.realm, object: target)
+			STRealmDB.delete(object: target, inRealm: this.realm)
 		}
 		
 		STHelpers.showAlert(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)

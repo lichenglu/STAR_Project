@@ -226,7 +226,7 @@ extension STArchiveListViewController: STArchiveCellDelegate {
 			
 			guard let target = this.dataSource?[indexPath.row] else { return }
 			
-			STRealmDB.deleteObject(in: this.realm, object: target)
+			STRealmDB.delete(object: target, inRealm: this.realm)
 		}
 		
 		STHelpers.showAlert(title: title, message: message, confirmAction: confirmAction, cancelAction: nil, vc: self)

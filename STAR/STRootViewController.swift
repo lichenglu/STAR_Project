@@ -178,7 +178,7 @@ class STRootViewController: UIViewController {
 			institution.owner = me
 			institution.ownerId = me.uid
 			institution.title = "Test Institution\(idx)"
-			STRealmDB.updateObject(inRealm: realm, object: institution)
+			STRealmDB.update(object: institution, inRealm: realm)
 		}
 		
 //		(0...4).forEach { (idx) in
@@ -226,7 +226,7 @@ class STRootViewController: UIViewController {
 		newInstitution.owner = me
 		newInstitution.ownerId = me.uid
 		newInstitution.title = title
-		STRealmDB.updateObject(inRealm: realm, object: newInstitution)
+		STRealmDB.update(object: newInstitution, inRealm: realm)
 	}
 	
 	private func showTitleInputView() {
