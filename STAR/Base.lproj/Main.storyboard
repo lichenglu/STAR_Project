@@ -533,14 +533,31 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49w-j5-IbU">
+                                    <rect key="frame" x="333" y="10" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="Xsh-W1-X0J"/>
+                                        <constraint firstAttribute="height" constant="30" id="dcN-LY-0By"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                    <state key="normal" title="+">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTapPlusBtn:" destination="0m5-G6-L2b" eventType="touchUpInside" id="XIO-ep-eV3"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.0078431372550000003" green="0.46666666670000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="SV3-UG-Dy5" firstAttribute="leading" secondItem="0m5-G6-L2b" secondAttribute="leading" constant="12" id="Eh1-ko-xqd"/>
+                                <constraint firstAttribute="trailing" secondItem="49w-j5-IbU" secondAttribute="trailing" constant="12" id="dRz-hQ-dUc"/>
                                 <constraint firstItem="SV3-UG-Dy5" firstAttribute="centerY" secondItem="0m5-G6-L2b" secondAttribute="centerY" id="lxl-LF-wGc"/>
+                                <constraint firstItem="49w-j5-IbU" firstAttribute="centerY" secondItem="0m5-G6-L2b" secondAttribute="centerY" id="yHo-l4-p2q"/>
                             </constraints>
                             <connections>
                                 <outlet property="headerTitle" destination="SV3-UG-Dy5" id="1Ng-0T-a3H"/>
+                                <outlet property="pluBtn" destination="49w-j5-IbU" id="N4B-jI-aEx"/>
                             </connections>
                         </collectionReusableView>
                         <connections>

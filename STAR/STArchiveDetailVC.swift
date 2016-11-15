@@ -27,7 +27,7 @@ class STArchiveDetailVC: UICollectionViewController {
 	var owner: STContainer?
 	var dataSource:[AnyObject]? {
 		didSet {
-			print("dataSource", dataSource?.count)
+			print("dataSource \(dataSource?.count)")
 		}
 	}
 	
@@ -68,6 +68,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		
 		guard let owner = self.owner else { return }
 		dataSource = owner.children
+		mapRealmNotifToDataSource()
     }
 
     override func didReceiveMemoryWarning() {
@@ -343,7 +344,7 @@ class STArchiveDetailVC: UICollectionViewController {
 		STFirebaseDB.db.uploadImageToFirebase(withUID: STUser.currentUserId, imageId: newItem.id, imagePath: newItem.localImgURL, metaData: newItem) { (metaData, error) in
 			
 			if error != nil {
-				print(error)
+				print("\(error?.localizedDescription)")
 			} else {
 				guard let remoteURL = metaData?.downloadURL()
 				else
@@ -437,6 +438,8 @@ class STArchiveDetailVC: UICollectionViewController {
 			let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! STArchiveHeaderView
 			let title = sectionTitles?[indexPath.section] ?? "unknow"
 			headerView.headerTitle.text = title.capitalized
+			headerView.delegate = self
+			headerView.isSavingItem = self.isSavingItem
 			return headerView
 		default:
 			assert(false, "Unexpected element kind")
@@ -482,6 +485,14 @@ class STArchiveDetailVC: UICollectionViewController {
 //    }
 
 
+}
+
+extension STArchiveDetailVC: STArchiveHeaderViewDelegate {
+	func archiveHeaderView(didTapPlusBtn hierarchyText: String) {
+		guard let owner = self.owner as? STHierarchy else { return }
+		let fileType = hierarchyText.lowercased()
+		self.showTitleInputView(fileType: fileType, owner: owner)
+	}
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
