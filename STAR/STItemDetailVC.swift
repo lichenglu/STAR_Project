@@ -33,6 +33,7 @@ class SCItemDetailVC: ElasticModalViewController {
 	let tagsField = WSTagsField()
 	
 	let confirmBtn = UIButton()
+	
 	@IBOutlet weak var saveToBtn: UIButton!
 	
 	// MARK: - Lifecycles
@@ -158,7 +159,6 @@ class SCItemDetailVC: ElasticModalViewController {
 		
 		if let itemTitle = itemTitle {
 			titleField.text = itemTitle
-			confirmBtn.isHidden = true
 			saveToBtn.isHidden = true
 		}
 			
@@ -200,8 +200,11 @@ class SCItemDetailVC: ElasticModalViewController {
 	}
 	
 	fileprivate func setUpBtn() {
-		confirmBtn.setTitle("Save", for: .normal)
+		confirmBtn.setTitle("Save Changes", for: .normal)
 		confirmBtn.backgroundColor = STColors.themeBlue.toUIColor()
+		confirmBtn.isHidden = true
+		
+//		confirmBtn.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
 	}
 	
 	fileprivate func addDividerToBottom(superView: UIView, referredView: UIView, margin: Int = 8) {

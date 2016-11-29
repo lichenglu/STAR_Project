@@ -25,8 +25,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="79U-7q-eco" userLabel="SignInStackView">
                                 <rect key="frame" x="20" y="199" width="335" height="269"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our Project's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSP-vg-Hef">
-                                        <rect key="frame" x="84" y="0.0" width="167" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSP-vg-Hef">
+                                        <rect key="frame" x="144" y="0.0" width="47" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="BBE-96-hCm"/>
                                         </constraints>
@@ -209,7 +209,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rNM-Rm-LeD" id="MGL-pW-UYb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -228,7 +228,7 @@
         <scene sceneID="PBC-HP-t3j">
             <objects>
                 <collectionViewController storyboardIdentifier="archiveListVC" id="bwr-nX-9US" customClass="STArchiveListViewController" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cEG-S1-Bne">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cEG-S1-Bne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -240,7 +240,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="archiveListCell" id="Ybb-Gk-7k0" customClass="STArchiveCollectionViewCell" customModule="STAR" customModuleProvider="target">
-                                <rect key="frame" x="13" y="0.0" width="350" height="200"/>
+                                <rect key="frame" x="12.5" y="0.0" width="350" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
@@ -414,7 +414,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Asd-nH-525" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UJg-4S-txc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UJg-4S-txc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -431,7 +431,7 @@
         <scene sceneID="e2p-PB-4bR">
             <objects>
                 <collectionViewController storyboardIdentifier="archiveDetailVC" id="nNi-qp-byw" userLabel="Archive Detail VC" customClass="STArchiveDetailVC" customModule="STAR" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="GNY-85-c3N">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GNY-85-c3N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
